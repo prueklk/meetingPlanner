@@ -1,0 +1,29 @@
+.border{
+	border: 2px dotted black;
+	height: 400px;
+	width: 400px;
+}
+
+#addActivitiesButton{
+	text-align: center;
+	margin-left: 40px;
+	margin-top: 10px;
+}
+
+.button{
+	background-color: gray;
+}
+
+#addActivity{
+	border: 1px solid black;
+	width: 250px;
+	padding: 10px;
+}
+
+#saveButton{
+	float: right;
+}
+
+#addActivityTitle{
+	text-align: center;
+}
