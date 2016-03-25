@@ -27,3 +27,21 @@
 #addActivityTitle{
 	text-align: center;
 }
+#overview{
+	border: 1px solid black;
+	width: 250px;
+	padding: 10px;
+}
+#overviewDay1{
+	border: 1px solid black;
+	width: 250px;
+	padding: 10px;
+}
+#overviewDay2{
+	border: 1px solid black;
+	width: 250px;
+	padding: 10px;
+}
+#deleteButton{
+	float: right;
+}
