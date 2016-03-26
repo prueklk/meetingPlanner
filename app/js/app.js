@@ -34,19 +34,24 @@ var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource'
 // the path we use the ":" sign. For instance, our '/dish/:dishId' will be triggered when we access 
 // 'http://localhost:8000/#/dish/12345'. The 12345 value will be stored in a dishId parameter, which we can
 // then access through $routeParams service. More information on this in the dishCtrl.js 
-dinnerPlannerApp.config(['$routeProvider',
+meetingPlannerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
         templateUrl: 'partials/home.html'
       }).
-      when('/search', {
-        templateUrl: 'partials/search.html',
-        controller: 'SearchCtrl'
+      when('/activities', {
+        templateUrl: 'partials/activities.html',
+        controller: 'ActivitiesCtrl'
       }).
-      when('/dish/:dishId', {
-        templateUrl: 'partials/dish.html',
-        controller: 'DishCtrl'
+      
+      when('/overview', {
+        templateUrl: 'partials/overview.html',
+        controller: 'OverviewCtrl'
+      }).
+      when('/addActivity', {
+        templateUrl: 'partials/addActivity.html',
+        controller: 'AddActivityCtrl'
       }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
