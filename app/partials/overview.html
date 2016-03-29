@@ -16,27 +16,47 @@
 </div> -->
 
 
+<ng-include src="../_calendar/calendar.html" ng-controller="overviewCtrl"></ng-include>
+
 <div class="row">
 
-  <div class="col-sm-4 daysinfo">
+  <div class="col-sm-4 days">
          
-    <!-- <div class="col-sm-6 days">
+    
+
+    <div class="col-sm-6 activity">
 
 
-    </div> -->
+      <br>
+      <br>
+      <br>
+
+
+    </div>
 
     <div class="col-sm-6 daysinfo">
          <p> <time ></time></p>
-          <p>Start Time: <input type="text"> </p>
-           <p>End Time :<input type="text"> </p>
-            <p>Total Time: <output></output> </p>
-          <button id="deleteButton" class="button">Delete Day</button>
+          <p>Start Time: <div class="input-group bootstrap-timepicker timepicker">
+            <input id="timepicker1" type="text" class="form-control input-small">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+        </div> </p>
+
+        <script type="text/javascript">
+            $('#timepicker1').timepicker();
+        </script>
+           <p>End Time : </p>
+            <p>Total Time:  </p>
+          <button id="deleteButton" class="btn btn-default">Delete Day</button>
 
     </div>
+
+
           
   </div>
 
 </div>
+
+
 
 <!-- <div class="row">
 

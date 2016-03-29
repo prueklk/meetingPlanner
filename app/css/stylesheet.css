@@ -47,15 +47,27 @@
 }
 .daysinfo{
 	border: 1px solid black;
-	width: 100%;
-	padding: 10px;
-	margin: 20px;
+	width: 30%;
+	/*padding: 10px;*/
+	margin: 5px;
+	height: 30%;
+}
+
+.activity{
+	border: 1px solid black;
+	width: 60%;
+	/*padding: 10px;*/
+	margin: 5px;
+	height: 30%;
 }
 
 .days {
 
 border: 1px solid black;
-margin: 20px;
+/*margin: 20px;*/
+width: 75%;
+height: 600px;
+margin: 5px;
 
 
 
