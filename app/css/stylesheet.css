@@ -45,21 +45,22 @@
 #addActivityTitle{
 	text-align: center;
 }
-#overview{
+.daysinfo{
 	border: 1px solid black;
-	width: 250px;
+	width: 100%;
 	padding: 10px;
+	margin: 20px;
 }
-#overviewDay1{
-	border: 1px solid black;
-	width: 250px;
-	padding: 10px;
+
+.days {
+
+border: 1px solid black;
+margin: 20px;
+
+
+
 }
-#overviewDay2{
-	border: 1px solid black;
-	width: 250px;
-	padding: 10px;
-}
+
 #deleteButton{
 	float: right;
 }

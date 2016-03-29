@@ -1,6 +1,24 @@
+
 <div class="row">
-    <div class="col-lg-2 border">
+
+<div class="col-sm-6">
+
+<ng-include src="'partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
+
+</div>
+
+</div>
+ 
+
+ <div class="col-lg-2 border">
         <a id="addActivitiesButton" class="btn btn-default" href="#addActivity">+ Add activities</a>
         <div id="parkinglot"></div>
-    </div>
+ </div>
+
+
+<div class="col-lg-8"> 
+
+	<ng-include src="'partials/overview.html'" ng-controller="overviewCtrl"></ng-include>
+
+
 </div>
