@@ -1,4 +1,4 @@
-meetingPlannerApp.controller('addActivityCtrl', function ($scope,$firebaseArray,Agenda) {
+meetingPlannerApp.controller('AddActivityCtrl', function ($scope,$firebaseArray,Agenda) {
 
 	
 
