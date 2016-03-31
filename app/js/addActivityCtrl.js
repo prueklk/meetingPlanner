@@ -1,4 +1,6 @@
+
 meetingPlannerApp.controller('AddActivityCtrl', function ($scope,$firebaseArray,Agenda,$firebaseObject) {
+
 
 
 $scope.addAct = function() {

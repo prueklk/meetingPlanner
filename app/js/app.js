@@ -53,6 +53,10 @@ meetingPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/addActivity.html',
         controller: 'AddActivityCtrl'
       }).
+      when('/calendar', {
+        templateUrl: 'partials/calendar.html',
+        controller: 'CalendarCtrl'
+      }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
         redirectTo: '/home'
