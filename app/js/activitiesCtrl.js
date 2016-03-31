@@ -4,15 +4,15 @@ var ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
 var actRef = ref.child("activity")
 $scope.activities = $firebaseObject(actRef);
 
-ref.on("child_changed", function(snapshot){
+// ref.on("child_changed", function(snapshot){
 
-	// console.log(snapshot.val());
+// 	// console.log(snapshot.val());
 
 
-}, function (errorObject){
+// }, function (errorObject){
 
-	console.log("The read failed:" + errorObject.code);
-});
+// 	console.log("The read failed:" + errorObject.code);
+// });
 
 
 $scope.removeAct = function(id) {
