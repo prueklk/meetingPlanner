@@ -2,6 +2,8 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 
 var ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
 var actRef = ref.child("activity")
+var dayRef = ref.child("days")
+
 $scope.activities = $firebaseObject(actRef);
 
 // ref.on("child_changed", function(snapshot){

@@ -22,7 +22,10 @@
 <!-- <ng-include src="../_calendar/calendar.html" ng-controller="CalendarCtrl"></ng-include> -->
 
 
-<div  class="row">
+<button ng-click="addDay()" id="AddButton" class="btn btn-default">Add Day</button>
+
+<div ng-repeat="(key, value) in days"  class="row">
+
 
   <div class="col-sm-4 days">
          
