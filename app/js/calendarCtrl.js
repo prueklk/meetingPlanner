@@ -1,4 +1,4 @@
-meetingPlannerApp.controller('calendarCtrl', function ($scope, Agenda) {
+meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
 
 
 

@@ -3,8 +3,8 @@
 
 <div class="col-sm-6">
 
-<ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
-
+<!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
+ -->
 </div>
 
 </div>
@@ -13,6 +13,18 @@
  <div class="col-lg-2 border">
         <a id="addActivitiesButton" class="btn btn-default" href="#addActivity">+ Add activities</a>
         <div id="parkinglot"></div>
+
+        <div ng-repeat="(key, value) in activities" class="row"> 
+        	<div class="col-sm-4 activity">
+        	<h4> {{value.name}} </h4>
+        	<span> {{value.length}} min </span>
+        	<a id="{{key}}" ng-click="removeAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
+        	<!-- <p> {{act.type}} </p>
+        	<p> {{act.description}} </p> -->
+
+        	</div>
+
+        </div> <!-- end of activity item -->
  </div>
 
 
