@@ -1,29 +1,54 @@
-meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray) {
+meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebaseObject) {
+
+this.ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
+this.actRef = this.ref.child("activity")
+this.dayRef = this.ref.child("day")
 
 this.actIDarray = [];
-console.log(this.actIDarray);
+this.selectedDate = "";
+this.selectedTime = "";
 
 
+this.logdate = function(){
+
+	console.log(this.selectedDate);
+
+}
+
+this.addAct = function(name, length, type, description){
+
+	
+
+	if (name == "") {
+
+		alert("Your activity needs a name!")
+	};
+
+	this.actRef.push({
+  		
+		    name: name,
+		    length: length,
+		    type: type,
+		    description: description
+
+		});
 
 
-// this.getId = function(obj) {
+}
 
-// for (var i in obj) {
-//      console.log(obj[i].key());
-//       // actIDarray.push(obj[i].key());
+this.addDay = function(){
 
-//   }
+	this.dayRef.push({
+  			
+		    date: this.selectedDate.toString(),
+		    time: this.selectedTime.toString()
+		    
+		    
 
-// }
-
-// this.removeId = function (obj) {
-
-
-
-// }
+		});
 
 
-
+}
 
 return this;
 });

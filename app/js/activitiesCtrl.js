@@ -1,10 +1,10 @@
 meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$firebaseObject,Agenda) {
 
-var ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
-var actRef = ref.child("activity")
-var dayRef = ref.child("days")
+// Agenda.ref = ref;
+// var actRef = ref.child("activity")
+// var dayRef = ref.child("days")
 
-$scope.activities = $firebaseObject(actRef);
+$scope.activities = $firebaseObject(Agenda.actRef);
 
 // ref.on("child_changed", function(snapshot){
 
@@ -20,7 +20,7 @@ $scope.activities = $firebaseObject(actRef);
 $scope.removeAct = function(id) {
 
 
-actRef.child(id).remove();
+Agenda.actRef.child(id).remove();
 
 
 }

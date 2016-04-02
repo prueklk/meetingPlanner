@@ -57,8 +57,19 @@ meetingPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/calendar.html',
         controller: 'CalendarCtrl'
       }).
+      when('/timepicker', {
+        templateUrl: 'partials/timepicker.html',
+        controller: 'TimepickerCtrl'
+      }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
         redirectTo: '/home'
       });
   }]);
+
+
+
+
+
+
+

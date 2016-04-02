@@ -1,16 +1,17 @@
 meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
 
 	$scope.today = function() {
+
 		$scope.dt = new Date();
   	};
-  	$scope.today();
+  	// $scope.today();
 
   	$scope.clear = function() {
     	$scope.dt = null;
   	};
 
   	$scope.inlineOptions = {
-    	customClass: getDayClass,
+    	// customClass: getDayClass,
     	minDate: new Date(),
     	showWeeks: true
   	};
@@ -36,6 +37,13 @@ meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
   	};
   	$scope.toggleMin();
 
+    $scope.changed = function(){
+      // alert("calchanged");
+
+      Agenda.selectedDate = $scope.dt;
+      // Agenda.logdate();
+    }
+
   	// $scope.open1 = function() {
    //  	$scope.popup1.opened = true;
   	// };
@@ -44,13 +52,13 @@ meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
    //  	$scope.popup2.opened = true;
   	// };
 
-  	$scope.setDate = function(year, month, day) {
-    	$scope.dt = new Date(year, month, day);
-  	};
+ //  	$scope.setDate = function(year, month, day) {
+ //    	$scope.dt = new Date(year, month, day);
+ //  	};
 
-	$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  	$scope.format = $scope.formats[0];
-  	$scope.altInputFormats = ['M!/d!/yyyy'];
+	// $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+ //  	$scope.format = $scope.formats[0];
+ //  	$scope.altInputFormats = ['M!/d!/yyyy'];
 
   	// $scope.popup1 = {
    //  	opened: false
@@ -60,37 +68,37 @@ meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
    //  	opened: false
   	// };
 
-  	var tomorrow = new Date();
-  	tomorrow.setDate(tomorrow.getDate() + 1);
-  	var afterTomorrow = new Date();
-  	afterTomorrow.setDate(tomorrow.getDate() + 1);
-  	$scope.events = [
-    	{
-      		date: tomorrow,
-      		status: 'full'
-    	},
-    	{
-      		date: afterTomorrow,
-      		status: 'partially'
-    	}
-  	];
+ //  	var tomorrow = new Date();
+ //  	tomorrow.setDate(tomorrow.getDate() + 1);
+ //  	var afterTomorrow = new Date();
+ //  	afterTomorrow.setDate(tomorrow.getDate() + 1);
+ //  	$scope.events = [
+ //    	{
+ //      		date: tomorrow,
+ //      		status: 'full'
+ //    	},
+ //    	{
+ //      		date: afterTomorrow,
+ //      		status: 'partially'
+ //    	}
+ //  	];
 
-  	function getDayClass(data) {
-    	var date = data.date,
-      	mode = data.mode;
-    	if (mode === 'day') {
-	      	var dayToCheck = new Date(date).setHours(0,0,0,0);
+ //  	function getDayClass(data) {
+ //    	var date = data.date,
+ //      	mode = data.mode;
+ //    	if (mode === 'day') {
+	//       	var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-	      	for (var i = 0; i < $scope.events.length; i++) {
-	        	var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+	//       	for (var i = 0; i < $scope.events.length; i++) {
+	//         	var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-	        	if (dayToCheck === currentDay) {
-	          		return $scope.events[i].status;
-	        	}
-	      	}
-    	}
-    	return '';
-	}
+	//         	if (dayToCheck === currentDay) {
+	//           		return $scope.events[i].status;
+	//         	}
+	//       	}
+ //    	}
+ //    	return '';
+	// }
 
 
 });

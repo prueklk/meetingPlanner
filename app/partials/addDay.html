@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col-lg-2" id="addActivity">
+        <h4 id="addActivityTitle">ADD NEW DAY</h4>
+        <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
+        <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+        <p>Type 
+        <select class="form-control" ng-model="type">
+        <option value="coffeeBreak">Coffee break</option>
+        <option value="Group work">Group work</option>
+        <option selected="selected" value="Presentation">Presentation</option>
+        <option value="Discussion">Discussion</option></select></p>
+        <p>Descpription <input ng-model="description" type="text">
+            <pre>{{ data | json }}</pre>
+        </p>
+        <a href="#activities"  id="cancelButton" class="btn btn-default">Cancel</a>
+        <a href="#activities" ng-click="addAct()" id="saveButton" class="btn btn-default">Save</a>
+    </div>
+</div>
