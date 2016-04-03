@@ -54,7 +54,8 @@ this.addAct = function(name, length, type, description){
 }
 
 this.addDay = function(){
-
+	
+	// need to check duplicate dates
 
 	this.dayRef.push({
   			
@@ -64,9 +65,8 @@ this.addDay = function(){
 
 		    
 		    
-		    
-
-		});
+		  
+	});
 
 	
 

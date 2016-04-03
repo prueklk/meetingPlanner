@@ -32,6 +32,8 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
 
   $scope.clear = function() {
     $scope.mytime = null;
+
+    // If type minutes then 'clear', it doesn't reset minute to 00, but continues +/-15 after 'clear'.
   };
 
 
