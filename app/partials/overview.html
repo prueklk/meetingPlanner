@@ -79,40 +79,37 @@
 
 
 
-<div class="row">
+<div  class="row">
 
 
   <div class="col-sm-4 days">
          
-    
+   <div id="{{key}}" ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
 
-    <div class="col-sm-6 activity">
+    <div class="col-sm-6 dayactivity">
 
 
-      <br>
-      <br>
-      <br>
+     
 
 
     </div>
 
-    <div class="col-sm-6 daysinfo">
-         <p> <time ></time></p>
-          <p>Start Time: <div class="input-group bootstrap-timepicker timepicker">
-            <input id="timepicker1" type="text" class="form-control input-small">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-        </div> </p>
+    <div  class="col-sm-6 daysinfo">
+         <p>Date: {{value.date | date: 'mediumDate'}} </p>
+          <p>Start Time: {{value.time | date: 'HH:mm'}}  </p>
+            
 
-       
-           <p>End Time : </p>
-            <p>Total Time:  </p>
-          <button id="deleteButton" class="btn btn-default">Delete Day</button>
+           <p>End Time: <!-- {{endtime}} --> </p>
+            <p>Total Time: <!-- {{totaltime}}  --> </p>
+          <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default">Delete Day</button>
 
     </div>
 
 
           
-  </div>
+ </div> <!-- end of day item -->
+
+</div>
 
 </div>
 

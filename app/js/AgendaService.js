@@ -9,6 +9,22 @@ this.selectedDate = "";
 this.selectedTime = "";
 
 
+this.deleteDay = function(id){
+
+	
+this.dayRef.child(id).remove();
+
+
+};
+
+this.deleteAct = function(id){
+
+this.actRef.child(id).remove();
+
+}
+
+
+
 this.logdate = function(){
 
 	console.log(this.selectedDate);
@@ -38,10 +54,11 @@ this.addAct = function(name, length, type, description){
 
 this.addDay = function(){
 
+
 	this.dayRef.push({
   			
-		    date: this.selectedDate.toString(),
-		    time: this.selectedTime.toString()
+		    date: this.selectedDate.toISOString(),
+		    time: this.selectedTime.toISOString()
 		    
 		    
 

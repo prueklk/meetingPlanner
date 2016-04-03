@@ -1,4 +1,6 @@
 
+
+
 <div class="row">
 
 <div class="col-sm-6">
@@ -7,7 +9,7 @@
 <!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
  -->
 
-<ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
+<!-- <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include> -->
 
 
 </div>
@@ -23,7 +25,7 @@
         	<div class="col-sm-4 activity">
         	<h4> {{value.name}} </h4>
         	<span> {{value.length}} min </span>
-        	<a id="{{key}}" ng-click="removeAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
+        	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
         	<!-- <p> {{act.type}} </p>
         	<p> {{act.description}} </p> -->
 
@@ -39,3 +41,4 @@
 
 
 </div>
+

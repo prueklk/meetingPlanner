@@ -50,7 +50,7 @@
 	width: 30%;
 	/*padding: 10px;*/
 	margin: 5px;
-	height: 30%;
+	height: 300px;
 }
 
 .activity{
@@ -58,7 +58,7 @@
 	width: 60%;
 	/*padding: 10px;*/
 	margin: 5px;
-	height: 30%;
+	height: 100%;
 }
 
 .days {
@@ -66,8 +66,9 @@
 border: 1px solid black;
 /*margin: 20px;*/
 width: 75%;
-height: 600px;
+height: 650px;
 margin: 5px;
+overflow: auto;
 
 
 
@@ -75,6 +76,15 @@ margin: 5px;
 
 #deleteButton{
 	float: right;
+}
+
+.dayactivity{
+	border: 1px solid black;
+	width: 60%;
+	/*padding: 10px;*/
+	margin: 5px;
+	height: 300px;
+	overflow: auto;
 }
 
 
