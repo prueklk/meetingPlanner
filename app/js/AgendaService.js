@@ -3,6 +3,7 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 this.ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
+// this.dayRefActivities = this.dayRef.child("dayActivities")
 
 this.actIDarray = [];
 this.selectedDate = "";
@@ -59,13 +60,28 @@ this.addDay = function(){
   			
 		    date: this.selectedDate.toISOString(),
 		    time: this.selectedTime.toISOString()
+
+
+		    
 		    
 		    
 
 		});
 
+	
+
 
 }
+
+
+this.addActToDay = function(){
+
+
+
+}
+
+
+
 
 return this;
 });
