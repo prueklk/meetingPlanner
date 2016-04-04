@@ -1,22 +1,42 @@
-meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseObject) {
+meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseObject,$uibModal) {
 
-$scope.days = $firebaseObject(Agenda.dayRef);
-
-
-$scope.deleteDay = function(id){
-
-Agenda.deleteDay(id);
-
-}
+	$scope.days = $firebaseObject(Agenda.dayRef);
 
 
-$scope.addDay = function() {
-
-Agenda.addDay();
-
-}
+	$scope.deleteDay = function(id){
+		Agenda.deleteDay(id);
+	}
 
 
+  	$scope.open = function (size) {
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'myModalContent.html',
+	      controller: 'ModalInstanceCtrl'
+    	});
+  	};
+});
 
 
+angular.module('ui.bootstrap').controller('ModalInstanceCtrl', function ($scope, Agenda, $uibModalInstance){
+  // $scope.ok = function () {
+    //$uibModalInstance.close($scope.selected.item);
+  // };
+
+	$scope.addDay = function() {
+		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
+
+		if(Agenda.selectedDate){
+			console.log("selectedDate");
+
+			Agenda.addDay();
+			$uibModalInstance.dismiss('cancel');
+		}else{
+			console.log("NO selectedDate");
+		}
+		
+	}
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 });

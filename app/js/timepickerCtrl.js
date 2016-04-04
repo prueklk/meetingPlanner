@@ -16,6 +16,7 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
     d.setHours( 8 );
     d.setMinutes( 0 );
     $scope.mytime = d;
+    Agenda.selectedTime = $scope.mytime;
   };
 
   $scope.changed = function () {

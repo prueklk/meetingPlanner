@@ -55,7 +55,8 @@ this.addAct = function(name, length, type, description){
 
 this.addDay = function(){
 	
-	// need to check duplicate dates
+	// TODO // need to check duplicate dates
+	console.log("SERVICE // addDay");
 
 	this.dayRef.push({
   			
@@ -68,11 +69,15 @@ this.addDay = function(){
 		  
 	});
 
-	
+	this.resetDateTime();
 
 
 }
 
+this.resetDateTime = function(){
+	this.selectedDate = "";
+	this.selectedTime = "";
+}
 
 this.addActToDay = function(){
 
