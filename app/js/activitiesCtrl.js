@@ -12,8 +12,22 @@ Agenda.deleteAct(id);
 
 }
 
+$scope.name = "";
+$scope.description = "";
+$scope.length = 0;
+$scope.type = "Select here";
+$scope.addAct = function() {
+	
+	Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
+		$scope.name = "";
+		$scope.description = "";
+		$scope.length = 0;
+		$scope.type = "Select here";
 
+}
 
+$scope.list1 = {title: 'AngularJS - Drag Me'};
+$scope.list2 = {};
 
 
 });

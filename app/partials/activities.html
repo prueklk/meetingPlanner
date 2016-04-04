@@ -18,21 +18,62 @@
  
 
  <div class="col-lg-2 border">
-        <a id="addActivitiesButton" class="btn btn-default" href="#addActivity">+ Add activities</a>
-        <div id="parkinglot"></div>
+        <a id="addActivitiesButton" class="btn btn-default" data-toggle="modal" data-target="#addNewActivity">+ Add activities</a>
 
-        <div ng-repeat="(key, value) in activities" class="row"> 
-        	<div class="col-sm-4 activity">
-        	<h4> {{value.name}} </h4>
-        	<span> {{value.length}} min </span>
-        	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
-        	<!-- <p> {{act.type}} </p>
-        	<p> {{act.description}} </p> -->
 
-        	</div>
+                <div ng-repeat="(key, value) in activities" class="row"> 
+                	<div class="col-sm-4 activity">
+                	<h4> {{value.name}} </h4>
+                	<span> {{value.length}} min </span>
+                	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
+                	<!-- <p> {{act.type}} </p>
+                	<p> {{act.description}} </p> -->
 
-        </div> <!-- end of activity item -->
+                	</div>
+
+                </div> <!-- end of activity item -->
+
+
+                <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-controller="ActivitiesCtrl" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.title">{{list1.title}}</div>
+
+                    <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;' ng-controller="ActivitiesCtrl">
+                      <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title" ng-controller="ActivitiesCtrl">{{list2.title}}</div>
+                        </div>
+
+
  </div>
+
+ <!-- Modal -->
+<div id="addNewActivity" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add activity</h4>
+      </div>
+      <div class="modal-body">
+                <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
+                <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                <p>Type 
+                <select class="form-control" ng-model="type">
+                <option value="coffeeBreak">Coffee break</option>
+                <option value="Group work">Group work</option>
+                <option selected="selected" value="Presentation">Presentation</option>
+                <option value="Discussion">Discussion</option></select></p>
+                <p>Descpription <input ng-model="description" type="text">
+                    <pre>{{ data | json }}</pre>
+                </p>
+        </div>
+       <button type="button" class="btn btn-success" ng-click="addAct()">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>       
+
+
+      </div>
+    </div>
+
+</div>
 
 
 <div class="col-lg-8"> 

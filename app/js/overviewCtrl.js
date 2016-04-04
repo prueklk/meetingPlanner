@@ -14,8 +14,8 @@ $scope.addDay = function() {
 
 Agenda.addDay();
 
-
 }
+
 
 
 
