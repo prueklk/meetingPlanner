@@ -8,7 +8,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseO
 	}
 
 
-  	$scope.open = function (size) {
+  	$scope.open = function () {
 	    var modalInstance = $uibModal.open({
 	      templateUrl: 'myModalContent.html',
 	      controller: 'ModalInstanceCtrl'
@@ -17,7 +17,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseO
 });
 
 
-angular.module('ui.bootstrap').controller('ModalInstanceCtrl', function ($scope, Agenda, $uibModalInstance){
+meetingPlannerApp.controller('ModalInstanceCtrl', function ($scope, Agenda, $uibModalInstance){
   // $scope.ok = function () {
     //$uibModalInstance.close($scope.selected.item);
   // };

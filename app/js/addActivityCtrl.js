@@ -1,3 +1,4 @@
+// THIS FILE IS NO USE AND CAN BE DELETED
 
 meetingPlannerApp.controller('AddActivityCtrl', function ($scope,$firebaseArray,Agenda,$firebaseObject) {
 $scope.name = "";
