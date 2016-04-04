@@ -38,15 +38,14 @@
   <button type="button" class="btn btn-info btn-sm" ng-click="open()">Add Day</button>
 
   <!-- Modal -->
-  <script type="text/ng-template" id="myModalContent.html">
+  <script type="text/ng-template" id="overviewModal.html">
    
     <div class="modal-header">
       <button class="close" type="button" ng-click="cancel()">&times;</button>
-      <h4 class="modal-title">Modal Header</h4>
+      <h4 class="modal-title">Add Day</h4>
     </div>
 
     <div class="modal-body">
-      <p>Some text in the modal.</p>
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>
     </div>
