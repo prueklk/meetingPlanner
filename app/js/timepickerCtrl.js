@@ -1,12 +1,6 @@
 meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
   
 
-  // $scope.mytime = new Date();
-  $scope.mytime = null;
-
-  $scope.hstep = 1;
-  $scope.mstep = 15;
-
   // $scope.options = {
   //   hstep: [1, 2, 3],
   //   mstep: [1, 5, 10, 15, 25, 30]
@@ -19,7 +13,7 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
 
   $scope.update = function() {
     var d = new Date();
-    d.setHours( 10 );
+    d.setHours( 8 );
     d.setMinutes( 0 );
     $scope.mytime = d;
   };
@@ -31,14 +25,13 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
   };
 
   $scope.clear = function() {
-    $scope.mytime = null;
-
-    // If type minutes then 'clear', it doesn't reset minute to 00, but continues +/-15 after 'clear'.
+    //$scope.mytime = null;
+    $scope.update();
   };
 
-
-
-
+  $scope.update();
+  $scope.hstep = 1;
+  $scope.mstep = 15;
 
 });
 
