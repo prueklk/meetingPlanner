@@ -21,9 +21,14 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 			$scope.type = "Select here";
 
 	}
+	
+	//$scope.drag = function(event){
+	//	ev.dataTransfer.setData("text", ev.target.id);
+	//}
 
-	$scope.list1 = {title: 'AngularJS - Drag Me'};
-	$scope.list2 = {};
+	document.ondragstart = function(ev){
+	 	ev.dataTransfer.setData("text", ev.target.id);
+	}
 
 
 	$scope.openAddActivity = function () {

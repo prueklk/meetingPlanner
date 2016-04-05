@@ -4,6 +4,10 @@
 	margin: 15px;
 }
 
+#activityParking{
+	overflow: auto;
+}
+
 .jumbopanel {
 	width: 50%;
 	

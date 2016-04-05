@@ -15,11 +15,12 @@
     <!-- </div> -->
  
 
-    <div class="col-lg-2 border">
+    <div class="col-lg-2 border" id="activityParking">
         <button type="button" class="btn btn-info btn-sm" ng-click="openAddActivity()">Add Activity</button>
             
-        <div ng-repeat="(key, value) in activities" class="row"> 
-            <div class="col-sm-4 activity">
+        <div ng-repeat="(key, value) in activities" class="row" > 
+            <div class="col-sm-4 activity btn btn-default" id={{value.name}} draggable="true"
+ondragstart="ondragstart(event)">
             	<h4> {{value.name}} </h4>
             	<span> {{value.length}} min </span>
             	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
@@ -29,11 +30,6 @@
         </div> <!-- end of activity item -->
 
 
-        <div class="btn btn-primary" data-drag="true" data-jqyoui-options="{revert: 'invalid'}" ng-controller="ActivitiesCtrl" ng-model="list1" jqyoui-draggable="{animate:true}" ng-hide="!list1.title">{{list1.title}}</div>
-
-        <div class="thumbnail" data-drop="true" data-jqyoui-options ng-model="list2" jqyoui-droppable style='height:50px;' ng-controller="ActivitiesCtrl">
-            <div class="btn btn-success" data-drag="false" data-jqyoui-options ng-model="list2" jqyoui-draggable ng-hide="!list2.title" ng-controller="ActivitiesCtrl">{{list2.title}}</div>
-        </div>
 
     </div>
 

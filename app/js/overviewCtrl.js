@@ -14,6 +14,28 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseO
 	      controller: 'OverviewModalCtrl'
     	});
   	};
+
+  	//$scope.allowDrop = function(ev){
+	//	ev.preventDefault();
+	//}
+
+	// $scope.drop = function(){
+	// 	ev.preventDefault();
+	//     var data = ev.dataTransfer.getData("text");
+	//     ev.target.appendChild(document.getElementById(data));
+	//     Agenda.deleteAct(data);
+	// }
+
+	document.ondragover = function(ev) {
+	     ev.preventDefault();
+	}
+
+	document.ondrop = function(ev){
+		ev.preventDefault();
+	    var data = ev.dataTransfer.getData("text");
+	    ev.target.appendChild(document.getElementById(data));
+	    Agenda.deleteAct(data);
+	}
 });
 
 
