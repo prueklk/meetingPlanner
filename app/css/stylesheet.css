@@ -2,17 +2,44 @@
 .btn-custom {
 
 	margin: 15px;
+
+}
+
+.btn{
+	background-color:  #1abc9c;
 }
 
 #activityParking{
 	overflow: auto;
+background-color:  white;
+height: 700px;
+
 }
 
+
+#text{
+	color:white;
+}
+#homepagebutton{
+	position: left;
+	margin: 220px;
+}
+#planning{
+	background-color: gray;
+
+}
 .jumbopanel {
 	width: 50%;
 	
 	padding: 10px;
-	margin: 10px;
+	margin: 140px;
+	background: gray;
+	filter: alpha(opacity=90);
+  /* IE */
+  -moz-opacity: 0.9;
+  /* Mozilla */
+  opacity: 0.9;
+   position: right;
 
 
 }
@@ -37,10 +64,12 @@
 	background-color: gray;
 }
 
+
 #addActivity{
 	border: 1px solid black;
 	width: 250px;
 	padding: 10px;
+	background-color:  white;
 }
 
 #saveButton{
@@ -56,6 +85,7 @@
 	/*padding: 10px;*/
 	margin: 5px;
 	height: 300px;
+	background-color:  white;
 }
 
 .activity{
@@ -64,6 +94,7 @@
 	/*padding: 10px;*/
 	margin: 5px;
 	height: 100%;
+	background-color:  white;
 }
 
 .days {
@@ -72,7 +103,7 @@ border: 1px solid black;
 /*margin: 20px;*/
 width: 75%;
 height: 650px;
-margin: 5px;
+margin: 35px;
 overflow: auto;
 
 
@@ -87,9 +118,10 @@ overflow: auto;
 	border: 1px solid black;
 	width: 60%;
 	/*padding: 10px;*/
-	margin: 5px;
+	margin: 15px;
 	height: 300px;
 	overflow: auto;
+	background-color:  white;
 }
 
 
@@ -109,6 +141,14 @@ border: 1px solid black;
 
 	
 }
+body {
+     margin: 0;
+     background: url('http://back-2-front.co.uk/wp-content/uploads/2015/08/Team-Meeting.jpg');
+     background-size: 1440px 800px;
+     background-repeat:no-repeat;
+    display: compact;
+     font: 13px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 /* DATE PICKER*/
 /*.full button span {
@@ -121,4 +161,4 @@ border: 1px solid black;
     border-radius: 32px;
     color: black;
 }*/
->>>>>>> 3b08ee380d3dc39d41a7dda782dcb816f3d91810
+
