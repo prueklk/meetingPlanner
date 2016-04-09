@@ -40,6 +40,7 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <script src="js/calendarCtrl.js"></script>
     <script src="js/overviewCtrl.js"></script>
      <script src="js/timepickerCtrl.js"></script>
+      <script src="js/navbarCtrl.js"></script>
 
   </head>
   <body>
@@ -49,16 +50,16 @@ which module to associate the app with. In app.js we create the "dinnerPlanner" 
     <!-- ng-view Angular directive is where the partials will be loaded. app.js configures the $routingProvider
     where you specify which partial should be loaded when. -->
 
-    <div class="container row no-gutter">
+   <!--  <div class="container row no-gutter">
         <div id="header"  class="firstHeader" class="col-md-12">
            
         </div>
-    </div>
+    </div> -->
 
 
     <!-- ng-view Angular directive is where the partials will be loaded. app.js configures the $routingProvider
     where you specify which partial should be loaded when. -->
-    <div ng-view></div>
+    <div ng-view width="100%" height="100%"></div>
 
 
   </body>

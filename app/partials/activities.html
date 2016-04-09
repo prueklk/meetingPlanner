@@ -1,77 +1,149 @@
 
-
-
 <div class="row">
-<header id="headerFix">
-    <h2 class="headertext">MeetingPlanner</h2>
-    <h5 class="headertext">The best way to control and plan your meetings</h5>
 
-</header>
-    <!-- <div class="col-sm-6"> -->
+    <ng-include src="'partials/navbar.html'" ng-controller="NavbarCtrl"></ng-include>
+
+</div>
+
+<div class="container">
+    <div class="col-sm-12 activitiesArea">
+
+        <div class="row">
+        <!-- <header id="headerFix">
+            <h2 class="headertext">MeetingPlanner</h2>
+            <h5 class="headertext">The best way to control and plan your meetings</h5>
+
+        </header> -->
+            <!-- <div class="col-sm-6"> -->
 
 
-    <!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
-     -->
+            <!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
+             -->
 
-    <!-- <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include> -->
+            <!-- <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include> -->
 
 
-    <!-- </div> -->
- 
+            <!-- </div> -->
+         
 
-    <div class="col-lg-2 border" id="activityParking">
-        <button type="button" class="btn btn-info btn-sm" ng-click="openAddActivity()">Add Activity</button>
-            
-        <div ng-repeat="(key, value) in activities" class="row" > 
-            <div class="col-sm-4 activity btn btn-default" id={{value.name}} draggable="true"
-ondragstart="ondragstart(event)">
-            	<h4> {{value.name}} </h4>
-            	<span> {{value.length}} min </span>
-            	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
-            	<!-- <p> {{act.type}} </p>
-            	<p> {{act.description}} </p> -->
+            <div class="col-sm-2 activityParking shadow">
+                <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
+                        <div ng-repeat="(key, value) in activities" class="row"> 
+                           
+                        <div class="col-sm-4 activity" >
+                        <div class="panel-group ">
+                        <div class="panel panel-default " draggable="true">
+                        
+                        <div ng-init="tag='collapse'" class="panel-heading ">
+                                <h4 class="panel-title">
+                                
+
+                                  
+
+                                <div class="col-sm-6 activityHeading">
+                                {{value.name}} 
+                                </div>
+
+                                 <div class="col-sm-6 activityHeading">
+                                {{value.length}} min
+                                </div>
+
+
+                                <div class="row ">
+
+                                    <div class="col-sm-6">
+                               
+                                <button class="glyphicon glyphicon-chevron-down" data-toggle="collapse" href="#{{key + tag}}">
+                                  </button>
+
+                                </div>
+
+                                  <div class="col-sm-6">
+                                 
+                                  <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+
+                              </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12  {{value.type}} TypeTag">
+                                    </div>
+                                </div>
+
+                            
+                                </h4>
+                        </div>
+                        <div id="{{key + tag}}" class="panel-collapse collapse">
+
+                                <div class="panel-body">{{value.description}}</div>
+                        </div>
+
+                    
+
+                    
+                        </div>
+                        </div>
+                        </div>
+
+
+
+
+
+             </div>    
+                <!-- <div ng-repeat="(key, value) in activities" class="row" > 
+                    <div class="col-sm-4 activity" id="{{value.name}}" draggable="true"
+                            ondragstart="ondragstart(event)">
+                    	<h4> {{value.name}} </h4>
+                    	<span> {{value.length}} min </span>
+                    	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
+                    	<!-- <p> {{act.type}} </p>
+                    	<p> {{act.description}} </p> -->
+                    <!-- </div> -->
+                <!-- </div> --> <!-- end of activity item --> <!-- --> 
+
+
+
             </div>
-        </div> <!-- end of activity item -->
 
 
 
-    </div>
+
+            <!-- Modal -->
+            <script type="text/ng-template" id="activityModal.html">
+               
+                <div class="modal-header">
+                    <button class="close" type="button" ng-click="cancel()">&times;</button>
+                    <h4 class="modal-title">Add Activity</h4>
+                </div>
+
+                <div class="modal-body">
+                    <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
+                    <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                    <p>Type 
+                        <select class="form-control" ng-model="type">
+                        <option value="Coffee">Coffee break</option>
+                        <option value="Group">Group work</option>
+                        <option selected="selected" value="Presentation">Presentation</option>
+                        <option value="Discussion">Discussion</option></select>
+                    </p>
+                    <p>Descpription <input ng-model="description" type="text">
+                        <pre>{{ data | json }}</pre>
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
+                  <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+                </div>
+                    
+            </script>
+            <!-- END Modal -->
 
 
-    <!-- Modal -->
-    <script type="text/ng-template" id="activityModal.html">
-       
-        <div class="modal-header">
-            <button class="close" type="button" ng-click="cancel()">&times;</button>
-            <h4 class="modal-title">Add Activity</h4>
+            <div class="col-sm-8"> 
+            	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
+
+            </div>
         </div>
-
-        <div class="modal-body">
-            <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
-            <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
-            <p>Type 
-                <select class="form-control" ng-model="type">
-                <option value="coffeeBreak">Coffee break</option>
-                <option value="Group work">Group work</option>
-                <option selected="selected" value="Presentation">Presentation</option>
-                <option value="Discussion">Discussion</option></select>
-            </p>
-            <p>Descpription <input ng-model="description" type="text">
-                <pre>{{ data | json }}</pre>
-            </p>
         </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
-          <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
-        </div>
-            
-    </script>
-    <!-- END Modal -->
-
-
-    <div class="col-lg-8"> 
-    	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
-
-    </div>
 </div>

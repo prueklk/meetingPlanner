@@ -61,6 +61,10 @@ meetingPlannerApp.config(['$routeProvider',
         templateUrl: 'partials/timepicker.html',
         controller: 'TimepickerCtrl'
       }).
+      when('/navbar', {
+        templateUrl: 'partials/navbar.html',
+        controller: 'NavbarCtrl'
+      }).
       // TODO in Lab 5: add more conditions for the last two screens (overview and preparation)
       otherwise({
         redirectTo: '/home'
