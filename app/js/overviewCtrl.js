@@ -35,6 +35,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope,Agenda, $firebaseO
 	    var data = ev.dataTransfer.getData("text");
 	    ev.target.appendChild(document.getElementById(data));
 	    Agenda.deleteAct(data);
+	   
 	}
 });
 
