@@ -21,6 +21,15 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 			$scope.type = "Select here";
 
 	}
+
+
+
+	$scope.AddToDayTest = function(act_id) {
+		day_id = "-KEziGbaxzMO_2Lt29IA"
+		console.log(day_id);
+
+		Agenda.addActToDay(act_id, day_id);
+	}
 	
 	//$scope.drag = function(event){
 	//	ev.dataTransfer.setData("text", ev.target.id);

@@ -28,6 +28,7 @@
 
             <div class="col-sm-2 activityParking shadow">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
+
                         <div ng-repeat="(key, value) in activities" class="row"> 
                            
                         <div class="col-sm-4 activity" >
@@ -61,6 +62,7 @@
                                   <div class="col-sm-6">
                                  
                                   <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+                                  <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button>
 
                               </div>
 

@@ -20,7 +20,10 @@ this.dayRef.child(id).remove();
 
 this.deleteAct = function(id){
 
+console.log(this.actRef.child(id))
 this.actRef.child(id).remove();
+
+
 
 }
 
@@ -61,7 +64,8 @@ this.addDay = function(){
 	this.dayRef.push({
   			
 		    date: this.selectedDate.toISOString(),
-		    time: this.selectedTime.toISOString()
+		    time: this.selectedTime.toISOString(),
+		    activities: ""
 
 
 		    
@@ -79,7 +83,49 @@ this.resetDateTime = function(){
 	this.selectedTime = "";
 }
 
-this.addActToDay = function(){
+this.addActToDay = function(act_id, day_id){
+
+	// addRef = this.dayRef;
+	// targetRef = addRef.child(day_id); 
+	targetDay = this.dayRef.child(day_id)
+	// console.log(targetDay.child("activities"));
+	targetAct = this.actRef.child(act_id)
+	
+			this.actRef.once("value", function(snapshot) {
+		  		snapshot.forEach(function(childSnapshot) {
+
+		  			var key = childSnapshot.key()
+		  			var data = childSnapshot.val()
+
+		  			if (act_id === key) {
+		  				console.log(data);
+
+		  				var targetData = data;
+		  				targetDay.child("activities").push({
+
+
+		  						name: targetData.name,
+							    length: "length",
+							    type: "type",
+							    description: "description"
+
+		  				});
+
+		  			} else {
+
+		  				console.log("noHit");
+		  			}
+
+		  			console.log(data);
+		  			// console.log(id);
+
+		  		});
+
+
+		});
+
+
+
 
 
 
