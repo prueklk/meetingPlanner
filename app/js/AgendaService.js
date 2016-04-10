@@ -98,16 +98,17 @@ this.addActToDay = function(act_id, day_id){
 		  			var data = childSnapshot.val()
 
 		  			if (act_id === key) {
-		  				console.log(data);
+		  				
 
 		  				var targetData = data;
+		  				console.log(targetData.name);
 		  				targetDay.child("activities").push({
 
 
 		  						name: targetData.name,
-							    length: "length",
-							    type: "type",
-							    description: "description"
+							    length: targetData.length,
+							    type: targetData.type,
+							    description: targetData.description
 
 		  				});
 
