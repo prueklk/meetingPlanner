@@ -9,46 +9,25 @@
     <div class="col-sm-12 activitiesArea">
 
         <div class="row">
-        <!-- <header id="headerFix">
-            <h2 class="headertext">MeetingPlanner</h2>
-            <h5 class="headertext">The best way to control and plan your meetings</h5>
-
-        </header> -->
-            <!-- <div class="col-sm-6"> -->
-
-
-            <!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
-             -->
-
-            <!-- <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include> -->
-
-
-            <!-- </div> -->
          
 
             <div class="col-sm-2 activityParking shadow">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
 
-                        <div ng-repeat="(key, value) in activities" class="row"> 
-                           
-                        <div class="col-sm-4 activity" >
-                        <div class="panel-group ">
-                        <div class="panel panel-default " draggable="true">
-                        
-                        <div ng-init="tag='collapse'" class="panel-heading ">
-                                <h4 class="panel-title">
-                                
 
-                                  
 
+                    <ul class="draggable-objects"> 
+                        <li ng-repeat="(key, value) in activities" class="row"> 
+                            <div class="col-sm-4 activity" id="{{value.name}}" ng-drag="true" ng-drag-data="obj" data-allow-transform="true">
+                            <div class="panel-group panel panel-default">
+                                <div ng-init="tag='collapse'" class="panel-heading ">
+                                <h4 class="panel-title"> 
                                 <div class="col-sm-6 activityHeading">
                                 {{value.name}} 
                                 </div>
-
-                                 <div class="col-sm-6 activityHeading">
+                                <div class="col-sm-6 activityHeading">
                                 {{value.length}} min
                                 </div>
-
 
                                 <div class="row ">
 
@@ -64,7 +43,7 @@
                                   <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
                                   <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button>
 
-                              </div>
+                                    </div>
 
                                 </div>
                                 <div class="row">
@@ -74,37 +53,27 @@
 
                             
                                 </h4>
-                        </div>
+                                </div>
                         <div id="{{key + tag}}" class="panel-collapse collapse">
 
                                 <div class="panel-body">{{value.description}}</div>
-                        </div>
+                        </div>    
 
-                    
+                                
+                               
+                                
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+            </div>
 
-                    
-                        </div>
-                        </div>
-                        </div>
+                 <div class="col-sm-8"> 
+                    <ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
 
-
-
-
-
-             </div>    
-                <!-- <div ng-repeat="(key, value) in activities" class="row" > 
-                    <div class="col-sm-4 activity" id="{{value.name}}" draggable="true"
-                            ondragstart="ondragstart(event)">
-                    	<h4> {{value.name}} </h4>
-                    	<span> {{value.length}} min </span>
-                    	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
-                    	<!-- <p> {{act.type}} </p>
-                    	<p> {{act.description}} </p> -->
-                    <!-- </div> -->
-                <!-- </div> --> <!-- end of activity item --> <!-- --> 
-
-
-
+                </div>
+            </div>
             </div>
 
 
@@ -142,10 +111,4 @@
             <!-- END Modal -->
 
 
-            <div class="col-sm-8"> 
-            	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
-
-            </div>
-        </div>
-        </div>
 </div>
