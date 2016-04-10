@@ -1,41 +1,4 @@
-<!-- <div class="row">
-
-<div class="col-lg-4" id="overview">
- <h4 id="overviewTitle">DAY OVERVIEW</h4>
-    <div class="col-lg-2" id="overviewDay1">
-        <p> <time ></time></p>
-        <p>Start Time: <input type="text"> </p>
-         <p>End Time :<input type="text"> </p>
-          <p>Total Time: <output></output> </p>
-        <button id="deleteButton" class="button">Delete Day</button>
-        
-</div>
-
-</div>
-
-</div> -->
-
-
-
-<!-- <ng-include src="../_calendar/calendar.html" ng-controller="overviewCtrl"></ng-include> -->
-
-<!-- <ng-include src="../_calendar/calendar.html" ng-controller="CalendarCtrl"></ng-include> -->
-
-<!-- <div class="col-sm-4">
-
-  <div class="form-group">
-    <label for="usr">Name:</label>
-    <input type="text" class="form-control" id="usr">  
-  </div>
-   
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd">
-    </div>
-
-
-</div> -->
-  
+ 
 
   <!-- Modal -->
   <script type="text/ng-template" id="overviewModal.html">
@@ -59,7 +22,7 @@
   <!-- END Modal -->
 
 
-
+<div class="container">
 <div  class="row">
 
   <div class="col-sm-4 days shadow">
@@ -68,14 +31,23 @@
     </div>
     <div id="{{key}}" ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
 
-      <div class="col-sm-6 dayactivity">
+         <div class="foo Group"></div>
+          <div class="foo Discussion"></div>
+          <div class="foo Presentation"></div> 
+          <div class="foo Coffee"></div> 
 
-     <div class="foo Group"></div>
-      <div class="foo Discussion"></div>
-      <div class="foo Presentation"></div> 
-      <div class="foo Coffee"></div> 
+  
+      <div class="col-sm-6 dayactivity thumbnail" ng-drop="true" ng-drop-success="onDropComplete1($data,$event)">
 
+
+          <div ng-repeat="obj in droppedObjects1" ng-drag="true" ng-drag-data="obj" ng-drag-success="onDragSuccess1($data,$event)" ng-center-anchor="{{centerAnchor}}">
+              <h4> {{obj.name}} </h4>
+              <span> {{obj.length}} min </span>
+              <a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
+          </div>
+      
       </div>
+
 
       <div  class="col-sm-6 daysinfo">
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
@@ -94,33 +66,6 @@
 </div>
 
 
-
-<!-- <div class="row">
-
-  <div class="col-sm-4 days">
-         <p> <time ></time></p>
-          <p>Start Time: <input type="text"> </p>
-           <p>End Time :<input type="text"> </p>
-            <p>Total Time: <output></output> </p>
-          <button id="deleteButton" class="button">Delete Day</button>
-          
-  </div>
-
-</div>
-
-<div class="row">
-
-  <div class="col-sm-4 days">
-         <p> <time ></time></p>
-          <p>Start Time: <input type="text"> </p>
-           <p>End Time :<input type="text"> </p>
-            <p>Total Time: <output></output> </p>
-          <button id="deleteButton" class="button">Delete Day</button>
-          
-  </div>
-
-</div>
- -->
 
 
 
