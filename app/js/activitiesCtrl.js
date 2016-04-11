@@ -25,7 +25,7 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 
 
 	$scope.AddToDayTest = function(act_id) {
-		day_id = "-KEziGbaxzMO_2Lt29IA"
+		day_id = "-KF-vybalfqvRa4lQQG8"
 		console.log(day_id);
 
 		Agenda.addActToDay(act_id, day_id);
@@ -36,6 +36,8 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	//}
 
 	document.ondragstart = function(ev){
+		console.log(ev.target.id)
+		Agenda.DragActID = ev.target.id
 	 	ev.dataTransfer.setData("text", ev.target.id);
 	}
 

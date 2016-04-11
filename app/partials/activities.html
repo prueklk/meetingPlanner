@@ -32,14 +32,12 @@
                         <div ng-repeat="(key, value) in activities" class="row"> 
                            
                         <div class="col-sm-4 activity" >
-                        <div class="panel-group ">
-                        <div class="panel panel-default " draggable="true">
+                        <div class="panel-group">
+                        <div  id="{{key}}" class="panel panel-default" draggable="true">
                         
                         <div ng-init="tag='collapse'" class="panel-heading ">
                                 <h4 class="panel-title">
-                                
-
-                                  
+                    
 
                                 <div class="col-sm-6 activityHeading">
                                 {{value.name}} 

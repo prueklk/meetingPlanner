@@ -66,14 +66,35 @@
     <div class="col-sm-12">
       <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add Day</button>
     </div>
-    <div id="{{key}}" ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
+    <div  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
 
-      <div class="col-sm-6 dayactivity">
+      <div ng-init="tag='day'" id="{{key}}" class="col-sm-6 dayactivity">
 
-     <div class="foo Group"></div>
-      <div class="foo Discussion"></div>
-      <div class="foo Presentation"></div> 
-      <div class="foo Coffee"></div> 
+    
+
+
+      <ul class="list-group">
+        <li class="list-group-item col-sm-12" ng-repeat="(keyact, obj) in value.activities">
+
+         
+          <div class="col-sm-7">
+            {{obj.name}}
+          </div>
+          
+          <div class="col-sm-3">
+            {{obj.length}}  min
+          </div>
+
+           <div class="col-sm-2">
+            <button id="" ng-click="deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+          </div>
+            
+ 
+          
+
+        </li>
+
+      </ul>
 
       </div>
 
@@ -84,11 +105,19 @@
 
              <p>End Time: <!-- {{endtime}} --> </p>
               <p>Total Time: <!-- {{totaltime}}  --> </p>
-            <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default">Delete Day</button>
+            
+
+             <div class="foo Group"></div>
+              <div class="foo Discussion"></div>
+              <div class="foo Presentation"></div> 
+              <div class="foo Coffee"></div> 
+              <br>
+
+              <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete Day</button>
 
       </div> 
-      <div id="div1" ondrop="ondrop(event)" ondragover="ondragover(event)">
-      </div>
+      <!-- <div id="div1" ondrop="ondrop(event)" ondragover="ondragover(event)">
+      </div> -->
     </div> <!-- end of day item -->
   </div>
 </div>

@@ -3,11 +3,22 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 this.ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
+// this.dayActs = this.dayRef.child("activities")
 // this.dayRefActivities = this.dayRef.child("dayActivities")
 
 this.actIDarray = [];
 this.selectedDate = "";
 this.selectedTime = "";
+
+this.DragDayID = "";
+this.DragActID = "";
+
+
+this.deleteActDay = function(day_id, act_id) {
+
+this.dayRef.child(day_id).child("activities").child(act_id).remove();
+
+}
 
 
 this.deleteDay = function(id){
@@ -83,21 +94,28 @@ this.resetDateTime = function(){
 	this.selectedTime = "";
 }
 
-this.addActToDay = function(act_id, day_id){
+this.addActToDay = function(){
+	alert("addact")
+	// console.log(this.DragDayID)
+	console.log(this.DragActID)
 
 	// addRef = this.dayRef;
 	// targetRef = addRef.child(day_id); 
-	targetDay = this.dayRef.child(day_id)
+	targetDay = this.dayRef.child(this.DragDayID)
 	// console.log(targetDay.child("activities"));
-	targetAct = this.actRef.child(act_id)
+	targetAct = this.actRef.child(this.DragActID)
+
+	var actID = this.DragActID;
 	
 			this.actRef.once("value", function(snapshot) {
 		  		snapshot.forEach(function(childSnapshot) {
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
+		  			console.log(key)
 
-		  			if (act_id === key) {
+		  			if (actID === key) {
+		  				console.log("HIT");
 		  				
 
 		  				var targetData = data;
@@ -117,7 +135,7 @@ this.addActToDay = function(act_id, day_id){
 		  				console.log("noHit");
 		  			}
 
-		  			console.log(data);
+		  			// console.log(data);
 		  			// console.log(id);
 
 		  		});
