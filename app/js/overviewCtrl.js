@@ -72,16 +72,46 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	document.ondrop = function(ev){
 		ev.preventDefault();
-	    // var data = ev.dataTransfer.getData("text");
-	    // ev.target.appendChild(document.getElementById(data));
-	    // Agenda.deleteAct(data);
-	    Agenda.DragDayID = ev.target.id;
-	    Agenda.addActToDay();
-	    console.log(ev.target.id)
-	    $scope.actUpdate();
+	
+	    
+	    if ( $(ev.target).hasClass("drop")) {
+	    	console.log(ev.target + "drop");
+
+	    	
+	    	Agenda.DragDayID = ev.target.id;
+	    	Agenda.addActToDay();
+
+
+
+	    } else if ($(ev.target).hasClass("drop2")) {
+	    	Agenda.DragDayID = ev.target.parentNode.id;
+	    	Agenda.addActToDay();
+
+	    	console.log(ev.target + "drop2");
+
+
+	    } else if ($(ev.target).hasClass("drop3")) {
+	    	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
+	    	Agenda.addActToDay();
+
+	    	console.log(ev.target + "drop3");
+
+
+	    };
+
+	    	
+	    	
+	    	// Agenda.DragDayID = ev.target.parentNode.id;
+	    	
+	    	// Agenda.addActToDay();
+	    }
+
+	    
+	    
+	    // $scope.actUpdate();
 
 	   
-	}
+	
 });
 
 

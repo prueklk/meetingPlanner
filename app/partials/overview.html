@@ -68,13 +68,13 @@
     </div>
     <div  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
 
-      <div ng-init="tag='day'" id="{{key}}" class="col-sm-6 dayactivity">
+      <div ng-init="tag='day'" id="{{key}}" class="col-sm-6 dayactivity drop">
 
     
 
 
-      <ul class="list-group">
-        <li class="list-group-item col-sm-12" ng-repeat="(keyact, obj) in value.activities">
+      <ul class="list-group drop2">
+        <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, obj) in value.activities">
 
          
 
