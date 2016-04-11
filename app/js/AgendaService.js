@@ -95,14 +95,12 @@ this.resetDateTime = function(){
 }
 
 this.addActToDay = function(){
-	alert("addact")
-	// console.log(this.DragDayID)
+
 	console.log(this.DragActID)
 
-	// addRef = this.dayRef;
-	// targetRef = addRef.child(day_id); 
+
 	targetDay = this.dayRef.child(this.DragDayID)
-	// console.log(targetDay.child("activities"));
+
 	targetAct = this.actRef.child(this.DragActID)
 
 	var actID = this.DragActID;
@@ -135,8 +133,7 @@ this.addActToDay = function(){
 		  				console.log("noHit");
 		  			}
 
-		  			// console.log(data);
-		  			// console.log(id);
+		  			
 
 		  		});
 
