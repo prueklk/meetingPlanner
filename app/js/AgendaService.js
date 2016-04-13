@@ -148,7 +148,41 @@ this.addActToDay = function(){
 }
 
 
+var self = this;
+this.apiKey = "63528f449410f83acb94ee8edf8c0d02";
 
+// {"_id":2673730,"name":"Stockholm","country":"SE","coord":{"lon":18.064899,"lat":59.332581}}
+//HOW TO: http://openweathermap.org/forecast5
+console.log("DaysWeather");
+this.DaysWeather = $resource('http://api.openweathermap.org/data/2.5/forecast',{units:"metric",appid:self.apiKey});
+console.log(this.DaysWeather.get({id:2673730})); // OR this.DaysWeather.get({q:"Stockholm"});
+// 5 days, 3 hours = 00.00, 03.00, 06.00, 09.00, 12.00, 15.00, 18.00, 21.00
+
+
+/*
+this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:self.apiKey});
+
+Dinner.DishSearch.get({title_kw:query},function(data){
+ 	$scope.dishes=data.Results;
+ 	$scope.status = "Showing " + data.Results.length + " results";
+},function(data){
+ 	$scope.status = "There was an error";
+});
+
+this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:self.apiKey}); 
+
+Dinner.Dish.get({id:$routeParams.dishId},function(data){
+	$scope.dish=data;
+    $scope.status = "";
+    Dinner.keepPreparedDish(data);
+    $scope.foodPrice = Dinner.getFoodPrice();
+},function(data){
+    $scope.status = "There was an error";
+});
+
+//in the controller, if we want to search for dishes we can call Dinner.DishSearch.get({title_kw:'chicken'}) 
+//or to get a single dish we would do Dinner.Dish.get({id:12345}).
+*/
 
 return this;
 });
