@@ -153,9 +153,9 @@ this.apiKey = "63528f449410f83acb94ee8edf8c0d02";
 
 // {"_id":2673730,"name":"Stockholm","country":"SE","coord":{"lon":18.064899,"lat":59.332581}}
 //HOW TO: http://openweathermap.org/forecast5
-console.log("DaysWeather");
-this.DaysWeather = $resource('http://api.openweathermap.org/data/2.5/forecast',{units:"metric",appid:self.apiKey});
-console.log(this.DaysWeather.get({id:2673730})); // OR this.DaysWeather.get({q:"Stockholm"});
+// console.log("DaysWeather");
+// this.DaysWeather = $resource('http://api.openweathermap.org/data/2.5/forecast',{units:"metric",appid:self.apiKey});
+// console.log(this.DaysWeather.get({id:2673730})); // OR this.DaysWeather.get({q:"Stockholm"});
 // 5 days, 3 hours = 00.00, 03.00, 06.00, 09.00, 12.00, 15.00, 18.00, 21.00
 
 
