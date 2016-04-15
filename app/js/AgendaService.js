@@ -13,6 +13,8 @@ this.selectedTime = "";
 this.DragDayID = "";
 this.DragActID = "";
 
+this.summ = 0;
+
 
 this.deleteActDay = function(day_id, act_id) {
 
@@ -75,7 +77,8 @@ this.addDay = function(){
 	this.dayRef.push({
   			
 		    date: this.selectedDate.toISOString(),
-		    time: this.selectedTime.toISOString(),
+		    starttime: this.selectedTime.toISOString(),
+		    length: "",  
 		    activities: ""
 
 
@@ -93,6 +96,53 @@ this.resetDateTime = function(){
 	this.selectedDate = "";
 	this.selectedTime = "";
 }
+
+
+this.updateSum = function(value){
+	//update total time and endtiem for the day when dropped or removed activity, change value to dayId for the day
+	// that has changed? Or not needed because of the other two functions?
+	this.summ = value;
+	console.log(this.summ);
+}
+
+this.getEndTime = function(dayId){
+	return false;
+	//get the total time and start time from the day sent in and calculate them to an endtime. 
+	//store in firebase for that day as endtime and display in the view
+	// call whenever dropped or deleted activity and in the beginning of the program (0)
+}
+
+this.getTotalTime = function(){
+	// get activities length from day sent in and calculate them, store them in firebase for that day 
+	//and display in the view from firebase
+	// call whenever dropped or deleted activity and in the beginning of the program (0)
+	targetDay = this.dayRef.child(this.DragDayID)
+	targetDayActs = targetDay.child("activities")
+	console.log(targetDay);
+
+	sum = 0;
+
+	targetDayActs.once("value", function(snapshot) {
+		  		snapshot.forEach(function(childSnapshot) {
+
+		  			var key = childSnapshot.key()
+		  			var data = childSnapshot.val()
+		  			console.log(key)
+		  			console.log(data.length)
+		  			
+		  			sum += data.length;
+
+		  			console.log(sum)
+		  			
+				});
+
+				this.dayRef.update({length: sum});
+
+		  			
+			});
+
+	this.updateSum(sum)
+};
 
 this.addActToDay = function(){
 

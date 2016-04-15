@@ -74,7 +74,7 @@
 
 
       <ul class="list-group drop2">
-        <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, obj) in value.activities">
+        <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, obj) in value.activities" id="{{key}}" draggable="true">
 
          
 
@@ -110,9 +110,8 @@
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
             <p>Start Time: {{value.time | date: 'HH:mm'}}  </p>
               
-
-             <p>End Time: <!-- {{endtime}} --> </p>
-              <p>Total Time: <!-- {{totaltime}}  --> </p>
+             <p>End Time: {{value.endtime | date: 'HH:mm'}} </p>
+              <p>Total Time: {{value.length | date: 'HH:mm' }}</p>
             
 
              <div class="foo Group"></div>
@@ -120,6 +119,7 @@
               <div class="foo Presentation"></div> 
               <div class="foo Coffee"></div> 
               <br>
+
 
               <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete Day</button>
 
