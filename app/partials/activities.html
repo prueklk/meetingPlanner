@@ -26,7 +26,7 @@
             <!-- </div> -->
          
 
-            <div class="col-sm-2 activityParking shadow">
+            <div class="col-sm-2 activityParking shadow drop">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
 
                         <div ng-repeat="(key, value) in activities" class="row"> 
@@ -119,15 +119,13 @@
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
-                    <p>Type 
-                        <select class="form-control" ng-model="type">
+                    <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
                         <option selected="selected" value="Presentation">Presentation</option>
-                        <option value="Discussion">Discussion</option></select>
-                    </p>
-                    <p>Descpription <input ng-model="description" type="text">
-                        <pre>{{ data | json }}</pre>
+                        <option value="Discussion">Discussion</option></select> </p>
+                    <p>Descpription <textarea ng-model="description" type="text" id="actDescription">
+                        <pre>{{ data | json }}</pre></textarea>
                     </p>
                 </div>
 

@@ -13,13 +13,29 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	$scope.length = 0;
 	$scope.type = "Select here";
 	$scope.addAct = function() {
+
+		if ($scope.name == ""){
+			alert("Please give the activity a name");
+		}
+		else if ($scope.length == ""){
+			alert("Please set a length to the activity");
+		}
+		else if ($scope.type == "Select here"){
+			alert("Please select a type");
+		}
+		else if ($scope.description == ""){
+			alert("Please give a description to the activity");
+		}
+		else{
 		
 		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
+
 			$scope.name = "";
 			$scope.description = "";
 			$scope.length = 0;
 			$scope.type = "Select here";
 
+		}
 	}
 
 
@@ -62,11 +78,25 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 	$scope.type = "Select here";
 
 	$scope.addAct = function() {
-		// TODO // check if all fields are filled, don't call addAct until every field is filled
 
+		if ($scope.name == ""){
+			alert("Please give the activity a name");
+		}
+		else if ($scope.length == ""){
+			alert("Please set a length to the activity");
+		}
+		else if ($scope.type == "Select here"){
+			alert("Please select a type");
+		}
+		else if ($scope.description == ""){
+			alert("Please give a description to the activity");
+		}
+		else{
 		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
 		$uibModalInstance.dismiss('cancel');
+		}
 	}
+
 	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
   	};

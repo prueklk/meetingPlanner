@@ -2,15 +2,19 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	$scope.days = $firebaseObject(Agenda.dayRef);
 	$scope.daysAct = $firebaseObject(Agenda.dayRef).activities;
+
+	$scope.totalSum = 0;
 	// $scope.daysAct = $firebaseObject(Agenda.dayRef.child("activities").child("-KF0S7rQ9fhU2-m1fIsv"));
 	// console.log($firebaseObject(Agenda.dayRef).activities);
 	// console.log($scope.daysAct);
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
+		if (confirm("Are you sure you want to delete this day?")){
 		console.log(day_id);
 		console.log(act_id);
 		Agenda.deleteActDay(day_id, act_id);
+	}
 
 	}
 	
@@ -41,10 +45,10 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 
-
-
 	$scope.deleteDay = function(id){
+		if (confirm("Are you sure you want to delete this day?")){
 		Agenda.deleteDay(id);
+	}
 	}
 
 
@@ -80,7 +84,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	
 	    	Agenda.DragDayID = ev.target.id;
 	    	Agenda.addActToDay();
-
+	    	Agenda.getTotalTime();
 
 
 	    } else if ($(ev.target).hasClass("drop2")) {
@@ -89,6 +93,8 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	    	console.log(ev.target + "drop2");
 
+	    	Agenda.getTotalTime();
+
 
 	    } else if ($(ev.target).hasClass("drop3")) {
 	    	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
@@ -96,9 +102,13 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	    	console.log(ev.target + "drop3");
 
+	    	Agenda.getTotalTime();
+
 
 	    };
 
+
+	    $scope.totalSum = Agenda.summ;
 	    	
 	    	
 	    	// Agenda.DragDayID = ev.target.parentNode.id;
@@ -113,6 +123,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	   
 	
 });
+
 
 
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
