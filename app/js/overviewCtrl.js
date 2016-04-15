@@ -10,7 +10,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
-		if (confirm("Are you sure you want to delete this day?")){
+		if (confirm("Are you sure you want to delete this activity?")){
 		console.log(day_id);
 		console.log(act_id);
 		Agenda.deleteActDay(day_id, act_id);
