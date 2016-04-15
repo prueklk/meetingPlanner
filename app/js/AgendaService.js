@@ -14,6 +14,9 @@ this.DragDayID = "";
 this.DragActID = "";
 
 
+
+
+
 this.deleteActDay = function(day_id, act_id) {
 
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
@@ -76,6 +79,7 @@ this.addDay = function(){
   			
 		    date: this.selectedDate.toISOString(),
 		    time: this.selectedTime.toISOString(),
+		     
 		    activities: ""
 
 
@@ -98,9 +102,7 @@ this.addActToDay = function(){
 
 	console.log(this.DragActID)
 
-
 	targetDay = this.dayRef.child(this.DragDayID)
-
 	targetAct = this.actRef.child(this.DragActID)
 
 	var actID = this.DragActID;
@@ -111,6 +113,7 @@ this.addActToDay = function(){
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
 		  			console.log(key)
+		  			console.log(data)
 
 		  			if (actID === key) {
 		  				console.log("HIT");
