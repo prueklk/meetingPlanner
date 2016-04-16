@@ -13,6 +13,83 @@
 	margin: 15px;
 
 }
+/*about page css*/
+#about{
+	text-align: center;
+	color: white;
+	font-style: normal;
+	margin-top:170px;
+}
+ul li q{
+ color:orange;
+  color:#000;
+  background:#13b4ff;
+  display:block;
+  height:15em;
+  width:15em;
+  padding:1em;
+  margin-left:130px;
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -webkit-transform:rotate(10deg);
+}
+ul li b{
+ color:orange;
+  color:#000;
+  background:LightCoral;
+  display:block;
+  height:15em;
+  width:15em;
+  padding:1em;
+  margin-left:20px;
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -webkit-transform:rotate(-3deg);
+}
+ul li c{
+ color:orange;
+  color:#000;
+  background:#ab3fdd;
+  display:block;
+  height:15em;
+  width:15em;
+  padding:1em;
+  margin-left:30px;
+
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -webkit-transform:rotate(-8deg);
+}
+ul li d{
+ color:orange;
+  color:#000;
+  background:#F4A460;
+  display:block;
+  height:15em;
+  width:15em;
+  padding:1em;
+  margin-right:70px;
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  -webkit-transform:rotate(4deg);
+}
+/*about page css ends here*/
+
+/*contact page css*/
+#cont{
+	margin-left: 350px;
+    margin-top: 100px;
+		color:white;
+}
+#contactform{
+	margin-left: 350px;
+	margin-top: 20px;
+}
+#textcontact{
+
+	margin-left: 350px;
+}
+
+ul li{
+
+  float:left;
+}
 
 /*.btn{
 	background-color: #1abc9c;*/
