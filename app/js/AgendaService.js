@@ -13,7 +13,6 @@ this.selectedTime = "";
 this.DragDayID = "";
 this.DragActID = "";
 
-this.summ = 0;
 
 
 this.deleteActDay = function(day_id, act_id) {
@@ -78,13 +77,9 @@ this.addDay = function(){
   			
 		    date: this.selectedDate.toISOString(),
 		    starttime: this.selectedTime.toISOString(),
+		    endtime: "",
 		    length: "",  
 		    activities: ""
-
-
-		    
-		    
-		  
 	});
 
 	this.resetDateTime();
@@ -98,15 +93,42 @@ this.resetDateTime = function(){
 }
 
 
-this.updateSum = function(value){
-	//update total time and endtiem for the day when dropped or removed activity, change value to dayId for the day
-	// that has changed? Or not needed because of the other two functions?
-	this.summ = value;
-	console.log(this.summ);
-}
 
-this.getEndTime = function(dayId){
-	return false;
+this.getEndTime = function(){
+
+	targetDay = this.dayRef.child(this.DragDayID)
+	totalTime = 0;
+	startTime = 0;
+	endTime = 0;
+
+
+	targetDay.once("value", function(snapshot) {
+
+		  			var key = snapshot.key()
+		  			var data = snapshot.val()
+		  			
+		  			totalTime += data.length;
+		  			console.log(totalTime);
+		  			startTime = data.starttime;
+		  			console.log(startTime);
+		  			
+				});
+
+				endTime = totalTime + startTime;
+				console.log(endTime);
+
+				targetDay.update({endtime: endTime});
+
+		  			
+			
+
+	//targetDay("length").on("value", function(snapshot) {
+      //console.log(snapshot.val()); 
+    //});
+
+	//How to get the length and starttime of a day? get those from database, add them together, save in a variable and 
+	// stor in this.targetDay.update({endtime: sumTime});
+
 	//get the total time and start time from the day sent in and calculate them to an endtime. 
 	//store in firebase for that day as endtime and display in the view
 	// call whenever dropped or deleted activity and in the beginning of the program (0)
@@ -127,21 +149,17 @@ this.getTotalTime = function(){
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
-		  			console.log(key)
-		  			console.log(data.length)
 		  			
 		  			sum += data.length;
-
-		  			console.log(sum)
 		  			
 				});
 
-				this.dayRef.update({length: sum});
+				this.targetDay.update({length: sum});
 
 		  			
 			});
 
-	this.updateSum(sum)
+	//this.updateSum(sum)
 };
 
 this.addActToDay = function(){

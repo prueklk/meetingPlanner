@@ -14,6 +14,9 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		console.log(day_id);
 		console.log(act_id);
 		Agenda.deleteActDay(day_id, act_id);
+		Agenda.DragDayID = day_id;
+		Agenda.getTotalTime();
+		Agenda.getEndTime();
 	}
 
 	}
@@ -85,6 +88,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	Agenda.DragDayID = ev.target.id;
 	    	Agenda.addActToDay();
 	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
 
 
 	    } else if ($(ev.target).hasClass("drop2")) {
@@ -94,6 +98,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	console.log(ev.target + "drop2");
 
 	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
 
 
 	    } else if ($(ev.target).hasClass("drop3")) {
@@ -103,12 +108,13 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	console.log(ev.target + "drop3");
 
 	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
 
 
 	    };
 
 
-	    $scope.totalSum = Agenda.summ;
+	    //$scope.totalSum = Agenda.summ;
 	    	
 	    	
 	    	// Agenda.DragDayID = ev.target.parentNode.id;
