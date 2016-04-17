@@ -44,11 +44,18 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// $scope.actUpdate();
 
 
+		
+		
+	
+
+	
+	
+
 
 	$scope.deleteDay = function(id){
-		if (confirm("Are you sure you want to delete this day?")){
+		
 		Agenda.deleteDay(id);
-	}
+	
 	}
 
 
@@ -84,7 +91,51 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	
 	    	Agenda.DragDayID = ev.target.id;
 	    	Agenda.addActToDay();
-	    	Agenda.getTotalTime();
+	    	//Agenda.getTotalTime();
+	    	//Agenda.fillcolor();
+	    	var percentageArr=Agenda.fillcolor(); 
+		
+	    	CoffePercent = percentageArr[0];
+	    	GroupPercent = percentageArr[1];
+	    	DiscussionPercent = percentageArr[2];
+		PresentationPercent = percentageArr[3];
+		
+			$scope.colorboxg = {
+        "color" : "blue",
+        "background-color" : "#ae163e",
+        "width":GroupPercent+"px",
+        "height":"20px",
+        "display": "inline-block"
+      
+      
+    }
+   	$scope.colorbox = {
+        "color" : "blue",
+        "background-color" : "orange",
+        "width":CoffePercent+"px",
+        "height":"20px",
+       "display": "inline-block"
+       
+        
+    }
+$scope.colorboxd = {
+        "color" : "blue",
+        "background-color" : "#ab3fdd",
+        "width":DiscussionPercent+"px",
+        "height":"20px",
+        "display": "inline-block"
+       
+        
+    }
+    $scope.colorboxp = {
+        "color" : "blue",
+        "background-color" : "#13b4ff",
+        "width":PresentationPercent+"px",
+        "height":"20px",
+        "display": "inline-block"
+       
+         
+    }
 
 
 	    } else if ($(ev.target).hasClass("drop2")) {
@@ -93,7 +144,39 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	    	console.log(ev.target + "drop2");
 
-	    	Agenda.getTotalTime();
+	    	//Agenda.getTotalTime();
+	    	//Agenda.fillcolor();
+	    	var percentageArr=Agenda.fillcolor(); 
+		
+	    	CoffePercent = percentageArr[0];
+	    	GroupPercent = percentageArr[1];
+	    	DiscussionPercent = percentageArr[2];
+		PresentationPercent = percentageArr[3];
+			$scope.colorboxg = {
+        "color" : "blue",
+        "background-color" : "#ae163e",
+        "width":GroupPercent+"px",
+        "height":"20px"
+    }
+   	$scope.colorbox = {
+        "color" : "blue",
+        "background-color" : "yellow",
+        "width":CoffePercent+"px",
+        "height":"20px"
+    }
+$scope.colorboxd = {
+        "color" : "blue",
+        "background-color" : "#ab3fdd",
+        "width":DiscussionPercent+"px",
+        "height":"20px"
+    }
+    $scope.colorboxp = {
+        "color" : "blue",
+        "background-color" : "#13b4ff",
+        "width":PresentationPercent+"px",
+        "height":"20px"
+    }
+	    	
 
 
 	    } else if ($(ev.target).hasClass("drop3")) {
@@ -103,6 +186,39 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	console.log(ev.target + "drop3");
 
 	    	Agenda.getTotalTime();
+	    	//Agenda.fillcolor();
+	    	var percentageArr=Agenda.fillcolor(); 
+		
+	    	CoffePercent = percentageArr[0];
+	    	GroupPercent = percentageArr[1];
+	    	DiscussionPercent = percentageArr[2];
+		    PresentationPercent = percentageArr[3];
+	
+	
+	$scope.colorboxg = {
+        "color" : "blue",
+        "background-color" : "#ae163e",
+        "width":GroupPercent+"px",
+        "height":"20px"
+    }
+   	$scope.colorbox = {
+        "color" : "blue",
+        "background-color" : "yellow",
+        "width":CoffePercent+"px",
+        "height":"20px"
+    }
+$scope.colorboxd = {
+        "color" : "blue",
+        "background-color" : "#ab3fdd",
+        "width":DiscussionPercent+"px",
+        "height":"20px"
+    }
+    $scope.colorboxp = {
+        "color" : "blue",
+        "background-color" : "#13b4ff",
+        "width":PresentationPercent+"px",
+        "height":"20px"
+    }
 
 
 	    };

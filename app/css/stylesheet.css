@@ -1,9 +1,17 @@
 #actDescription{
-	width: 250px;
+	width: 380px;
 	height: 100px;
-	margin-top: 20px;
+	margin-top: 10px;
+	margin-right: 100px;
+	
 }
 
+#activityhead{
+	background-color:rgba(207, 210, 207, 0.5)	;
+}
+#length{
+	width:170px;
+}
 #selectType{
 	width: 250px;
 }
@@ -12,6 +20,11 @@
 
 	margin: 15px;
 
+}
+#colorbox{
+	color:blue;
+	width: 250px;
+	width:;
 }
 /*about page css*/
 #about{
@@ -140,9 +153,14 @@ margin: 10px;
 
 
 }
+#mainbox{
+	width:100px;
+	height:20px;
+
+}
 .foo {
   float: left;
-  width: 30px;
+  width: ;
   height: 30px;
  
   border: 1px solid rgba(0, 0, 0, .2);
@@ -160,7 +178,7 @@ margin: 10px;
   background: #ae163e;
 }
 .Coffee{
-	 background: #F4A460;
+	 background-color:orange;
 }
 .ondrop{
 	border: 1px solid black;
@@ -210,7 +228,7 @@ h5{
 
 #addActivity{
 	border: 1px solid black;
-	width: 250px;
+	width: 260px;
 	padding: 10px;
 	background-color:  white;
 }
@@ -269,7 +287,7 @@ background-color: #a0fff0;
 /*border: 1px solid black;*/
 /*margin: 20px;*/
 background: white;
-width: 100vh;
+width: 120vh;
 height: 600px;
 /*margin: 35px;*/
 overflow: auto;
@@ -281,6 +299,8 @@ margin-left: 30px;
 
 #deleteButton{
 	float: right;
+	margin-top: 20px;
+	
 }
 
 
@@ -302,6 +322,8 @@ border: 1px solid black;
 font-size: 9px;
 background: none;
 border: none;
+vertical-align: middle;
+    margin-top: -5px;
 	
 }
 body {
