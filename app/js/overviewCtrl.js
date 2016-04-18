@@ -10,11 +10,14 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
-		if (confirm("Are you sure you want to delete this day?")){
+		
 		console.log(day_id);
 		console.log(act_id);
 		Agenda.deleteActDay(day_id, act_id);
-	}
+		Agenda.DragDayID = day_id;
+		Agenda.getTotalTime();
+		Agenda.getEndTime();
+
 
 	}
 	
@@ -91,6 +94,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	
 	    	Agenda.DragDayID = ev.target.id;
 	    	Agenda.addActToDay();
+
 	    	//Agenda.getTotalTime();
 	    	//Agenda.fillcolor();
 	    	var percentageArr=Agenda.fillcolor(); 
@@ -137,12 +141,17 @@ $scope.colorboxd = {
          
     }
 
+	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
+
+
 
 	    } else if ($(ev.target).hasClass("drop2")) {
 	    	Agenda.DragDayID = ev.target.parentNode.id;
 	    	Agenda.addActToDay();
 
 	    	console.log(ev.target + "drop2");
+
 
 	    	//Agenda.getTotalTime();
 	    	//Agenda.fillcolor();
@@ -178,6 +187,9 @@ $scope.colorboxd = {
     }
 	    	
 
+	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
+
 
 	    } else if ($(ev.target).hasClass("drop3")) {
 	    	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
@@ -186,6 +198,7 @@ $scope.colorboxd = {
 	    	console.log(ev.target + "drop3");
 
 	    	Agenda.getTotalTime();
+
 	    	//Agenda.fillcolor();
 	    	var percentageArr=Agenda.fillcolor(); 
 		
@@ -220,11 +233,14 @@ $scope.colorboxd = {
         "height":"20px"
     }
 
+	    	Agenda.getEndTime();
+
+
 
 	    };
 
 
-	    $scope.totalSum = Agenda.summ;
+	    //$scope.totalSum = Agenda.summ;
 	    	
 	    	
 	    	// Agenda.DragDayID = ev.target.parentNode.id;

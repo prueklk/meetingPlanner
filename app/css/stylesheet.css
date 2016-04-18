@@ -21,17 +21,14 @@
 	margin: 15px;
 
 }
-#colorbox{
-	color:blue;
-	width: 250px;
-	width:;
-}
+
 /*about page css*/
 #about{
 	text-align: center;
 	color: white;
 	font-style: normal;
 	margin-top:170px;
+
 }
 ul li q{
  color:orange;
@@ -361,7 +358,7 @@ body {
 	background: url('/images/MeetingBG.jpg') no-repeat center center fixed; 
 	  
 	  height: 100vh;
-	  background: cover;
+	 background: cover;
 
 }
 
