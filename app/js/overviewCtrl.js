@@ -1,18 +1,19 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal) {
 
 
-	$scope.sortConfig = {
-            group: 'sortConfig',
-            animation: 200,
+	 $scope.config = {
+            group: 'foobar',
+            animation: 150,
             onSort: function (/** ngSortEvent */evt){
                 // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24
-                console.log("SORT");
+
+                console.log("SORT")
             }
+        };
 
 
 
-        }
-
+        
 	$scope.days = $firebaseObject(Agenda.dayRef);
 	$scope.daysAct = $firebaseObject(Agenda.dayRef).activities;
 
@@ -151,6 +152,8 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	$scope.dragBackStart = function(act, day){
 
+		Agenda.DragDayID = day;
+		Agenda.DragActID = act;
 		Agenda.dragBackDay = day;
 		Agenda.dragBackAct = act;
 		

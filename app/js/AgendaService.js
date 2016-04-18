@@ -150,7 +150,7 @@ this.getTotalTime = function(){
 
 this.addActToDay = function(){
 
-	console.log(this.DragActID)
+	// console.log(this.DragActID)
 
 	targetDay = this.dayRef.child(this.DragDayID)
 	targetAct = this.actRef.child(this.DragActID)
