@@ -51,11 +51,36 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	//	ev.dataTransfer.setData("text", ev.target.id);
 	//}
 
-	document.ondragstart = function(ev){
-		console.log(ev.target.id)
-		Agenda.DragActID = ev.target.id
-	 	ev.dataTransfer.setData("text", ev.target.id);
+	// $scope.onDragComplete=function(data,evt){
+ //       console.log("drag success, data:", data);
+ //    }
+
+	$scope.drag = function(key){
+		console.log("dragstart");
+		console.log(key)
+		Agenda.DragActID = key;
+	 // 	ev.dataTransfer.setData("text", ev.target.id);
 	}
+
+
+	$scope.dropBack = function(){
+
+		var targetDay = Agenda.dayRef.child(Agenda.dragBackDay);
+		var targetAct = targetDay.child("activities").child(Agenda.dragBackAct);
+		
+		targetAct.once("value", function(snapshot) {
+				var data = snapshot.val();
+						
+				Agenda.addAct(data.name, data.length, data.type, data.description)
+				Agenda.deleteActDay(Agenda.dragBackDay, Agenda.dragBackAct);
+
+		});
+
+	}
+	
+
+
+
 
 
 	$scope.openAddActivity = function () {

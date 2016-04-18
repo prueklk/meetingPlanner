@@ -26,16 +26,16 @@
             <!-- </div> -->
          
 
-            <div class="col-sm-2 activityParking shadow drop">
+            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
 
                         <div ng-repeat="(key, value) in activities" class="row"> 
                            
                         <div class="col-sm-4 activity" >
                         <div class="panel-group">
-                        <div  id="{{key}}" class="panel panel-default" draggable="true">
+                        <div  id="{{key}}"  class="panel panel-default"  >
                         
-                        <div ng-init="tag='collapse'" class="panel-heading ">
+                        <div  ng-init="tag='collapse'" class="panel-heading" draggable dragstart="drag(key)">
                                 <h4 class="panel-title">
                     
 
@@ -138,7 +138,7 @@
             <!-- END Modal -->
 
 
-            <div class="col-sm-8"> 
+            <div class="col-sm-8" ng-drop="true"> 
             	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
 
             </div>

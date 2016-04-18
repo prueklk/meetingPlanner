@@ -12,11 +12,10 @@ this.selectedTime = "";
 
 this.DragDayID = "";
 this.DragActID = "";
+this.dragBackDay = "";
+this.dragBackAct = "";
 
 this.summ = 0;
-
-
-
 
 
 this.deleteActDay = function(day_id, act_id) {
@@ -36,13 +35,12 @@ this.dayRef.child(id).remove();
 
 this.deleteAct = function(id){
 
+
 console.log(this.actRef.child(id))
 this.actRef.child(id).remove();
 
 
-
 }
-
 
 
 this.logdate = function(){
@@ -194,6 +192,9 @@ this.addActToDay = function(){
 
 
 		});
+
+
+	// this.actRef.child(targetAct).remove();
 
 
 

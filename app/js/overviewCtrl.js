@@ -1,5 +1,18 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal) {
 
+
+	$scope.sortConfig = {
+            group: 'sortConfig',
+            animation: 200,
+            onSort: function (/** ngSortEvent */evt){
+                // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24
+                console.log("SORT");
+            }
+
+
+
+        }
+
 	$scope.days = $firebaseObject(Agenda.dayRef);
 	$scope.daysAct = $firebaseObject(Agenda.dayRef).activities;
 
@@ -70,45 +83,61 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	//     Agenda.deleteAct(data);
 	// }
 
-	document.ondragover = function(ev) {
-	     ev.preventDefault();
-	}
+	// $scope.drag = function(ev) {
+	//      ev.preventDefault();
 
-	document.ondrop = function(ev){
-		ev.preventDefault();
+
+
+	// }
+
+	// $scope.onDragComplete=function(data, evt){
+ //       console.log("drag success, data:", data);
+
+
+
+
+
+
+ //    }
+
+	$scope.drop = function(day){
+		// ev.preventDefault();
+		console.log(day);
 	
 	    
-	    if ( $(ev.target).hasClass("drop")) {
-	    	console.log(ev.target + "drop");
+	    // if ( $(ev.target).hasClass("drop")) {
+	    // 	console.log(ev.target + "drop");
 
 	    	
-	    	Agenda.DragDayID = ev.target.id;
-	    	Agenda.addActToDay();
-	    	Agenda.getTotalTime();
-
-
-	    } else if ($(ev.target).hasClass("drop2")) {
-	    	Agenda.DragDayID = ev.target.parentNode.id;
+	    	Agenda.DragDayID = day;
 	    	Agenda.addActToDay();
 
-	    	console.log(ev.target + "drop2");
-
-	    	Agenda.getTotalTime();
-
-
-	    } else if ($(ev.target).hasClass("drop3")) {
-	    	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
-	    	Agenda.addActToDay();
-
-	    	console.log(ev.target + "drop3");
-
-	    	Agenda.getTotalTime();
+	    	Agenda.deleteAct(Agenda.DragActID);
+	    // 	Agenda.getTotalTime();
 
 
-	    };
+	    // } else if ($(ev.target).hasClass("drop2")) {
+	    // 	Agenda.DragDayID = ev.target.parentNode.id;
+	    // 	Agenda.addActToDay();
+
+	    // 	console.log(ev.target + "drop2");
+
+	    // 	Agenda.getTotalTime();
 
 
-	    $scope.totalSum = Agenda.summ;
+	    // } else if ($(ev.target).hasClass("drop3")) {
+	    // 	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
+	    // 	Agenda.addActToDay();
+
+	    // 	console.log(ev.target + "drop3");
+
+	    // 	Agenda.getTotalTime();
+
+
+	    // };
+
+
+	    // $scope.totalSum = Agenda.summ;
 	    	
 	    	
 	    	// Agenda.DragDayID = ev.target.parentNode.id;
@@ -120,9 +149,16 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    
 	    // $scope.actUpdate();
 
-	   
-	
+	$scope.dragBackStart = function(act, day){
+
+		Agenda.dragBackDay = day;
+		Agenda.dragBackAct = act;
+		
+	}
 });
+
+
+
 
 
 
