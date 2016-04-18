@@ -2,7 +2,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 	 $scope.config = {
-            group: 'foobar',
+            group: 'acts',
             animation: 150,
             onSort: function (/** ngSortEvent */evt){
                 // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24

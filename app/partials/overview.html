@@ -74,25 +74,25 @@
 
 
       <ul ng-sortable="config" class="list-group drop2" >
-        <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, obj) in value.activities" id="{{key}}"  draggable dragstart="dragBackStart(keyact, key)">
+        <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, item) in value.activities" id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)">
 
          
 
                                  <div class="col-sm-2">
-                                    <div class="{{obj.type}} TypeTag">
+                                    <div class="{{item.type}} TypeTag">
                                     </div>
                                 </div>
 
           <div class="col-sm-6">
-            {{obj.name}}
+            {{item.name}}
           </div>
           
           <div class="col-sm-3">
-            {{obj.length}} min
+            {{item.length}} min
           </div>
 
            <div class="col-sm-1">
-            <button id="" ng-click="deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+            <button id="{{keyact}}" ng-click="deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
           </div>
 
 
