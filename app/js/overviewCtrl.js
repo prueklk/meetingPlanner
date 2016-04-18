@@ -24,45 +24,24 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
-		if (confirm("Are you sure you want to delete this day?")){
+		
 		console.log(day_id);
 		console.log(act_id);
 		Agenda.deleteActDay(day_id, act_id);
-	}
+		Agenda.DragDayID = day_id;
+		Agenda.getTotalTime();
+		Agenda.getEndTime();
+
 
 	}
 	
 
-	// $scope.actUpdate = function(){
-
-	// Agenda.dayRef.once("value", function(snapshot) {
- 
- //  	snapshot.forEach(function(childSnapshot) {
-    
- //    var key = childSnapshot.key();
-   
- //    var childData = childSnapshot.val();
-
-  
-    
-
- //    act = childData.activities;
- //    $scope.daysAct = act;
- //    console.log(act)
-
-	//   });
-	// });
-
-	// }
-
-	// $scope.actUpdate();
-
 
 
 	$scope.deleteDay = function(id){
-		if (confirm("Are you sure you want to delete this day?")){
+		
 		Agenda.deleteDay(id);
-	}
+	
 	}
 
 
@@ -73,77 +52,67 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
     	});
   	};
 
-  	//$scope.allowDrop = function(ev){
-	//	ev.preventDefault();
-	//}
-
-	// $scope.drop = function(){
-	// 	ev.preventDefault();
-	//     var data = ev.dataTransfer.getData("text");
-	//     ev.target.appendChild(document.getElementById(data));
-	//     Agenda.deleteAct(data);
-	// }
-
-	// $scope.drag = function(ev) {
-	//      ev.preventDefault();
-
-
-
-	// }
-
-	// $scope.onDragComplete=function(data, evt){
- //       console.log("drag success, data:", data);
-
-
-
-
-
-
- //    }
+  	
 
 	$scope.drop = function(day){
-		// ev.preventDefault();
-		console.log(day);
 	
-	    
-	    // if ( $(ev.target).hasClass("drop")) {
-	    // 	console.log(ev.target + "drop");
 
 	    	
 	    	Agenda.DragDayID = day;
 	    	Agenda.addActToDay();
 
+
+	    	var percentageArr=Agenda.fillcolor(); 
+		
+	    	CoffeePercent = percentageArr[0];
+	    	GroupPercent = percentageArr[1];
+	    	DiscussionPercent = percentageArr[2];
+			PresentationPercent = percentageArr[3];
+		
+				$scope.colorboxGroup = {
+			        "color" : "blue",
+			        "background-color" : "#ae163e",
+			        "width":GroupPercent+"px",
+			        "height":"20px",
+			        "display": "inline-block"
+			      
+			      
+			    }
+			   	$scope.colorboxCoffee = {
+			        "color" : "blue",
+			        "background-color" : "orange",
+			        "width":CoffeePercent+"px",
+			        "height":"20px",
+			       "display": "inline-block"
+			       
+			        
+			    }
+				$scope.colorboxDiscussion = {
+			        "color" : "blue",
+			        "background-color" : "#ab3fdd",
+			        "width":DiscussionPercent+"px",
+			        "height":"20px",
+			        "display": "inline-block"
+			       
+			        
+			    }
+			    $scope.colorboxPresentation = {
+			        "color" : "blue",
+			        "background-color" : "#13b4ff",
+			        "width":PresentationPercent+"px",
+			        "height":"20px",
+			        "display": "inline-block"
+			       
+			         
+			    }
+
+	    	Agenda.getTotalTime();
+	    	Agenda.getEndTime();
+
+
+
 	    	Agenda.deleteAct(Agenda.DragActID);
-	    // 	Agenda.getTotalTime();
-
-
-	    // } else if ($(ev.target).hasClass("drop2")) {
-	    // 	Agenda.DragDayID = ev.target.parentNode.id;
-	    // 	Agenda.addActToDay();
-
-	    // 	console.log(ev.target + "drop2");
-
-	    // 	Agenda.getTotalTime();
-
-
-	    // } else if ($(ev.target).hasClass("drop3")) {
-	    // 	Agenda.DragDayID = ev.target.parentNode.parentNode.id;
-	    // 	Agenda.addActToDay();
-
-	    // 	console.log(ev.target + "drop3");
-
-	    // 	Agenda.getTotalTime();
-
-
-	    // };
-
-
-	    // $scope.totalSum = Agenda.summ;
-	    	
-	    	
-	    	// Agenda.DragDayID = ev.target.parentNode.id;
-	    	
-	    	// Agenda.addActToDay();
+	
 	    }
 
 	    

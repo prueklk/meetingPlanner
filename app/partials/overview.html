@@ -108,25 +108,48 @@
 
       <div  class="col-sm-6 daysinfo">
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
-            <p>Start Time: {{value.time | date: 'HH:mm'}}  </p>
+            <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
               
-             <p>End Time: {{value.endtime | date: 'HH:mm'}} </p>
-              <p>Total Time: {{value.length | date: 'HH:mm' }}</p>
+             <p>End Time: {{value.endtime}} </p>
+              <p>Total Time: {{value.length}} min</p>
             
+
 
               
                
-              <br>
+        <br>
+
+             <!-- <div class="foo Group" ng-style=></div>
+              <div class="foo Discussion"></div>
+              <div class="foo Presentation"></div> 
+              <div class="foo Coffee"></div> -->
+
+               
+       <div id="mainbox" > <div  ng-style="colorboxGroup"></div><div  ng-style="colorboxDiscussion"> </div><div  ng-style="colorboxCoffee"> </div><div  ng-style="colorboxPresentation"> 
+        </div></div>        
+          
+            
 
 
               <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete Day</button>
 
       </div> 
+
+      
+      
+       
+        
+      
+      
+      
+       
+       
+       </div>
       <!-- <div id="div1" ondrop="ondrop(event)" ondragover="ondragover(event)">
       </div> -->
     </div> <!-- end of day item -->
   </div>
-</div>
+<!-- </div> -->
 
 
 

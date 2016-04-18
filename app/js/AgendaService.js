@@ -15,7 +15,6 @@ this.DragActID = "";
 this.dragBackDay = "";
 this.dragBackAct = "";
 
-this.summ = 0;
 
 
 this.deleteActDay = function(day_id, act_id) {
@@ -23,11 +22,104 @@ this.deleteActDay = function(day_id, act_id) {
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
 
 }
+//fill color box
+this.fillcolor=function(){
+  
+    var PresentationArr=[];
+	var CoffeeBreakArr=[];
+	
+	var GroupWorkArr=[];
+	var DiscussionArr=[];
+	var percentageArr=[];
+
+  //  initializing sum variables
+
+    var sumcoffee=0;
+    var sumgroup=0;
+    var sumdiscussion=0;
+    var sumpresentation=0;
+ //targetDay = this.dayRef.child("-KFOVszSjV7jW99NhlnG")
+ targetDay = this.dayRef.child(this.DragDayID)
+
+    targetDayActs = targetDay.child("activities");
+    var actID = this.DragActID;
+	
+    targetDayActs.once("value", function(snapshot) {
+
+	   snapshot.forEach(function(childSnapshot) {
+
+		  			var key = childSnapshot.key()
+		  			var data = childSnapshot.val()
+		  	     
+		  			var typ=data.type;
+		  			console.log(typ)
+		  			var Len=data.length;
+		  			if (typ=="Coffee"){
+		  				CoffeeBreakArr.push(Len);
+		  				 }
+		  			
+		  			else  if(typ=="Group"){
+		  				GroupWorkArr.push(Len);
+		  			   	 }
+		  			
+		  		    else if(typ=="Discussion"){
+		  			 DiscussionArr.push(Len);
+		  			     }
+		  
+                   else{
+	                 PresentationArr.push(Len);
+	                   }
+		  			  
+
+	});
+
+
+		});
+
+  console.log(CoffeeBreakArr)
+  console.log(PresentationArr)
+  console.log(GroupWorkArr)
+  console.log(DiscussionArr)
+
+
+//summation
+for(var i in CoffeeBreakArr) {sumcoffee += CoffeeBreakArr[i]; }
+console.log(sumcoffee)
+//groupsum
+for(var i in GroupWorkArr) {sumgroup += GroupWorkArr[i]; }
+console.log(sumgroup)
+//discussion
+for(var i in DiscussionArr) {sumdiscussion += DiscussionArr[i]; }
+console.log(sumdiscussion)
+//presentation
+for(var i in PresentationArr) {sumpresentation += PresentationArr[i]; }
+console.log(sumpresentation)
+
+// Total sum of all type arrays
+		  			 
+ var total=sumcoffee+sumpresentation+sumdiscussion+sumgroup;
+			    
+// Percentage time  of eacy type
+
+var percentagecoffe=Math.round((sumcoffee/total)*100);
+ percentageArr.push(percentagecoffe);
+var percentagegroup=Math.round((sumgroup/total)*100);
+ percentageArr.push(percentagegroup);
+var percentagediscussion=Math.round((sumdiscussion/total)*100);
+ percentageArr.push(percentagediscussion);
+var percentagepresentation=Math.round((sumpresentation/total)*100);
+ percentageArr.push(percentagepresentation);
+ console.log( percentageArr)
+ console.log(percentagecoffe)
+return  percentageArr;
+
+}
+
 
 
 this.deleteDay = function(id){
 
-	
+
 this.dayRef.child(id).remove();
 
 
@@ -80,15 +172,11 @@ this.addDay = function(){
 	this.dayRef.push({
   			
 		    date: this.selectedDate.toISOString(),
-		    time: this.selectedTime.toISOString(),   
-		    starttime: start,
+		    starttime: this.selectedTime.toISOString(),
+		    endtime: "",
+
 		    length: "",  
 		    activities: ""
-
-
-		    
-		    
-		  
 	});
 
 	this.resetDateTime();
@@ -102,15 +190,42 @@ this.resetDateTime = function(){
 }
 
 
-this.updateSum = function(value){
-	//update total time and endtiem for the day when dropped or removed activity, change value to dayId for the day
-	// that has changed? Or not needed because of the other two functions?
-	this.summ = value;
-	console.log(this.summ);
-}
 
-this.getEndTime = function(dayId){
-	return false;
+this.getEndTime = function(){
+
+	targetDay = this.dayRef.child(this.DragDayID)
+	totalTime = 0;
+	startTime = 0;
+	endTime = 0;
+
+
+	targetDay.once("value", function(snapshot) {
+
+		  			var key = snapshot.key()
+		  			var data = snapshot.val()
+		  			
+		  			totalTime += data.length;
+		  			console.log(totalTime);
+		  			startTime = data.starttime;
+		  			console.log(startTime);
+		  			
+				});
+
+				endTime = totalTime + startTime;
+				console.log(endTime);
+
+				targetDay.update({endtime: endTime});
+
+		  			
+			
+
+	//targetDay("length").on("value", function(snapshot) {
+      //console.log(snapshot.val()); 
+    //});
+
+	//How to get the length and starttime of a day? get those from database, add them together, save in a variable and 
+	// stor in this.targetDay.update({endtime: sumTime});
+
 	//get the total time and start time from the day sent in and calculate them to an endtime. 
 	//store in firebase for that day as endtime and display in the view
 	// call whenever dropped or deleted activity and in the beginning of the program (0)
@@ -120,7 +235,8 @@ this.getTotalTime = function(){
 	// get activities length from day sent in and calculate them, store them in firebase for that day 
 	//and display in the view from firebase
 	// call whenever dropped or deleted activity and in the beginning of the program (0)
-	targetDay = this.dayRef.child(this.DragDayID)
+	targetDay = this.dayRef.child("-KFOVszSjV7jW99NhlnG")
+
 	targetDayActs = targetDay.child("activities")
 	console.log(targetDay);
 
@@ -131,21 +247,17 @@ this.getTotalTime = function(){
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
-		  			console.log(key)
-		  			console.log(data.length)
 		  			
 		  			sum += data.length;
-
-		  			console.log(sum)
 		  			
 				});
 
-				this.dayRef.update({length: sum});
+				this.targetDay.update({length: sum});
 
 		  			
 			});
 
-	this.updateSum(sum)
+	//this.updateSum(sum)
 };
 
 this.addActToDay = function(){

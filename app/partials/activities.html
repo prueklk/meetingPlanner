@@ -111,24 +111,27 @@
             <!-- Modal -->
             <script type="text/ng-template" id="activityModal.html">
                
-                <div class="modal-header">
+                <div class="modal-header" id="activityhead">
                     <button class="close" type="button" ng-click="cancel()">&times;</button>
                     <h4 class="modal-title">Add Activity</h4>
                 </div>
 
                 <div class="modal-body">
-                    <p>Name <input type="text" ng-model="name" id="name" placeholder="Name your event.."> </p>
+      <form name="myForm">
+                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
+                    <span ng-show="myForm.name.$touched && myForm.name.$invalid">The name is required.</span>
+
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
                         <option selected="selected" value="Presentation">Presentation</option>
                         <option value="Discussion">Discussion</option></select> </p>
-                    <p>Descpription <textarea ng-model="description" type="text" id="actDescription">
+                    <p>Description <textarea ng-model="description" type="text" id="actDescription">
                         <pre>{{ data | json }}</pre></textarea>
                     </p>
                 </div>
-
+</form>
                 <div class="modal-footer">
                   <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
                   <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>

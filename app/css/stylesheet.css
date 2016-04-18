@@ -1,9 +1,17 @@
 #actDescription{
-	width: 250px;
+	width: 380px;
 	height: 100px;
-	margin-top: 20px;
+	margin-top: 10px;
+	margin-right: 100px;
+	
 }
 
+#activityhead{
+	background-color:rgba(207, 210, 207, 0.5)	;
+}
+#length{
+	width:170px;
+}
 #selectType{
 	width: 250px;
 }
@@ -13,12 +21,14 @@
 	margin: 15px;
 
 }
+
 /*about page css*/
 #about{
 	text-align: center;
 	color: white;
 	font-style: normal;
 	margin-top:170px;
+
 }
 ul li q{
  color:orange;
@@ -140,9 +150,14 @@ margin: 10px;
 
 
 }
+#mainbox{
+	width:100px;
+	height:20px;
+
+}
 .foo {
   float: left;
-  width: 30px;
+  width: ;
   height: 30px;
  
   border: 1px solid rgba(0, 0, 0, .2);
@@ -160,7 +175,7 @@ margin: 10px;
   background: #ae163e;
 }
 .Coffee{
-	 background: #F4A460;
+	 background-color:orange;
 }
 .ondrop{
 	border: 1px solid black;
@@ -210,7 +225,7 @@ h5{
 
 #addActivity{
 	border: 1px solid black;
-	width: 250px;
+	width: 260px;
 	padding: 10px;
 	background-color:  white;
 }
@@ -281,6 +296,8 @@ margin-left: 30px;
 
 #deleteButton{
 	float: right;
+	margin-top: 20px;
+	
 }
 
 
@@ -302,6 +319,8 @@ border: 1px solid black;
 font-size: 9px;
 background: none;
 border: none;
+vertical-align: middle;
+    margin-top: -5px;
 	
 }
 body {
@@ -339,7 +358,7 @@ body {
 	background: url('/images/MeetingBG.jpg') no-repeat center center fixed; 
 	  
 	  height: 100vh;
-	  background: cover;
+	 background: cover;
 
 }
 
