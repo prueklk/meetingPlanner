@@ -84,7 +84,14 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	}
 	
 
-
+	$scope.openEditActivity = function (key) {
+  		Agenda.clickedAct = key;
+  		
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'editActivityModal.html',
+	      controller: 'editActivityModalCtrl'
+    	});
+  	};
 
 
 
@@ -132,3 +139,42 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
   	};
 
 });
+
+meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance){
+
+	  //HOW TO GET THE DATA FROM THE CLICKED ACTIVITY IN HERE???!
+
+	//var clickedActivity = Agenda.getAct(key);
+	//console.log(clickedActivity);
+	var clickAct = Agenda.clickedAct;
+
+	targetAct = Agenda.actRef.child(clickAct)
+
+		targetAct.once("value", function(snapshot) {
+
+			  			var key = snapshot.key()
+			  			var data = snapshot.val()
+			  			
+			  			$scope.name = data.name; 
+						$scope.description = data.description;
+						$scope.length = data.length;
+						$scope.type = data.type;
+
+		
+					});
+
+		$scope.editAct = function(){
+
+				Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
+
+				$uibModalInstance.dismiss('cancel');
+
+				}
+
+					$scope.cancel = function () {
+				    	$uibModalInstance.dismiss('cancel');
+				  	};
+
+
+		});
+

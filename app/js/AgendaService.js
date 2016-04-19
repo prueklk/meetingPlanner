@@ -14,7 +14,8 @@ this.DragDayID = "";
 this.DragActID = "";
 this.dragBackDay = "";
 this.dragBackAct = "";
-
+this.clickedAct = "";
+this.clickedDay = "";
 
 
 this.deleteActDay = function(day_id, act_id) {
@@ -378,6 +379,41 @@ this.addActToDay = function(){
 
 
 }
+
+this.updateActDay = function(name, length, type, description){
+	console.log("updating activity Day")
+
+	this.dayRef.child(this.clickedDay).child("activities").child(this.clickedAct).update({
+  		
+		    name: name,
+		    length: length,
+		    type: type,
+		    description: description
+	
+
+		});
+
+	this.clickedAct = "";
+	this.clickedDay = "";
+
+}
+
+this.updateAct = function(name, length, type, description){
+
+	console.log("updating activity")
+
+	this.actRef.child(this.clickedAct).update({
+  		
+		    name: name,
+		    length: length,
+		    type: type,
+		    description: description
+
+		});
+
+	this.clickedAct = "";
+
+};
 
 
 var self = this;

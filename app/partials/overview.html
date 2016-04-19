@@ -78,14 +78,12 @@
 
          
 
-                                 <div class="col-sm-2">
-                                    <div class="{{item.type}} TypeTag">
-                                    </div>
-                                </div>
+                                 
 
           <div class="col-sm-6">
             {{item.name}}
           </div>
+
           
           <div class="col-sm-3">
             {{item.length}} min
@@ -94,6 +92,16 @@
            <div class="col-sm-1">
             <button id="{{keyact}}" ng-click="deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
           </div>
+
+          <div class="col-sm-2">
+              <button id="edit" ng-click="openEditActivityDay(keyact, key)">Edit</button>
+          </div>
+
+          <div class="col-sm-2">
+                                    <div class="{{item.type}} TypeTag">
+                                    </div>
+                                </div>
+
 
 
             
