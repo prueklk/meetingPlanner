@@ -23,7 +23,7 @@ this.dayRef.child(day_id).child("activities").child(act_id).remove();
 
 }
 //fill color box
-this.fillcolor=function(){
+this.fillcolor = function(day){
   
     var PresentationArr=[];
 	var CoffeeBreakArr=[];
@@ -39,10 +39,10 @@ this.fillcolor=function(){
     var sumdiscussion=0;
     var sumpresentation=0;
  //targetDay = this.dayRef.child("-KFOVszSjV7jW99NhlnG")
- targetDay = this.dayRef.child(this.DragDayID)
+ targetDay = this.dayRef.child(day)
 
     targetDayActs = targetDay.child("activities");
-    var actID = this.DragActID;
+    
 	
     targetDayActs.once("value", function(snapshot) {
 
@@ -52,7 +52,7 @@ this.fillcolor=function(){
 		  			var data = childSnapshot.val()
 		  	     
 		  			var typ=data.type;
-		  			console.log(typ)
+		  			// console.log(typ)
 		  			var Len=data.length;
 		  			if (typ=="Coffee"){
 		  				CoffeeBreakArr.push(Len);
@@ -76,24 +76,24 @@ this.fillcolor=function(){
 
 		});
 
-  console.log(CoffeeBreakArr)
-  console.log(PresentationArr)
-  console.log(GroupWorkArr)
-  console.log(DiscussionArr)
+  // console.log(CoffeeBreakArr)
+  // console.log(PresentationArr)
+  // console.log(GroupWorkArr)
+  // console.log(DiscussionArr)
 
 
 //summation
 for(var i in CoffeeBreakArr) {sumcoffee += CoffeeBreakArr[i]; }
-console.log(sumcoffee)
+// console.log(sumcoffee)
 //groupsum
 for(var i in GroupWorkArr) {sumgroup += GroupWorkArr[i]; }
-console.log(sumgroup)
+// console.log(sumgroup)
 //discussion
 for(var i in DiscussionArr) {sumdiscussion += DiscussionArr[i]; }
-console.log(sumdiscussion)
+// console.log(sumdiscussion)
 //presentation
 for(var i in PresentationArr) {sumpresentation += PresentationArr[i]; }
-console.log(sumpresentation)
+// console.log(sumpresentation)
 
 // Total sum of all type arrays
 		  			 
@@ -109,9 +109,42 @@ var percentagediscussion=Math.round((sumdiscussion/total)*100);
  percentageArr.push(percentagediscussion);
 var percentagepresentation=Math.round((sumpresentation/total)*100);
  percentageArr.push(percentagepresentation);
- console.log( percentageArr)
- console.log(percentagecoffe)
-return  percentageArr;
+ // console.log( percentageArr)
+ // console.log(percentagecoffe)
+
+
+
+
+targetDayColorbox = targetDay.child("colorbox");
+
+targetDayColorbox.update({
+
+	group: {
+
+		percent: percentagegroup,
+		color: "#ae163e"
+	},
+	coffee: {
+
+		percent: percentagecoffe,
+		color: "orange"
+	},
+	discussion: {
+
+		percent: percentagediscussion,
+		color: "#ab3fdd"
+
+	},
+	presentation: {
+
+		percent: percentagepresentation,
+		color: "#13b4ff"
+	}
+
+});
+
+
+// return  percentageArr;
 
 }
 
@@ -128,7 +161,7 @@ this.dayRef.child(id).remove();
 this.deleteAct = function(id){
 
 
-console.log(this.actRef.child(id))
+// console.log(this.actRef.child(id))
 this.actRef.child(id).remove();
 
 
@@ -137,7 +170,7 @@ this.actRef.child(id).remove();
 
 this.logdate = function(){
 
-	console.log(this.selectedDate);
+	// console.log(this.selectedDate);
 
 }
 
@@ -174,9 +207,33 @@ this.addDay = function(){
 		    date: this.selectedDate.toISOString(),
 		    starttime: this.selectedTime.toISOString(),
 		    endtime: "",
+			length: "",  
+		    activities: "",
+		    colorbox: {
 
-		    length: "",  
-		    activities: ""
+		    	group: {
+
+		    		percent: "",
+		    		color: "#ae163e"
+
+		    	},
+		    	coffee: {
+		    		percent: "",
+		    		color: "orange"
+
+		    	},
+
+		    	discussion: {
+		    		percent: "",
+		    		color: "#ab3fdd"
+
+		    	},
+
+		    	presentation: {
+		    		percent: "",
+		    		color: "#13b4ff"
+		    	}
+		    }
 	});
 
 	this.resetDateTime();
@@ -205,19 +262,26 @@ this.getEndTime = function(){
 		  			var data = snapshot.val()
 		  			
 		  			totalTime += data.length;
-		  			console.log(totalTime);
+		  			// console.log(totalTime);
 		  			startTime = data.starttime;
-		  			console.log(startTime);
+		  			// console.log(startTime);
 		  			
 				});
 
-				endTime = totalTime + startTime;
+				getStartTime = new Date(startTime);
+				getStartTimeConvert = getStartTime.getTime();
+
+				getTotalTimeConvert = totalTime * 60000
+				
+				endTimeConvert = getTotalTimeConvert + getStartTimeConvert;
+
+				endTime = new Date(endTimeConvert).toISOString();
+
 				console.log(endTime);
 
 				targetDay.update({endtime: endTime});
 
 		  			
-			
 
 	//targetDay("length").on("value", function(snapshot) {
       //console.log(snapshot.val()); 
@@ -235,10 +299,10 @@ this.getTotalTime = function(){
 	// get activities length from day sent in and calculate them, store them in firebase for that day 
 	//and display in the view from firebase
 	// call whenever dropped or deleted activity and in the beginning of the program (0)
-	targetDay = this.dayRef.child("-KFOVszSjV7jW99NhlnG")
+	targetDay = this.dayRef.child(this.DragDayID)
 
 	targetDayActs = targetDay.child("activities")
-	console.log(targetDay);
+	// console.log(targetDay);
 
 	sum = 0;
 
@@ -274,15 +338,15 @@ this.addActToDay = function(){
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
-		  			console.log(key)
-		  			console.log(data)
+		  			// console.log(key)
+		  			// console.log(data)
 
 		  			if (actID === key) {
 		  				console.log("HIT");
 		  				
 
 		  				var targetData = data;
-		  				console.log(targetData.name);
+		  				// console.log(targetData.name);
 		  				targetDay.child("activities").push({
 
 

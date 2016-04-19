@@ -76,6 +76,11 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 
 		});
 
+			Agenda.getTotalTime();
+	    	Agenda.getEndTime();
+	    	Agenda.fillcolor(Agenda.dragBackDay);
+	
+
 	}
 	
 

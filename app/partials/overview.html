@@ -110,8 +110,8 @@
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
             <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
               
-             <p>End Time: {{value.endtime}} </p>
-              <p>Total Time: {{value.length}} min</p>
+             <p>End Time: {{value.endtime | date: 'HH:mm'}} </p>
+              <p>Total Time: {{value.length}}  min</p>
             
 
 
@@ -125,8 +125,38 @@
               <div class="foo Coffee"></div> -->
 
                
-       <div id="mainbox" > <div  ng-style="colorboxGroup"></div><div  ng-style="colorboxDiscussion"> </div><div  ng-style="colorboxCoffee"> </div><div  ng-style="colorboxPresentation"> 
-        </div></div>        
+       <div  id="mainbox"> 
+
+
+  <!--        <span>{{keybox}}</span> -->
+         
+           
+
+         <!--    <span>{{box.color}}</span> -->
+        <div  ng-repeat="(keybox, box) in value.colorbox"  ng-style="{
+              'color' : 'blue',
+              'background-color': box.color,
+              'width':  box.percent + 'px',
+              'height':'20px',
+
+              'display': 'inline-block'}">
+
+
+              <!-- <span>{{box.percent}}</span> -->
+
+        </div>
+
+
+          <!-- <div  ng-style="{{'colorboxDiscussion' + key}}"> </div>
+
+
+          <div  ng-style="{{'colorboxCoffee' + key}}"> </div> 
+
+
+          <div  ng-style="{{'colorboxPresentation' + key}}">  </div>
+         -->
+
+      </div>        
           
             
 
