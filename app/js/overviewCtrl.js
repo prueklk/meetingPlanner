@@ -18,10 +18,6 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 
-
-
-
-
 	$scope.totalSum = 0;
 
 
@@ -39,6 +35,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		Agenda.DragDayID = day_id;
 		Agenda.getTotalTime();
 		Agenda.getEndTime();
+		Agenda.fillcolor(day_id)
 
 
 	}
