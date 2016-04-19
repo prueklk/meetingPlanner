@@ -209,6 +209,7 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 		$scope.editAct = function(){
 			
 				Agenda.updateActDay($scope.name, $scope.length, $scope.type, $scope.description);
+				Agenda.fillcolor(clickDay)
 
 				$uibModalInstance.dismiss('cancel');
 
