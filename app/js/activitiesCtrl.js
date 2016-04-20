@@ -15,18 +15,19 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	$scope.addAct = function() {
 
 		if ($scope.name == ""){
-			alert("Please give the activity a name");
+			$scope.status = "Please enter a name";
 		}
-		else if ($scope.length == ""){
-			alert("Please set a length to the activity");
-		}
+		// else if ($scope.length == ""){
+		// 	$scope.status = "Please choose a length of the activity";
+		// }
 		else if ($scope.type == "Select here"){
-			alert("Please select a type");
+			$scope.status = "Please choose a type for the activity";
 		}
-		else if ($scope.description == ""){
-			alert("Please give a description to the activity");
-		}
+		// else if ($scope.description == ""){
+		// 	$scope.status = "Please give the activity a description";
+		// }
 		else{
+	
 		
 		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
 
@@ -120,15 +121,15 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 		if ($scope.name == ""){
 			$scope.status = "Please enter a name";
 		}
-		else if ($scope.length == ""){
-			$scope.status = "Please choose a length of the activity";
-		}
+		// else if ($scope.length == ""){
+		// 	$scope.status = "Please choose a length of the activity";
+		// }
 		else if ($scope.type == "Select here"){
 			$scope.status = "Please choose a type for the activity";
 		}
-		else if ($scope.description == ""){
-			$scope.status = "Please give the activity a description";
-		}
+		// else if ($scope.description == ""){
+		// 	$scope.status = "Please give the activity a description";
+		// }
 		else{
 		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
 		$uibModalInstance.dismiss('cancel');
@@ -172,15 +173,15 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 				if ($scope.name == ""){
 					$scope.status = "Please enter a name";
 				}
-				else if ($scope.length == ""){
-					$scope.status = "Please choose a length of the activity";
-				}
+				// else if ($scope.length == ""){
+				// 	$scope.status = "Please choose a length of the activity";
+				// }
 				else if ($scope.type == "Select here"){
 					$scope.status = "Please choose a type for the activity";
 				}
-				else if ($scope.description == ""){
-					$scope.status = "Please give the activity a description";
-				}
+				// else if ($scope.description == ""){
+				// 	$scope.status = "Please give the activity a description";
+				// }
 				else{
 				Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
 

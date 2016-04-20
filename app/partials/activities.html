@@ -119,11 +119,9 @@
                 </div>
 
                 <div class="modal-body">
-      <form name="myForm">
+   
                     <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
-                    <span ng-show="myForm.name.$touched && myForm.name.$invalid">The name is required.</span>
-               
-
+                   
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
                     
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
@@ -137,7 +135,7 @@
                     </p>
                     
                 </div>
-</form>
+
                 <span class="status">{{status}}</span>
                 <div class="modal-footer">
                   <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>

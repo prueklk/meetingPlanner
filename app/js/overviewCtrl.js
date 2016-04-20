@@ -187,23 +187,36 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
-  // $scope.ok = function () {
-    //$uibModalInstance.close($scope.selected.item);
-  // };
 
 	$scope.addDay = function() {
 		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
 
-		if(Agenda.selectedDate){
+		Agenda.dayRef.once("value", function(snapshot) {
+
+		  			var key = snapshot.key()
+		  			var data = snapshot.val()
+
+		  			if (data == Agenda.selectedDate){
+		  				alert("EXIST!");
+		  			}
+		  		
+		  			
+		});
+
+		if (Agenda.selectedDate && $scope.meetingname){
 			console.log("selectedDate");
 
 			Agenda.addDay($scope.meetingname);
 			$uibModalInstance.dismiss('cancel');
-		}else{
-			console.log("NO selectedDate");
+			$scope.daystatus = ""			
 		}
-		
+
+		else{
+			$scope.daystatus = "Please give your activity a name and pick a date"
+		}
 	}
+		
+	
 
   $scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -241,15 +254,15 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 				if ($scope.name == ""){
 					$scope.status = "Please enter a name";
 				}
-				else if ($scope.length == ""){
-					$scope.status = "Please choose a length of the activity";
-				}
+				// else if ($scope.length == ""){
+				// 	$scope.status = "Please choose a length of the activity";
+				// }
 				else if ($scope.type == "Select here"){
 					$scope.status = "Please choose a type for the activity";
 				}
-				else if ($scope.description == ""){
-					$scope.status = "Please give the activity a description";
-				}
+				// else if ($scope.description == ""){
+				// 	$scope.status = "Please give the activity a description";
+				// }
 				else{
 				Agenda.updateActDay($scope.name, $scope.length, $scope.type, $scope.description);
 

@@ -47,11 +47,15 @@
 
     <div class="modal-body">
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
-      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>
-      <p>Name <input  type="text"  ng-model="meetingname" placeholder="Name your meeting.." required> </p>
+      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
+      
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
 
+    <span class="status">{{daystatus}}</span>
 
     </div>
+
+
 
     <div class="modal-footer">
       <button class="btn btn-success" type="button" ng-click="addDay()">Save</button>
