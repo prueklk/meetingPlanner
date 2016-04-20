@@ -168,6 +168,16 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		
 	}
 
+	  $scope.openEditActivityDay = function (keyAct, keyDay) {
+	  		Agenda.clickedAct = keyAct;
+	  		Agenda.clickedDay = keyDay;
+	  		
+		    var modalInstance = $uibModal.open({
+		      templateUrl: 'editActivityModal.html',
+		      controller: 'editActivityDayModalCtrl'
+	    	});
+ 	 	};
+
 
 });
 
@@ -199,3 +209,46 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
     $uibModalInstance.dismiss('cancel');
   };
 });
+
+meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){
+
+
+	//var clickedActivity = Agenda.getAct(key);
+	//console.log(clickedActivity);
+	var clickAct = Agenda.clickedAct;
+	var clickDay = Agenda.clickedDay;
+	
+
+	targetAct = Agenda.dayRef.child(clickDay).child("activities").child(clickAct)
+
+		targetAct.once("value", function(snapshot) {
+
+			  			var key = snapshot.key()
+			  			var data = snapshot.val()
+			  	
+			  			
+			  			$scope.name = data.name; 
+						$scope.description = data.description;
+						$scope.length = data.length;
+						$scope.type = data.type;
+
+		
+					});
+
+		$scope.editAct = function(){
+			
+				Agenda.updateActDay($scope.name, $scope.length, $scope.type, $scope.description);
+				Agenda.fillcolor(clickDay)
+
+				$uibModalInstance.dismiss('cancel');
+
+				}
+
+					$scope.cancel = function () {
+				    	$uibModalInstance.dismiss('cancel');
+				  	};
+
+
+		});
+
+
