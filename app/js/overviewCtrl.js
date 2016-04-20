@@ -194,7 +194,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 	$scope.addDay = function() {
 		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
 
-		if(Agenda.selectedDate){
+		if(Agenda.selectedDate && $scope.meetingname){
 			console.log("selectedDate");
 
 			Agenda.addDay($scope.meetingname);

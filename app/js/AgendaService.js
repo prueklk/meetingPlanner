@@ -165,7 +165,7 @@ updateDB = function() {
 
  if ( isNaN(percentagegroup) && isNaN(percentagecoffe) && isNaN(percentagediscussion) && isNaN(percentagepresentation) ) {
 
- 	this.emptycheck = true;
+ 	
  	console.log("NaN We are empty");
 
  	percentagegroup = 0;
@@ -175,7 +175,7 @@ updateDB = function() {
  	updateDB();
 
  } else {
- 	this.emptycheck = false;
+ 	
  	updateDB();
  	
  }

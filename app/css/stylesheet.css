@@ -491,7 +491,7 @@ body {
 .list-group-item{
 
 
-	height: 70px;
+	/*height: 70px;*/
 }
 
 
@@ -520,6 +520,31 @@ body {
   	position: absolute;
   	top: 0;
   	left: 0;
+}
+
+
+.GroupHover:hover {
+
+	background: rgba(197, 129, 148, .2);
+
+}
+
+.PresentationHover:hover {
+
+	background: rgba(132, 213, 250, .2);
+
+}
+
+.CoffeeHover:hover {
+
+	background: rgba(250, 205, 123, .2);
+
+}
+
+.DiscussionHover:hover {
+
+	background: rgba(208, 154, 233, .2);
+
 }
 /*.activityParking{
 
