@@ -26,7 +26,7 @@
             <!-- </div> -->
          
 
-            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()">
+            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()" data-toggle="tooltip" title="Drag and drop an activity to a meeting">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
 
                         <div ng-repeat="(key, value) in activities" class="row"> 

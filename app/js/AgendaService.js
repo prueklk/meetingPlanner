@@ -20,7 +20,6 @@ this.dragBackAct = "";
 this.clickedAct = "";
 this.clickedDay = "";
 
-this.plannedDays = [];
 
 
 
@@ -270,8 +269,6 @@ this.addDay = function(name){
 		    	}
 		    }
 	});
-
-	this.plannedDays.push({name: name});
 
 
 }

@@ -183,25 +183,28 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 
-
-
-
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
 
 	$scope.addDay = function() {
 		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
+		console.log(Agenda.dayRef);
 
 		Agenda.dayRef.once("value", function(snapshot) {
 
 		  			var key = snapshot.key()
 		  			var data = snapshot.val()
+		  			console.log(data.date);
 
-		  			if (data == Agenda.selectedDate){
+		  			if (data.date == Agenda.selectedDate){
 		  				alert("EXIST!");
+		  			}
+		  			else{
+		  				console.log("no such date");
 		  			}
 		  		
 		  			
 		});
+
 
 		if (Agenda.selectedDate && $scope.meetingname){
 			console.log("selectedDate");
