@@ -48,6 +48,9 @@
     <div class="modal-body">
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>
+      <p>Name <input  type="text"  ng-model="meetingname" placeholder="Name your meeting.." required> </p>
+
+
     </div>
 
     <div class="modal-footer">
@@ -64,7 +67,7 @@
 
   <div class="col-sm-4 days shadow">
     <div class="col-sm-12">
-      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add Day</button>
+      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting</button>
     </div>
     <div   ng-init="tag='day'"  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
 
@@ -73,13 +76,23 @@
     
 
 
-      <ul ng-sortable="config" class="list-group drop2" >
+      <ul  class="list-group drop2" >
         <li class="list-group-item col-sm-12 drop3" ng-repeat="(keyact, item) in value.activities" id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)">
 
          
 
                                  <div class="col-sm-2">
                                     <div class="{{item.type}} TypeTag">
+                                      <div class="row">
+                                         <div class="col-sm-3"></div>
+                                        <div class="col-sm-9 pull-right">
+
+                                          <div class="typetext">{{item.type | limitTo: letterlimit}}</div>
+
+                                        </div>
+                                       
+                                      </div>
+
                                     </div>
                                 </div>
 
@@ -107,17 +120,21 @@
       </div>
 
       <div  class="col-sm-6 daysinfo">
+           
+           <p>Name: {{value.name}} </p>
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
             <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
               
              <p>End Time: {{value.endtime | date: 'HH:mm'}} </p>
               <p>Total Time: {{value.length}}  min</p>
+
+
             
 
 
               
                
-        <br>
+       
 
              <!-- <div class="foo Group" ng-style=></div>
               <div class="foo Discussion"></div>
@@ -131,20 +148,36 @@
   <!--        <span>{{keybox}}</span> -->
          
            
+        
+
+        
+        
 
          <!--    <span>{{box.color}}</span> -->
         <div  ng-repeat="(keybox, box) in value.colorbox"  ng-style="{
               'color' : 'blue',
               'background-color': box.color,
-              'width':  box.percent + 'px',
+              'width':  box.percent + '%',
               'height':'20px',
+              'position' : 'relative',
+              'opacity' : '0.8',
 
               'display': 'inline-block'}">
+
+
+             
 
 
               <!-- <span>{{box.percent}}</span> -->
 
         </div>
+
+         
+          <span ng-style="breakmarker" ng-show="value.length >= 1"></span>
+
+         <!-- <div  class="breakmarker">
+
+          </div> -->
 
 
           <!-- <div  ng-style="{{'colorboxDiscussion' + key}}"> </div>
@@ -159,11 +192,11 @@
       </div>        
           
             
+          <br>
 
+              <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete meeting</button>
 
-              <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete Day</button>
-
-      </div> 
+    </div> 
 
       
       
@@ -174,7 +207,7 @@
       
        
        
-       </div>
+  </div>
       <!-- <div id="div1" ondrop="ondrop(event)" ondragover="ondragover(event)">
       </div> -->
     </div> <!-- end of day item -->

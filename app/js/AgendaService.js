@@ -15,6 +15,8 @@ this.DragActID = "";
 this.dragBackDay = "";
 this.dragBackAct = "";
 
+this.emptycheck = false;
+
 
 
 this.deleteActDay = function(day_id, act_id) {
@@ -22,6 +24,17 @@ this.deleteActDay = function(day_id, act_id) {
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
 
 }
+
+
+
+
+
+
+
+
+
+
+
 //fill color box
 this.fillcolor = function(day){
   
@@ -111,13 +124,11 @@ var percentagepresentation=Math.round((sumpresentation/total)*100);
  percentageArr.push(percentagepresentation);
  // console.log( percentageArr)
  // console.log(percentagecoffe)
-
-
-
-
 targetDayColorbox = targetDay.child("colorbox");
+updateDB = function() {
 
-targetDayColorbox.update({
+
+	targetDayColorbox.update({
 
 	group: {
 
@@ -141,7 +152,30 @@ targetDayColorbox.update({
 		color: "#13b4ff"
 	}
 
+
 });
+
+
+}
+
+
+
+ if ( isNaN(percentagegroup) && isNaN(percentagecoffe) && isNaN(percentagediscussion) && isNaN(percentagepresentation) ) {
+
+ 	this.emptycheck = true;
+ 	console.log("NaN We are empty");
+
+ 	percentagegroup = 0;
+ 	percentagecoffe = 0;
+ 	percentagediscussion = 0;
+ 	percentagepresentation = 0;
+ 	updateDB();
+
+ } else {
+ 	this.emptycheck = false;
+ 	updateDB();
+ 	
+ }
 
 
 // return  percentageArr;
@@ -195,7 +229,7 @@ this.addAct = function(name, length, type, description){
 
 }
 
-this.addDay = function(){
+this.addDay = function(name){
 
 	var start = 0;
 	
@@ -204,10 +238,12 @@ this.addDay = function(){
 
 	this.dayRef.push({
   			
+  			name: name,
 		    date: this.selectedDate.toISOString(),
 		    starttime: this.selectedTime.toISOString(),
 		    endtime: "",
-			length: "",  
+			length: "",
+			breakpercent: 20,  
 		    activities: "",
 		    colorbox: {
 

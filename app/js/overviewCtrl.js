@@ -19,6 +19,8 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 	$scope.totalSum = 0;
+	$scope.letterlimit = 1;
+
 
 
 
@@ -58,6 +60,33 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
   	};
 
   	
+
+
+
+
+  	$scope.breakmarker = {
+
+
+
+              'color' : 'blue',
+              'background-color': 'red',
+              'width':  '3px',
+              'height':'20px',
+              'position' : 'relative',
+              'left':  '20%',
+              'bottom':'25px',
+
+              'display': 'inline-block'
+  	}
+
+  	// if (Agenda.emptycheck === true) {
+
+  	// 	console.log(Agenda.emptycheck);
+  	// 	$scope.breakhide = true;
+  	// } else {
+
+  	// 	$scope.breakhide = false;
+  	// }
 
 	$scope.drop = function(day){
 	
@@ -158,7 +187,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 		if(Agenda.selectedDate){
 			console.log("selectedDate");
 
-			Agenda.addDay();
+			Agenda.addDay($scope.meetingname);
 			$uibModalInstance.dismiss('cancel');
 		}else{
 			console.log("NO selectedDate");

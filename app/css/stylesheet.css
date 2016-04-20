@@ -151,7 +151,7 @@ margin: 10px;
 
 }
 #mainbox{
-	width:100px;
+	width:100%;
 	height:20px;
 
 }
@@ -499,6 +499,26 @@ body {
 
 	position: fixed;
 	overflow: hidden;
+}
+
+
+.typetext {
+	color: white;
+	font-size: 80%;
+	/*text-align: center;*/
+	margin: 2px;
+}
+
+
+.breakmarker {
+
+	background-color: red;
+	
+	width: 5%;
+  	height: 100%;
+  	position: absolute;
+  	top: 0;
+  	left: 0;
 }
 /*.activityParking{
 
