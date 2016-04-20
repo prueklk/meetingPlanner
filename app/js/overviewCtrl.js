@@ -225,7 +225,8 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 			  			var key = snapshot.key()
 			  			var data = snapshot.val()
-			  	
+
+			  	$scope.status = "";
 			  			
 			  			$scope.name = data.name; 
 						$scope.description = data.description;
@@ -237,12 +238,26 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 		$scope.editAct = function(){
 			
+				if ($scope.name == ""){
+					$scope.status = "Please enter a name";
+				}
+				else if ($scope.length == ""){
+					$scope.status = "Please choose a length of the activity";
+				}
+				else if ($scope.type == "Select here"){
+					$scope.status = "Please choose a type for the activity";
+				}
+				else if ($scope.description == ""){
+					$scope.status = "Please give the activity a description";
+				}
+				else{
 				Agenda.updateActDay($scope.name, $scope.length, $scope.type, $scope.description);
-				Agenda.fillcolor(clickDay)
 
 				$uibModalInstance.dismiss('cancel');
+				$scope.status = "";
 
 				}
+			}
 
 					$scope.cancel = function () {
 				    	$uibModalInstance.dismiss('cancel');
