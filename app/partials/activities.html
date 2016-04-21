@@ -58,8 +58,9 @@
                                 </div>
 
                                   <div class="col-sm-6">
-                                 
-                                  <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+                              
+                                   <!--<button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>-->
+                                  <angular-smartconfirm confirm="deleteAct(key)"><i class="fa fa-close"></i></smart-confirm>
                                  <!--  <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button> -->
 
                               </div>
@@ -154,7 +155,9 @@
 
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder={{value.name}}> </p>
+                    
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                  
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>

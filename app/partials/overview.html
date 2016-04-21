@@ -35,8 +35,8 @@
 <div  class="row">
 
   <div class="col-sm-4 days shadow">
-    <div class="col-sm-12">
-      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting</button>
+    <div class="col-sm-12" data-toggle="tooltip" title="Select a day and create a schedule by drag your activities here.">
+      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting </button>
     </div>
     <div   ng-init="tag='day'"  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
 
