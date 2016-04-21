@@ -186,24 +186,48 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
 
 	$scope.addDay = function() {
-		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
-		console.log(Agenda.dayRef);
+
+		getSelectedTime = new Date(Agenda.selectedTime);
+		getSelectedTimeConvert = getSelectedTime.getTime();
+		getSelectedTimeRounded = getSelectedTimeConvert/100000;
+		var newPickTime = Math.floor(getSelectedTimeRounded); 
+		console.log("Time" + newPickTime);
+
+		getSelectedDate = Agenda.selectedDate.toISOString();
+		console.log("Date" + getSelectedDate)
 
 		Agenda.dayRef.once("value", function(snapshot) {
-
 			snapshot.forEach(function(childSnapshot){
 
-		  			var key = snapshot.key()
-		  			console.log(key);
-		  			var data = snapshot.val()
-		  			console.log(data);
-		  			console.log(data.date);
+		  			var key = childSnapshot.key()
+		  			var data = childSnapshot.val()
+		  			var savedDate = data.date;
+		  			console.log("savedDate "+ savedDate)
 
-		  			if (data.date == Agenda.selectedDate){
-		  				alert("EXIST!");
+		  			var savedStarttime = new Date(data.starttime);
+		  			var getSelectedStartTime = savedStarttime.getTime();
+		  			var getSelectedStartTimeRounded = getSelectedStartTime/100000;
+		  			var newTime = Math.floor(getSelectedStartTimeRounded); 
+		  			//var getSelectedStartTimeNew = Math.round(1000*getSelectedStartTime)/1000
+		  			console.log("Starttime" + newTime)
+
+		  			if ( getSelectedDate == savedDate && newPickTime == newTime){
+		  				console.log("same date!!!");
+		  				$scope.daystatus = "This date and time already exist. Please pick another day or time"
+
 		  			}
 		  			else{
-		  				console.log("no such date");
+		  				if (Agenda.selectedDate && $scope.meetingname){
+
+							Agenda.addDay($scope.meetingname);
+							$uibModalInstance.dismiss('cancel');
+							$scope.daystatus = ""			
+						}
+
+						else{
+							$scope.daystatus = "Please make sure your activity has a name and a date"
+						}
+		  				
 		  			}
 		  		
 		  		});
@@ -211,17 +235,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 		});
 
 
-		if (Agenda.selectedDate && $scope.meetingname){
-			console.log("selectedDate");
-
-			Agenda.addDay($scope.meetingname);
-			$uibModalInstance.dismiss('cancel');
-			$scope.daystatus = ""			
-		}
-
-		else{
-			$scope.daystatus = "Please make sure your activity has a date and a name"
-		}
+	
 	}
 		
 	
