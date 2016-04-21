@@ -3,12 +3,11 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 
 	$scope.activities = $firebaseObject(Agenda.actRef);
 
-	$scope.deleteAct = function(id) {
-		Agenda.deleteAct(id);
-	}
+	
 
 
 	$scope.name = "";
+		
 	$scope.description = "";
 	$scope.length = 0;
 	$scope.type = "Select here";
@@ -39,6 +38,9 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 		}
 	}
 
+$scope.deleteAct = function(id) {
+		Agenda.deleteAct(id);
+	}
 
 
 	$scope.AddToDayTest = function(act_id) {
@@ -84,6 +86,12 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 
 	}
 	
+$scope.removeactivity=function(){
+ var modalInstance = $uibModal.open({
+	      templateUrl: 'removeactivityModal.html',
+	      controller: 'RemoveActivityModalCtrl'
+    	});
+  	};
 
 	$scope.openEditActivity = function (key) {
   		Agenda.clickedAct = key;
@@ -99,6 +107,12 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$
 	$scope.openAddActivity = function () {
 	    var modalInstance = $uibModal.open({
 	      templateUrl: 'activityModal.html',
+	      controller: 'ActivityModalCtrl'
+    	});
+  	};
+  	$scope.removeActivity = function () {
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'removeactivityModal.html',
 	      controller: 'ActivityModalCtrl'
     	});
   	};
