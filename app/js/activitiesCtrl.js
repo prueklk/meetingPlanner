@@ -1,5 +1,11 @@
 meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$firebaseObject,Agenda,$uibModal) {
 
+	$scope.paneltag = function() {
+
+
+		
+	}
+
 
 	$scope.activities = $firebaseObject(Agenda.actRef);
 

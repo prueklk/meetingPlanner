@@ -110,7 +110,7 @@
           </div>
 
            <div class="col-sm-1">
-            <button id="{{keyact}}" ng-click="deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+            <button id="{{keyact}}" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
           </div>
 
          <!--  <div class="col-sm-2"> -->

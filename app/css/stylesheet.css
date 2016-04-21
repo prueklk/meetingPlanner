@@ -458,13 +458,15 @@ body {
 }
 
 
-.glyphicon-chevron-down{
+.glyphicon-chevron-right{
 
 
 	background: none;
+	color: white;
 	border: 0px;
-	padding: 15px;
+	/*padding: 15px;*/
 	font-size: 12px;
+	text-align: right;
 }
 
 .glyphicon:active{
