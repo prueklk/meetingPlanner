@@ -191,8 +191,12 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 
 		Agenda.dayRef.once("value", function(snapshot) {
 
+			snapshot.forEach(function(childSnapshot){
+
 		  			var key = snapshot.key()
+		  			console.log(key);
 		  			var data = snapshot.val()
+		  			console.log(data);
 		  			console.log(data.date);
 
 		  			if (data.date == Agenda.selectedDate){
@@ -202,6 +206,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 		  				console.log("no such date");
 		  			}
 		  		
+		  		});
 		  			
 		});
 
@@ -215,7 +220,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 		}
 
 		else{
-			$scope.daystatus = "Please give your activity a name and pick a date"
+			$scope.daystatus = "Please make sure your activity has a date and a name"
 		}
 	}
 		

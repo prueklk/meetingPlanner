@@ -489,9 +489,11 @@ body {
 
 .status{
 	color: red;
-	font-size: 18px;
-	font-style: bold;
-	margin-left: 15px;
+	font-size: 16px;
+	font-style: italic;
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 5px;
 }
 
 .list-group-item{
