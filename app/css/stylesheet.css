@@ -5,7 +5,9 @@
 	margin-right: 100px;
 	
 }
-
+#removeactivity{
+	width:50px;
+}
 #activityhead{
 	background-color:rgba(207, 210, 207, 0.5)	;
 }
@@ -22,63 +24,120 @@
 
 }
 
+
 /*about page css*/
+#aboutpanel{
+background-color: #808080;
+opacity:0.3;
+width :220px;
+height:380px;
+margin-right: 900px;
+margin-bottom: 0px;
+margin-top: 0px;
+
+}
+
 #about{
 	text-align: center;
 	color: white;
 	font-style: normal;
-	margin-top:170px;
+	margin-top:50px;
+
+	background: url('/images/MeetingBG.jpg') no-repeat center center fixed; 
+	  
+	  height: 70vh;
 
 }
-ul li q{
- color:orange;
-  color:#000;
-  background:#13b4ff;
+#sticky1{
+
+  background-color:DarkSlateGray;
   display:block;
-  height:15em;
-  width:15em;
-  padding:1em;
-  margin-left:130px;
+  opacity:0.6;
+  height:100px;
+  width:130px;
   -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  -webkit-transform:rotate(10deg);
+ 
+  float:right;
+  margin-right: 280px;
+margin-top: 100px;
 }
-ul li b{
- color:orange;
-  color:#000;
-  background:LightCoral;
+
+#sticky2{
+
+ background-color:DarkSlateGray;
+ opacity:0.6;
   display:block;
-  height:15em;
-  width:15em;
-  padding:1em;
-  margin-left:20px;
-  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  -webkit-transform:rotate(-3deg);
-}
-ul li c{
- color:orange;
-  color:#000;
-  background:#ab3fdd;
-  display:block;
-  height:15em;
-  width:15em;
-  padding:1em;
-  margin-left:30px;
+  height:100px;
+  width:130px;
+ float:right;
+margin-right: 60px;
+margin-top: 100px;
 
   -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  -webkit-transform:rotate(-8deg);
+  
 }
-ul li d{
- color:orange;
-  color:#000;
-  background:#F4A460;
+#sticky3{
+ background-color:DarkSlateGray;
   display:block;
-  height:15em;
-  width:15em;
-  padding:1em;
-  margin-right:70px;
+  opacity:0.6;
+ height:100px;
+  width:130px;
+margin-right: 70px;
+margin-top: 100px;
+ float:right;
+
   -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  -webkit-transform:rotate(4deg);
+
 }
+#sticky4{
+	
+
+ background-color:DarkSlateGray;
+ opacity:0.6;
+  display:block;
+ height:100px;
+  width:130px;
+ float:right;
+margin-right: 70px;
+margin-top: 100px;
+  -webkit-box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+
+}
+
+#sticky1div{
+ background-color:orange;
+  height:20px;
+  opacity:0.7;
+  width:130px;
+ margin-left: 0px;
+margin-top: 20px;
+}
+#sticky2div{
+ background-color:#13b4ff;
+  height:20px;
+  width:130px;
+ margin-left: 0px;
+margin-top: 20px;
+}
+#sticky3div{
+ background-color:Coral;
+  height:20px;
+  width:130px;
+  margin-left: 0px;
+margin-top: 20px;	
+}
+#sticky4div{
+ background-color:#ae163e;
+  height:20px;
+  width:130px;	
+  margin-left: 0px;
+margin-top: 20px;
+}
+#sticky{
+	
+	margin-left: 500px;
+}
+
 /*about page css ends here*/
 
 /*contact page css*/
@@ -489,6 +548,14 @@ body {
 		opacity: 0.5;
 	}
 
+.status{
+	color: red;
+	font-size: 16px;
+	font-style: italic;
+	float: left;
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
 
 .list-group-item{
 

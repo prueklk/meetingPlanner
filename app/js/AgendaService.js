@@ -22,6 +22,7 @@ this.clickedDay = "";
 
 
 
+
 this.deleteActDay = function(day_id, act_id) {
 
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
@@ -213,12 +214,6 @@ this.logdate = function(){
 
 this.addAct = function(name, length, type, description){
 
-	
-
-	if (name == "") {
-
-		alert("Your activity needs a name!")
-	};
 
 	this.actRef.push({
   		
@@ -234,10 +229,10 @@ this.addAct = function(name, length, type, description){
 
 this.addDay = function(name){
 
+
 	var start = 0;
 	
 	// TODO // need to check duplicate dates
-	console.log("SERVICE // addDay");
 
 	this.dayRef.push({
   			
@@ -274,8 +269,6 @@ this.addDay = function(name){
 		    	}
 		    }
 	});
-
-	this.resetDateTime();
 
 
 }
@@ -452,6 +445,7 @@ this.updateAct = function(name, length, type, description){
 	this.clickedAct = "";
 
 };
+
 
 
 var self = this;

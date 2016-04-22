@@ -1,40 +1,4 @@
-<!-- <div class="row">
 
-<div class="col-lg-4" id="overview">
- <h4 id="overviewTitle">DAY OVERVIEW</h4>
-    <div class="col-lg-2" id="overviewDay1">
-        <p> <time ></time></p>
-        <p>Start Time: <input type="text"> </p>
-         <p>End Time :<input type="text"> </p>
-          <p>Total Time: <output></output> </p>
-        <button id="deleteButton" class="button">Delete Day</button>
-        
-</div>
-
-</div>
-
-</div> -->
-
-
-
-<!-- <ng-include src="../_calendar/calendar.html" ng-controller="overviewCtrl"></ng-include> -->
-
-<!-- <ng-include src="../_calendar/calendar.html" ng-controller="CalendarCtrl"></ng-include> -->
-
-<!-- <div class="col-sm-4">
-
-  <div class="form-group">
-    <label for="usr">Name:</label>
-    <input type="text" class="form-control" id="usr">  
-  </div>
-   
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd">
-    </div>
-
-
-</div> -->
   
 
   <!-- Modal -->
@@ -47,11 +11,16 @@
 
     <div class="modal-body">
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
-      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>
-      <p>Name <input  type="text"  ng-model="meetingname" placeholder="Name your meeting.." required> </p>
+      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
+      
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
 
+    <span class="status">{{daystatus}}</span>
+    <span class="status">{{dateStatus}}</span>
 
     </div>
+
+
 
     <div class="modal-footer">
       <button class="btn btn-success" type="button" ng-click="addDay()">Save</button>
@@ -66,8 +35,8 @@
 <div  class="row">
 
   <div class="col-sm-4 days shadow">
-    <div class="col-sm-12">
-      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting</button>
+    <div class="col-sm-12" data-toggle="tooltip" title="Select a day and create a schedule by drag your activities here.">
+      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting </button>
     </div>
     <div   ng-init="tag='day'"  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
 

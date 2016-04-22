@@ -26,7 +26,7 @@
             <!-- </div> -->
          
 
-            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()">
+            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()" data-toggle="tooltip" title="Drag and drop an activity to a meeting">
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add Activity</button>
 
                         <div ng-repeat="(key, value) in activities" class="row"> 
@@ -36,7 +36,7 @@
                         <div  id="{{key}}"  class="panel panel-default"  >
                         
                         <div  ng-init="tag='collapse'" class="panel-heading {{value.type + 'Hover'}}" draggable dragstart="drag(key)">
-                                <h4 class="panel-title "ng-click="openEditActivity(key)">
+                                <h4 class="panel-title" ng-click="openEditActivity(key)">
                     
 
                                 <div class="col-sm-6 activityHeading">
@@ -57,8 +57,18 @@
                                 </div>
 
                                   <div class="col-sm-6">
+
                                  
                                   <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+
+                              
+                                  <!-- <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+ -->
+
+
+                                   
+
+
                                  <!--  <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button> -->
 
                               </div>
@@ -135,21 +145,24 @@
                 </div>
 
                 <div class="modal-body">
-      <form name="myForm">
+   
                     <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
-                    <span ng-show="myForm.name.$touched && myForm.name.$invalid">The name is required.</span>
-
+                   
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                    
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
                         <option selected="selected" value="Presentation">Presentation</option>
                         <option value="Discussion">Discussion</option></select> </p>
+              
                     <p>Description <textarea ng-model="description" type="text" id="actDescription">
                         <pre>{{ data | json }}</pre></textarea>
                     </p>
+                    
                 </div>
-</form>
+
+                <span class="status">{{status}}</span>
                 <div class="modal-footer">
                   <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
                   <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
@@ -157,6 +170,35 @@
                     
             </script>
             <!-- END Modal -->
+
+ <!-- Modal for remove key -->
+
+            <script type="text/ng-template" id="removeactivityModal.html">
+               
+                 <div class="modal-header">
+                    <button class="close" type="button" ng-click="cancel()">&times;</button>
+                 
+                </div>
+                <div class="modal-body">
+
+                    <p>Are you sure you want to delete this activity?
+                    </p>
+                    
+                </div>
+
+                
+                <div class="modal-footer">
+                  <button class="btn btn-success" type="button" ng-click="deleteAct(key)">Confirm</button>
+                  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+                   
+            </script>
+
+            <!-- END Modal -->
+
+
+
+
             <!-- Modal 2 Edit act-->
             <script type="text/ng-template" id="editActivityModal.html">
                
@@ -167,7 +209,9 @@
 
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder={{value.name}}> </p>
+                    
                     <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                  
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
@@ -177,6 +221,8 @@
                         <pre>{{ data | json }}</pre></textarea>
                     </p>
                 </div>
+
+                <span class="status">{{status}}</span>
 
                 <div class="modal-footer">
                   <button class="btn btn-success" type="button" ng-click="editAct()">Save</button>

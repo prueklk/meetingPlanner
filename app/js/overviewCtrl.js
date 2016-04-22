@@ -183,31 +183,72 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 
-
-
-
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
-  // $scope.ok = function () {
-    //$uibModalInstance.close($scope.selected.item);
-  // };
 
 	$scope.addDay = function() {
-		console.log("Agenda.selectedDate = "+Agenda.selectedDate);
 
-		if(Agenda.selectedDate && $scope.meetingname){
-			console.log("selectedDate");
+// <<<<<<< HEAD
+// 		if(Agenda.selectedDate && $scope.meetingname){
+// 			console.log("selectedDate");
+// =======
+		getSelectedTime = new Date(Agenda.selectedTime);
+		getSelectedTimeConvert = getSelectedTime.getTime();
+		getSelectedTimeRounded = getSelectedTimeConvert/100000;
+		var newPickTime = Math.floor(getSelectedTimeRounded); 
+		console.log("Time" + newPickTime);
 
-			Agenda.addDay($scope.meetingname);
-			$uibModalInstance.dismiss('cancel');
-		}else{
-			console.log("NO selectedDate");
-		}
-		
+		getSelectedDate = Agenda.selectedDate.toISOString();
+		console.log("Date" + getSelectedDate)
+
+		Agenda.dayRef.once("value", function(snapshot) {
+			snapshot.forEach(function(childSnapshot){
+
+		  			var key = childSnapshot.key()
+		  			var data = childSnapshot.val()
+		  			var savedDate = data.date;
+		  			console.log("savedDate "+ savedDate)
+
+		  			var savedStarttime = new Date(data.starttime);
+		  			var getSelectedStartTime = savedStarttime.getTime();
+		  			var getSelectedStartTimeRounded = getSelectedStartTime/100000;
+		  			var newTime = Math.floor(getSelectedStartTimeRounded); 
+		  			//var getSelectedStartTimeNew = Math.round(1000*getSelectedStartTime)/1000
+		  			console.log("Starttime" + newTime)
+
+		  			if ( getSelectedDate == savedDate && newPickTime == newTime){
+		  				console.log("same date!!!");
+		  				$scope.daystatus = "This date and time already exist. Please pick another day or time"
+
+		  			}
+		  			else{
+		  				if (Agenda.selectedDate && $scope.meetingname){
+
+							Agenda.addDay($scope.meetingname);
+							$uibModalInstance.dismiss('cancel');
+							$scope.daystatus = ""			
+						}
+
+						else{
+							$scope.daystatus = "Please make sure your activity has a name and a date"
+						}
+		  				
+		  			}
+		  		
+		  		});
+		  			
+		});
+// >>>>>>> 7fdd407cfd91d7f57de2f5f03917736438ff8746
+
+
+	
 	}
-
-  $scope.cancel = function () {
+		
+	
+$scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
+    console.log("CANCEL");
   };
+
 });
 
 meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){
@@ -225,7 +266,8 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 			  			var key = snapshot.key()
 			  			var data = snapshot.val()
-			  	
+
+			  	$scope.status = "";
 			  			
 			  			$scope.name = data.name; 
 						$scope.description = data.description;
@@ -237,12 +279,26 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 		$scope.editAct = function(){
 			
+				if ($scope.name == ""){
+					$scope.status = "Please enter a name";
+				}
+				// else if ($scope.length == ""){
+				// 	$scope.status = "Please choose a length of the activity";
+				// }
+				else if ($scope.type == "Select here"){
+					$scope.status = "Please choose a type for the activity";
+				}
+				// else if ($scope.description == ""){
+				// 	$scope.status = "Please give the activity a description";
+				// }
+				else{
 				Agenda.updateActDay($scope.name, $scope.length, $scope.type, $scope.description);
-				Agenda.fillcolor(clickDay)
 
 				$uibModalInstance.dismiss('cancel');
+				$scope.status = "";
 
 				}
+			}
 
 					$scope.cancel = function () {
 				    	$uibModalInstance.dismiss('cancel');
