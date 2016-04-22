@@ -1,10 +1,45 @@
-meetingPlannerApp.controller('ActivitiesCtrl', function ($scope,$firebaseArray,$firebaseObject,Agenda,$uibModal) {
-
-	$scope.paneltag = function() {
+meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal ) {
 
 
-		
-	}
+
+
+$scope.selectChevron = function(id, event) {
+    $scope.activeClass = id;
+
+	var myEl = angular.element(event.target);
+
+	if (angular.element(event.target).hasClass("glyphicon-chevron-down")) {
+
+		$scope.activeClass = "ChevronRight";
+
+	};
+    // $scope.myClass = {red:false};
+    
+
+
+    //   $scope.myClass.red = !$scope.myClass.red;
+
+    // var myEl = angular.element( document.querySelector(id) );
+    console.log(myEl)
+	// myEl.toggleClass('glyphicon-chevron-down');  
+   
+
+    
+  };
+
+
+
+
+
+ $scope.paneltag = function (key) { 
+		// $scope.paneltagID = key;
+		// $uibModalInstance.dismiss('cancel');
+		console.log("MODALCANCEL")
+
+		Agenda.paneltag = true;
+ }
+	
+        
 
 
 	$scope.activities = $firebaseObject(Agenda.actRef);
@@ -100,12 +135,24 @@ $scope.removeactivity=function(){
   	};
 
 	$scope.openEditActivity = function (key) {
-  		Agenda.clickedAct = key;
+  		
+		if (Agenda.paneltag === false) {
+
+			Agenda.clickedAct = key;
   		
 	    var modalInstance = $uibModal.open({
 	      templateUrl: 'editActivityModal.html',
 	      controller: 'editActivityModalCtrl'
     	});
+
+
+		} else {
+
+			console.log("clicked on collapse tag")
+			Agenda.paneltag = false;
+		}
+
+  		
   	};
 
 
@@ -128,6 +175,8 @@ $scope.removeactivity=function(){
 meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uibModalInstance){
   // $scope.ok = function () {
     //$uibModalInstance.close($scope.selected.item);//passing a result
+
+   
   // };
   	$scope.status = "";
 
@@ -172,9 +221,10 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 	$scope.cancel = function () {
     	$uibModalInstance.dismiss('cancel');
+    	console.log("CCCCCC")
   	};
 
-	
+
 	var clickAct = Agenda.clickedAct;
 
 	targetAct = Agenda.actRef.child(clickAct)

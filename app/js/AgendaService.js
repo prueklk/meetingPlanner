@@ -20,6 +20,8 @@ this.dragBackAct = "";
 this.clickedAct = "";
 this.clickedDay = "";
 
+this.paneltag = false;
+
 
 
 

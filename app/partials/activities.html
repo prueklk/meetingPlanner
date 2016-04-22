@@ -78,14 +78,16 @@
                                     <div class="col-sm-12  {{value.type}} TypeTag">
                                         <div class="row">
 
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                             <span class="typetext">{{value.type}} </span>
                                             </div>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-sm-9">
 
-                                                 <button ng-show="value.description.length >= 1" class="glyphicon glyphicon-chevron-right" data-toggle="collapse"  ng-click="$event.preventDefault(); $event.stopPropagation(); paneltag(key + tag)">
+                                                 <button id="{{key}}" class="glyphicon  glyphicon-chevron-right "  data-ng-class=" {'glyphicon-chevron-down': key == activeClass}"  ng-href="#{{key + tag}}"  ng-show="value.description.length >= 1"  data-toggle="collapse"  data-ng-click="selectChevron(key, $event); paneltag();">
                                                   </button>
+
+
 
                                             </div>
 
