@@ -76,8 +76,18 @@ $scope.test = function(text) {
 		}
 	}
 
-$scope.deleteAct = function(id) {
-		Agenda.deleteAct(id);
+	$scope.deleteAct = function(id) {
+		var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return id;
+			        }
+			    }
+	    });
+
+		// Agenda.deleteAct(id);
 	}
 
 
@@ -264,4 +274,22 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 	});
 
+meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id){
+	console.log("id = "+id);
+	$scope.getActivityName = function(){
+		//console.log(Agenda.getActivityName(id));
+		return Agenda.getActivityName(id);
+	}
+	
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	    console.log("CANCEL");
+	};
 
+	$scope.deleteActivity = function(){
+		console.log("DELETE");
+		$uibModalInstance.dismiss('cancel');
+		Agenda.deleteAct(id);
+	}
+
+});

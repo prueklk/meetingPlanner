@@ -124,9 +124,17 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 	$scope.deleteDay = function(id){
-		
-		Agenda.deleteDay(id);
-	
+		var modalInstance = $uibModal.open({
+	      	templateUrl: 'overviewConfirmModal.html',
+	      	controller: 'OverviewConfirmModalCtrl',
+		    resolve: {
+		        id: function () {
+		          	return id;
+		        }
+		    }
+    	});
+
+		//Agenda.deleteDay(id);
 	}
 
 
@@ -399,6 +407,25 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 				  	};
 
 
-		});
+});
 
+meetingPlannerApp.controller('OverviewConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id){
+	console.log("id = "+id);
+	$scope.getMeetingName = function(){
+		//console.log(Agenda.getMeetingName(id));
+		return Agenda.getMeetingName(id);
+	}
+	
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	    console.log("CANCEL");
+	};
+
+	$scope.deleteMeeting = function(){
+		console.log("DELETE");
+		$uibModalInstance.dismiss('cancel');
+		Agenda.deleteDay(id);
+	}
+
+});
 
