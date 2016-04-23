@@ -41,7 +41,7 @@ margin-top: 0px;
 	text-align: center;
 	color: white;
 	font-style: normal;
-	margin-top:50px;
+	margin-top:100px;
 
 	background: url('/images/MeetingBG.jpg') no-repeat center center fixed; 
 	  
@@ -132,10 +132,6 @@ margin-top: 20px;
   width:130px;	
   margin-left: 0px;
 margin-top: 20px;
-}
-#sticky{
-	
-	margin-left: 500px;
 }
 
 /*about page css ends here*/
