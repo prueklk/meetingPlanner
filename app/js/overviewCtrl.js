@@ -1,14 +1,58 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal) {
 
-	 $scope.config = {
+	$scope.TrackingFunction = function(actIndex, day, act){
+
+
+		Agenda.updateIndex(actIndex, day, act)
+		// console.log(actIndex, day)
+
+	}
+
+
+	$scope.sortableKey = function(key, day){
+
+		Agenda.ActSorted = key;
+		Agenda.DaySorted = day;
+		console.log(Agenda.ActSorted);
+		console.log(Agenda.DaySorted);
+
+		var ref = Agenda.dayRef.child(day).child("activities").child(key);
+			
+		// ref.setWithPriority('fred', 500, function(error) {
+			ref.once("value", function(snapshot) {
+			    var priority = snapshot.getPriority();
+			    // priority === 500
+			    console.log(priority)
+			  });
+
+		  // });
+
+	}
+
+	 $scope.sort = {
             group: 'acts',
             animation: 150,
             onSort: function (/** ngSortEvent */evt){
                 // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24
+                console.log("ADDED")
+                
+            },
 
-                console.log("SORT")
-            }
-        };
+
+            onEnd: function (/**Event*/evt) {
+		        console.log(evt.oldIndex);  // element's old index within parent
+		        console.log(evt.newIndex);  // element's new index within parent
+
+
+
+		    },
+		    onAdd: function (/**Event*/evt) {
+		        var itemEl = evt.item;  // dragged HTMLElement
+		        evt.from;  // previous list
+		        // + indexes from onEnd
+		        alert("ADD")
+		    	}
+		        }
 
 
 
@@ -186,37 +230,41 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
 
 	$scope.addDay = function() {
+		
 
-		getSelectedTime = new Date(Agenda.selectedTime);
-		getSelectedTimeConvert = getSelectedTime.getTime();
-		getSelectedTimeRounded = getSelectedTimeConvert/100000;
-		var newPickTime = Math.floor(getSelectedTimeRounded); 
-		console.log("Time" + newPickTime);
+		// getSelectedTime = new Date(Agenda.selectedTime);
+		// getSelectedTimeConvert = getSelectedTime.getTime();
+		// getSelectedTimeRounded = getSelectedTimeConvert/100000;
+		// var newPickTime = Math.floor(getSelectedTimeRounded); 
+		// // console.log("Time" + newPickTime);
 
-		getSelectedDate = Agenda.selectedDate.toISOString();
-		console.log("Date" + getSelectedDate)
+		// getSelectedDate = Agenda.selectedDate.toISOString();
+		// console.log("Date" + getSelectedDate)
 
-		Agenda.dayRef.once("value", function(snapshot) {
-			snapshot.forEach(function(childSnapshot){
 
-		  			var key = childSnapshot.key()
-		  			var data = childSnapshot.val()
-		  			var savedDate = data.date;
-		  			console.log("savedDate "+ savedDate)
 
-		  			var savedStarttime = new Date(data.starttime);
-		  			var getSelectedStartTime = savedStarttime.getTime();
-		  			var getSelectedStartTimeRounded = getSelectedStartTime/100000;
-		  			var newTime = Math.floor(getSelectedStartTimeRounded); 
-		  			//var getSelectedStartTimeNew = Math.round(1000*getSelectedStartTime)/1000
-		  			console.log("Starttime" + newTime)
+		
+		// Agenda.dayRef.once("value", function(snapshot) {
+		// 	snapshot.forEach(function(childSnapshot){
 
-		  			if ( getSelectedDate == savedDate && newPickTime == newTime){
-		  				console.log("same date!!!");
-		  				$scope.daystatus = "This date and time already exist. Please pick another day or time"
+		//   			var key = childSnapshot.key()
+		//   			var data = childSnapshot.val()
+		//   			var savedDate = data.date;
+		//   			console.log("savedDate "+ savedDate)
 
-		  			}
-		  			else{
+		//   			var savedStarttime = new Date(data.starttime);
+		//   			var getSelectedStartTime = savedStarttime.getTime();
+		//   			var getSelectedStartTimeRounded = getSelectedStartTime/100000;
+		//   			var newTime = Math.floor(getSelectedStartTimeRounded); 
+		//   			//var getSelectedStartTimeNew = Math.round(1000*getSelectedStartTime)/1000
+		//   			console.log("Starttime" + newTime)
+
+		//   			if ( getSelectedDate == savedDate && newPickTime == newTime){
+		//   				console.log("same date!!!");
+		//   				$scope.daystatus = "This date and time already exist. Please pick another day or time"
+
+		//   			}
+		//   			else{
 		  				if (Agenda.selectedDate && $scope.meetingname){
 
 							Agenda.addDay($scope.meetingname);
@@ -228,21 +276,23 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 							$scope.daystatus = "Please make sure your activity has a name and a date"
 						}
 		  				
-		  			}
+		  		// 	}
 		  		
-		  		});
+		  		// });
 		  			
-		});
+		// });
+// >>>>>>> 7fdd407cfd91d7f57de2f5f03917736438ff8746
 
 
 	
 	}
 		
 	
-
-  $scope.cancel = function () {
+$scope.cancel = function () {
     $uibModalInstance.dismiss('cancel');
+    console.log("CANCEL");
   };
+
 });
 
 meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){

@@ -20,23 +20,30 @@ this.dragBackAct = "";
 this.clickedAct = "";
 this.clickedDay = "";
 
+this.paneltag = false;
+
+this.ActSorted = "";
+this.DaySorted = "";
 
 
+this.updateIndex = function(index, day, act){
+
+	target = this.dayRef.child(day).child("activities").child(act)
+	target.update({
+
+
+		index: index
+	})
+
+	
+
+}
 
 this.deleteActDay = function(day_id, act_id) {
 
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
 
 }
-
-
-
-
-
-
-
-
-
 
 
 //fill color box
@@ -166,7 +173,7 @@ updateDB = function() {
 
  if ( isNaN(percentagegroup) && isNaN(percentagecoffe) && isNaN(percentagediscussion) && isNaN(percentagepresentation) ) {
 
- 	this.emptycheck = true;
+ 	
  	console.log("NaN We are empty");
 
  	percentagegroup = 0;
@@ -176,7 +183,7 @@ updateDB = function() {
  	updateDB();
 
  } else {
- 	this.emptycheck = false;
+ 	
  	updateDB();
  	
  }
@@ -359,6 +366,7 @@ this.getTotalTime = function(){
 this.addActToDay = function(){
 
 	// console.log(this.DragActID)
+	priority = 0;
 
 	targetDay = this.dayRef.child(this.DragDayID)
 	targetAct = this.actRef.child(this.DragActID)
@@ -385,9 +393,12 @@ this.addActToDay = function(){
 		  						name: targetData.name,
 							    length: targetData.length,
 							    type: targetData.type,
-							    description: targetData.description
+							    description: targetData.description,
+							    index: 0
 
 		  				});
+
+
 
 		  			} else {
 
