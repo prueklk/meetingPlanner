@@ -59,11 +59,11 @@
                                   <div class="col-sm-6">
 
                                  
-                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
+                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); removeactivity(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
 
                               
-                                  <!-- <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
- -->
+                            
+
 
 
                                    
@@ -150,7 +150,7 @@
    
                     <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
                    
-                    <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                    <p>Length <input type="number" ng-model="length" id="length" hrs="0"> min</p>
                     
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
@@ -212,8 +212,10 @@
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder={{value.name}}> </p>
                     
-                    <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
-                  
+                    <p>Length <input type="number" ng-model="time" id="length" hr:mins="0"> min</p>
+                
+  
+                
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>

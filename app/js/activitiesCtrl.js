@@ -124,7 +124,7 @@ $scope.deleteAct = function(id) {
 $scope.removeactivity=function(){
  var modalInstance = $uibModal.open({
 	      templateUrl: 'removeactivityModal.html',
-	      controller: 'RemoveActivityModalCtrl'
+	      controller: 'removeactivityModalCtrl'
     	});
   	};
 
