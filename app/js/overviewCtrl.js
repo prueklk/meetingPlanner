@@ -265,15 +265,16 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 
 		//   			}
 		//   			else{
-		  				if (Agenda.selectedDate && $scope.meetingname){
+		  				if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation){
+		  					// console.log("LOCATION = "+$scope.meetinglocation);
 
-							Agenda.addDay($scope.meetingname);
+							Agenda.addDay($scope.meetingname , $scope.meetinglocation);
 							$uibModalInstance.dismiss('cancel');
 							$scope.daystatus = ""			
 						}
 
 						else{
-							$scope.daystatus = "Please make sure your activity has a name and a date"
+							$scope.daystatus = "Please make sure your activity has a name, a location and a date."
 						}
 		  				
 		  		// 	}
@@ -313,7 +314,7 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 			  	$scope.status = "";
 			  			
-			  			$scope.name = data.name; 
+			  			$scope.name = data.name;
 						$scope.description = data.description;
 						$scope.length = data.length;
 						$scope.type = data.type;
