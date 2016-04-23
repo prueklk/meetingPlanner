@@ -1,6 +1,6 @@
 meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebaseObject) {
 
-this.ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
+this.ref = new Firebase("https://agendaplanner.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
 // this.dayActs = this.dayRef.child("activities")
