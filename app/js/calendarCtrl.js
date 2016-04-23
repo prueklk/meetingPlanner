@@ -1,8 +1,8 @@
 meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
+    Agenda.selectedDate = "";
 
-	$scope.today = function() {
-
-		$scope.dt = new Date();
+	  $scope.today = function() {
+		  $scope.dt = new Date();
   	};
   	// $scope.today();
 

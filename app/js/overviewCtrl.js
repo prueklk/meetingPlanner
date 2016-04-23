@@ -262,7 +262,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
-
+	
 	$scope.addDay = function() {
 		
 
@@ -329,7 +329,7 @@ $scope.cancel = function () {
   };
 
 $scope.getWeather = function(){
-	if(Agenda.selectedDate && Agenda.selectedDate){
+	if(Agenda.selectedDate && Agenda.selectedTime){
 		return "Weather : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
 	}
 }
