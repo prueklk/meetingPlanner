@@ -118,7 +118,7 @@
             <p><b>Start Time:</b> {{value.starttime | date: 'HH:mm'}}  </p>
 
              <p><b>End Time:</b> {{value.endtime | date: 'HH:mm'}} </p>
-              <p><b>Total Time: </b>{{value.length}}  min</p>
+              <p><b>Total Time: </b>{{convertToHours(value.length)}} hours</p>
 
 
             

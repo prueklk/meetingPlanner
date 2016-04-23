@@ -256,6 +256,15 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	});
  	 	};
 
+ 	$scope.convertToHours = function(min){
+        var minutes = min % 60;
+        var hours = Math.floor(min / 60);
+
+        minutes = (minutes < 10 ? '0' : '') + minutes;
+        // hours = (hours < 10 ? '0' : '') + hours;
+
+        return hours + ':' + minutes; 
+ 	}
 
 });
 
