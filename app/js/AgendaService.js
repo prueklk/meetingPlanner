@@ -255,6 +255,7 @@ this.addDay = function(name,location){
   			
   			name: name,
   			location: location,
+  			weather: this.getWeather(this.selectedDate, this.selectedTime),
 		    date: this.selectedDate.toISOString(),
 		    starttime: this.selectedTime.toISOString(),
 		    endtime: "",
@@ -479,43 +480,75 @@ this.updateAct = function(name, length, type, description){
 
 };
 
+this.getWeather = function(_selectedDate, _selectedTime){
+	//get selectedDate
+	// _selectedDate = new Date("April 26, 2017 12:13:00"); // FOR TESTING, TO BE DELETED
+	// _selectedHour = _selectedDate.getHours(); // FOR TESTING, TO BE DELETED
 
+	_selectedHour = _selectedTime.getHours(); // USE!!!
+	
+	// console.log("getWeather // _selectedDate = "+_selectedDate);
+	var _selectedDate0 = _selectedDate.setHours(0, 0, 0, 0);
+	// console.log("setHours 0 0 0 0 // _selectedDate0 = "+_selectedDate0);
+
+	//compare selectedDate to dayWeather list
+	for (var i=0; i <self.weatherList.length; i++){
+
+		var _testDate = self.weatherList[i];
+		var _date = new Date(_testDate.dt*1000);
+		var _hours = _date.getHours();
+		//var _minutes = "0" + _date.getMinutes();
+		//var _seconds = "0" + _date.getSeconds();
+		//var _time = _hours + ':' + _minutes.substr(-2) + ':' + _seconds.substr(-2); // 10:30:23 format
+
+		var _date0 = _date.setHours(0,0,0,0);
+		
+		//find selectedDate in dayWeather list
+		if(_selectedDate0.valueOf() == _date0.valueOf()){
+			//console.log("FOUND // _selectedDate0 = "+_selectedDate0+" , _date0 = "+_date0);
+			//console.log("_selectedHour = "+_selectedHour+", _hours = "+_hours);
+			
+			//find the next hour
+			if(_selectedHour <= _hours){
+
+				//show weather description and temperature
+				// console.log("_testDate.main.temp = "+_testDate.main.temp);
+				// console.log("_testDate.weather.decription = "+_testDate.weather[0].description);
+
+				var weather_temp = _testDate.main.temp;
+				var weather_description = _testDate.weather[0].description;
+				var weather_txt = weather_temp +" C with "+weather_description;
+				break;
+			}
+		}else{ //if cannot find selectedDate in dayWeather list, weather description = "no weather info"
+			// console.log("NOT FOUND // _selectedDate = "+_selectedDate+" , _date0 = "+_date0);
+			var weather_txt = "No data available.";
+		}
+
+	}
+
+	//return weather description
+	return weather_txt;
+}
 
 var self = this;
 this.apiKey = "63528f449410f83acb94ee8edf8c0d02";
 
+//HOW TO: http://openweathermap.org/forecast5 // 5 days, 3 hours
 // {"_id":2673730,"name":"Stockholm","country":"SE","coord":{"lon":18.064899,"lat":59.332581}}
-//HOW TO: http://openweathermap.org/forecast5
-// console.log("DaysWeather");
-// this.DaysWeather = $resource('http://api.openweathermap.org/data/2.5/forecast',{units:"metric",appid:self.apiKey});
-// console.log(this.DaysWeather.get({id:2673730})); // OR this.DaysWeather.get({q:"Stockholm"});
-// 5 days, 3 hours = 00.00, 03.00, 06.00, 09.00, 12.00, 15.00, 18.00, 21.00
+this.DaysWeather = $resource('http://api.openweathermap.org/data/2.5/forecast',{units:"metric",appid:self.apiKey});
+//console.log(this.DaysWeather.get({id:2673730})); // OR this.DaysWeather.get({q:"Stockholm"});
 
-
-/*
-this.DishSearch = $resource('http://api.bigoven.com/recipes',{pg:1,rpp:25,api_key:self.apiKey});
-
-Dinner.DishSearch.get({title_kw:query},function(data){
- 	$scope.dishes=data.Results;
- 	$scope.status = "Showing " + data.Results.length + " results";
-},function(data){
- 	$scope.status = "There was an error";
+this.DaysWeather.get({id:2673730},function(data){
+		console.log("this.DaysWeather // DAYSWEATHER");
+		self.weatherList = data.list;
+		// console.log(self.weatherList); //array of objects
+		
+		// self.getWeather(); // FOR TESTING, TO BE DELETED
+	},function(data){
+	    //$scope.status = "There was an error.";
 });
 
-this.Dish = $resource('http://api.bigoven.com/recipe/:id',{api_key:self.apiKey}); 
-
-Dinner.Dish.get({id:$routeParams.dishId},function(data){
-	$scope.dish=data;
-    $scope.status = "";
-    Dinner.keepPreparedDish(data);
-    $scope.foodPrice = Dinner.getFoodPrice();
-},function(data){
-    $scope.status = "There was an error";
-});
-
-//in the controller, if we want to search for dishes we can call Dinner.DishSearch.get({title_kw:'chicken'}) 
-//or to get a single dish we would do Dinner.Dish.get({id:12345}).
-*/
 
 return this;
 });

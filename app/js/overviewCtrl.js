@@ -328,6 +328,12 @@ $scope.cancel = function () {
     console.log("CANCEL");
   };
 
+$scope.getWeather = function(){
+	if(Agenda.selectedDate && Agenda.selectedDate){
+		return "Weather : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
+	}
+}
+
 });
 
 meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){

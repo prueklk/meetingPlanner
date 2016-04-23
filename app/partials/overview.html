@@ -15,10 +15,10 @@
       
       <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
       <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder=""> </p>
+      <span>{{getWeather()}}</span>
 
     <span class="status">{{daystatus}}</span>
-    <span class="status">{{dateStatus}}</span>
-
+    
     </div>
 
 
@@ -113,6 +113,7 @@
            <p>Name: {{value.name}} </p>
            <p>Location: {{value.location}} </p>
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
+           <p>Weather: {{value.weather}}</p>
             <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
               
              <p>End Time: {{value.endtime | date: 'HH:mm'}} </p>
