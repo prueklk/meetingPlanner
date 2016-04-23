@@ -536,6 +536,7 @@ div.panel {
     display: none;
      width: 100%;
      height:70px;
+     transition: 0.6;
 background: url('/images/MeetingBODY.jpg') no-repeat center center fixed; 
     opacity:0.6;
 }
