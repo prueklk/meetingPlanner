@@ -245,16 +245,16 @@ this.addAct = function(name, length, type, description){
 
 }
 
-this.addDay = function(name){
-
-
-	var start = 0;
+this.addDay = function(name,location){
 	
+
 	// TODO // need to check duplicate dates
 	// var list = $firebaseArray();
+
 	this.dayRef.push({
   			
   			name: name,
+  			location: location,
 		    date: this.selectedDate.toISOString(),
 		    starttime: this.selectedTime.toISOString(),
 		    endtime: "",
