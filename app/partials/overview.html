@@ -38,15 +38,17 @@
     <div class="col-sm-12" data-toggle="tooltip" title="Select a day and create a schedule by drag your activities here.">
       <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting </button>
     </div>
-    <div   ng-init="tag='day'"  ng-repeat="(key, value) in days track by $index" class="row"> <!-- start of day item -->
+    <div   ng-init="tag='day'"  ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
 
       <div  id="{{key}}" class="col-sm-6 dayactivity" droppable drop="drop(key)">
 
     
 
 
-      <ul  class="list-group drop2" >
-        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" class="list-group-item col-sm-12 drop3 {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities" id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)">
+      <ul ng-sortable="sort"  class="list-group drop2" >
+        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 drop3 {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities track by $index " id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
+
+          <!-- |orderBy:'item.index' -->
 
          
 
@@ -79,7 +81,7 @@
           </div>
 
            <div class="col-sm-1">
-            <button id="{{keyact}}" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
+            <button id="{{keyact}}" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteActDay(key, keyact)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{item.type + 'HoverRemove'}}"> </button>
           </div>
 
          <!--  <div class="col-sm-2"> -->

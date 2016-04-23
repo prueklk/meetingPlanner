@@ -1,6 +1,6 @@
 meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebaseObject) {
 
-this.ref = new Firebase("https://flickering-fire-1621.firebaseio.com/");
+this.ref = new Firebase("https://agendaplanner.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
 // this.dayActs = this.dayRef.child("activities")
@@ -22,23 +22,28 @@ this.clickedDay = "";
 
 this.paneltag = false;
 
+this.ActSorted = "";
+this.DaySorted = "";
 
 
+this.updateIndex = function(index, day, act){
+
+	target = this.dayRef.child(day).child("activities").child(act)
+	target.update({
+
+
+		index: index
+	})
+
+	
+
+}
 
 this.deleteActDay = function(day_id, act_id) {
 
 this.dayRef.child(day_id).child("activities").child(act_id).remove();
 
 }
-
-
-
-
-
-
-
-
-
 
 
 //fill color box
@@ -361,6 +366,7 @@ this.getTotalTime = function(){
 this.addActToDay = function(){
 
 	// console.log(this.DragActID)
+	priority = 0;
 
 	targetDay = this.dayRef.child(this.DragDayID)
 	targetAct = this.actRef.child(this.DragActID)
@@ -387,9 +393,12 @@ this.addActToDay = function(){
 		  						name: targetData.name,
 							    length: targetData.length,
 							    type: targetData.type,
-							    description: targetData.description
+							    description: targetData.description,
+							    index: 0
 
 		  				});
+
+
 
 		  			} else {
 

@@ -1,4 +1,4 @@
-meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal ) {
+meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal) {
 
 
 
@@ -13,15 +13,9 @@ $scope.selectChevron = function(id, event) {
 		$scope.activeClass = "ChevronRight";
 
 	};
-    // $scope.myClass = {red:false};
     
-
-
-    //   $scope.myClass.red = !$scope.myClass.red;
-
-    // var myEl = angular.element( document.querySelector(id) );
     console.log(myEl)
-	// myEl.toggleClass('glyphicon-chevron-down');  
+ 
    
 
     

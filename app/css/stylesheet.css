@@ -383,6 +383,13 @@ vertical-align: middle;
     margin-top: -5px;
 	
 }
+
+
+.glyphicon-remove:hover {
+
+	background: none;
+	
+}
 body {
 	background: url('/images/MeetingBODY.jpg') no-repeat center center fixed; 
 	background: cover;
@@ -617,6 +624,30 @@ body {
 
 }
 
+.GroupHoverRemove:hover {
+
+	background: rgba(197, 129, 148, .5);
+
+}
+
+.PresentationHoverRemove:hover {
+
+	background: rgba(132, 213, 250, .5);
+
+}
+
+.CoffeeHoverRemove:hover {
+
+	background: rgba(250, 205, 123, .5);
+
+}
+
+.DiscussionHoverRemove:hover {
+
+	background: rgba(208, 154, 233, .5);
+
+}
+
 .
 
 
@@ -646,6 +677,9 @@ select:focus{
 .glyphicon:focus {
   outline: none;
 }
+
+
+
 /*.activityParking{
 
 
