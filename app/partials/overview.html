@@ -6,7 +6,7 @@
    
     <div class="modal-header">
       <button class="close" type="button" ng-click="cancel()">&times;</button>
-      <h4 class="modal-title">Add Day</h4>
+      <h4 class="modal-title">Add a Meeting</h4>
     </div>
 
     <div class="modal-body">
@@ -14,6 +14,7 @@
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
       
       <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
+      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder=""> </p>
 
     <span class="status">{{daystatus}}</span>
     <span class="status">{{dateStatus}}</span>
@@ -36,7 +37,7 @@
 
   <div class="col-sm-4 days shadow">
     <div class="col-sm-12" data-toggle="tooltip" title="Select a day and create a schedule by drag your activities here.">
-      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a meeting </button>
+      <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a Meeting </button>
     </div>
     <div   ng-init="tag='day'"  ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
 
@@ -108,6 +109,7 @@
       <div  class="col-sm-6 daysinfo">
            
            <p>Name: {{value.name}} </p>
+           <p>Location: {{value.location}} </p>
            <p>Date: {{value.date | date: 'mediumDate'}} </p>
             <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
               
@@ -178,7 +180,6 @@
       </div>        
           
             
-          <br>
 
               <button ng-click="deleteDay(key)" id="deleteButton" class="btn btn-default pull-left">Delete meeting</button>
 
