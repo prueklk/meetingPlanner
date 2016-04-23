@@ -1,9 +1,11 @@
-meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal) {
+meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal, $firebaseArray) {
 
 	$scope.TrackingFunction = function(actIndex, day, act){
 
 
-		Agenda.updateIndex(actIndex, day, act)
+		// Agenda.updateIndex(actIndex, day, act)
+
+
 		// console.log(actIndex, day)
 
 	}
@@ -16,14 +18,14 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		console.log(Agenda.ActSorted);
 		console.log(Agenda.DaySorted);
 
-		var ref = Agenda.dayRef.child(day).child("activities").child(key);
+		// var ref = Agenda.dayRef.child(day).child("activities").child(key);
 			
-		// ref.setWithPriority('fred', 500, function(error) {
-			ref.once("value", function(snapshot) {
-			    var priority = snapshot.getPriority();
-			    // priority === 500
-			    console.log(priority)
-			  });
+		// // ref.setWithPriority('fred', 500, function(error) {
+		// 	ref.once("value", function(snapshot) {
+		// 	    var priority = snapshot.getPriority();
+		// 	    // priority === 500
+		// 	    console.log(priority)
+		// 	  });
 
 		  // });
 
@@ -35,11 +37,27 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
             onSort: function (/** ngSortEvent */evt){
                 // @see https://github.com/RubaXa/Sortable/blob/master/ng-sortable.js#L18-L24
                 console.log("ADDED")
+
+
+                			 angular.element(".dayAct").each(function(index, obj){
+		        	var id = obj.id;
+		        	var day = obj.parentNode.parentNode.id;
+		        	// console.log(obj.parentNode.parentNode.id);
+
+		        	Agenda.updateIndex(index, day, id);
+		        })
+
+
                 
             },
 
 
             onEnd: function (/**Event*/evt) {
+		        
+		        // var ref = Agenda.dayRef.child(day).child("activities")
+
+
+		       
 		        console.log(evt.oldIndex);  // element's old index within parent
 		        console.log(evt.newIndex);  // element's new index within parent
 
@@ -55,10 +73,26 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		        }
 
 
+	// var query = messagesRef.orderByChild("timestamp").limitToLast(25);
 
         
-	$scope.days = $firebaseObject(Agenda.dayRef);
-	$scope.daysAct = $firebaseObject(Agenda.dayRef).activities;
+	var arr = $firebaseObject(Agenda.dayRef);
+
+	arr.$loaded(function(data){
+
+		$scope.days = data;
+		console.log(data);
+	})
+
+	//  = $firebaseArray(Agenda.dayRef);
+
+	// $scope.days = $firebaseArray(Agenda.dayRef);
+	// var dayActArray = sync.$asArray();
+
+	// //  = objectsArray;
+	//  = dayArray;
+
+
 
 
 

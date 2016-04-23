@@ -3,6 +3,11 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 this.ref = new Firebase("https://agendaplanner.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
+// this.testRef = new Firebase("https://agendaplanner.firebaseio.com/day");
+
+// var list = $firebaseArray(this.dayRef);
+
+
 // this.dayActs = this.dayRef.child("activities")
 // this.dayRefActivities = this.dayRef.child("dayActivities")
 
@@ -35,7 +40,13 @@ this.updateIndex = function(index, day, act){
 		index: index
 	})
 
-	
+	// target.child("index").child("priority").setWithPriority(index, -index);
+
+
+
+	// target.orderByChild("index")
+
+
 
 }
 
@@ -240,7 +251,7 @@ this.addDay = function(name){
 	var start = 0;
 	
 	// TODO // need to check duplicate dates
-
+	// var list = $firebaseArray();
 	this.dayRef.push({
   			
   			name: name,
@@ -366,12 +377,16 @@ this.getTotalTime = function(){
 this.addActToDay = function(){
 
 	// console.log(this.DragActID)
-	priority = 0;
+	// priority = 0;
 
 	targetDay = this.dayRef.child(this.DragDayID)
 	targetAct = this.actRef.child(this.DragActID)
 
+	// var targetAct = this.actRef.child("-KG1mdw35O6AWVuNwpRO")
+	// var targetDay = this.dayRef.child("-KG1mcA22R6NbKqLVPt9")
+
 	var actID = this.DragActID;
+	// var actID = "-KG1mdw35O6AWVuNwpRO"
 	
 			this.actRef.once("value", function(snapshot) {
 		  		snapshot.forEach(function(childSnapshot) {
@@ -386,7 +401,9 @@ this.addActToDay = function(){
 		  				
 
 		  				var targetData = data;
+		  				// var list = $firebaseArray(targetDay.child("activities"));
 		  				// console.log(targetData.name);
+		  				// .then(console.log("ADDACTTHEN"))
 		  				targetDay.child("activities").push({
 
 
@@ -394,9 +411,12 @@ this.addActToDay = function(){
 							    length: targetData.length,
 							    type: targetData.type,
 							    description: targetData.description,
-							    index: 0
+							    index: {
 
-		  				});
+							    	priority: 0
+							    }
+
+		  				}); 
 
 
 
@@ -421,6 +441,8 @@ this.addActToDay = function(){
 
 
 }
+
+
 
 this.updateActDay = function(name, length, type, description){
 	console.log("updating activity Day")

@@ -46,9 +46,11 @@
 
 
       <ul ng-sortable="sort"  class="list-group drop2" >
-        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 drop3 {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities track by $index " id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
+        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 dayAct {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities track by $index   " id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
 
-          <!-- |orderBy:'item.index' -->
+
+
+
 
          
 
