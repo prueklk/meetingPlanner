@@ -48,6 +48,7 @@ $scope.test = function(text) {
 	$scope.description = "";
 	$scope.length = 0;
 	$scope.type = "Select here";
+	
 	$scope.addAct = function() {
 
 		if ($scope.name == ""){
