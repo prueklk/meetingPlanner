@@ -11,13 +11,37 @@
 
 			<h1> Agenda </h1>  
 			<h4> The best way to plan and control your meetings. </h4>
+			<button class="accordion"><h5>Learn more about agenda</h5></button>
+<div class="panel">
+  <p>Agenda is a meeting planner builder. You can add meetings by choosing day, date,time, location etc.Create different activities of given types auch as 'presentation' and drag them to the specific meeting to plan your schedule.You can edit and delete activities and visualize your schedule thoriugh color bar.</p>
+
+  <div id="orangediv"></div> <div id="coraldiv"></div>
+ 
+  
+ 
+
+
+</div>
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+</script>
 			<hr> 
 			<!-- <p>Plan your meetings without any fuss!
 						</p> -->
 	   </div>
+
 	  </div>
 
 	  <div class="container">
+
 
 	  <div class="row login">
 

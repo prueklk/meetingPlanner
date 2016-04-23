@@ -59,11 +59,10 @@
                                   <div class="col-sm-6">
 
                                  
-                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); removeactivity(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
+                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key); (confirm('Are you sure you want to delete the meeting?'))" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
 
                               
                             
-
 
 
                                    
@@ -135,7 +134,10 @@
 
             </div>
 
-
+<div class="alert alert-danger" ng-show="show">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+  </div>
 
 
             <!-- Modal -->
@@ -175,7 +177,7 @@
 
  <!-- Modal for remove key -->
 
-            <script type="text/ng-template" id="removeactivityModal.html">
+            <script type="text/ng-template" id="removeActivityModal.html">
                
                  <div class="modal-header">
                     <button class="close" type="button" ng-click="cancel()">&times;</button>
@@ -238,7 +240,7 @@
 
 
 
-            <div class="col-sm-8" ng-drop="true"> 
+            <div class="col-sm-8" ng-drop="true" > 
             	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
 
             </div>

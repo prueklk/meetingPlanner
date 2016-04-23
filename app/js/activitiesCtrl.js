@@ -22,7 +22,9 @@ $scope.selectChevron = function(id, event) {
   };
 
 
-
+$scope.test = function(text) {
+  alert(text);
+};
 
 
  $scope.paneltag = function (key) { 
@@ -121,12 +123,7 @@ $scope.deleteAct = function(id) {
 
 	}
 	
-$scope.removeactivity=function(){
- var modalInstance = $uibModal.open({
-	      templateUrl: 'removeactivityModal.html',
-	      controller: 'removeactivityModalCtrl'
-    	});
-  	};
+
 
 	$scope.openEditActivity = function (key) {
   		
@@ -157,12 +154,8 @@ $scope.removeactivity=function(){
 	      controller: 'ActivityModalCtrl'
     	});
   	};
-  	$scope.removeActivity = function () {
-	    var modalInstance = $uibModal.open({
-	      templateUrl: 'removeactivityModal.html',
-	      controller: 'ActivityModalCtrl'
-    	});
-  	};
+  	
+
 
 });
 
