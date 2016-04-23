@@ -704,13 +704,13 @@ div.panel.show {
   border: 0;
 }
 
-select:focus{
+/*select:focus{
     color:#333333;
     //border:10px solid red;
     border:none!important;
     outline:none!important;
     box-shadow: none!important;
-  }
+  }*/
 
   .btn:focus {
   outline: none;
