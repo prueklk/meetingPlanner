@@ -127,17 +127,17 @@ this.fillcolor = function(day){
 
 
 //summation
-for(var i in CoffeeBreakArr) {sumcoffee += CoffeeBreakArr[i]; }
-// console.log(sumcoffee)
+for(var i in CoffeeBreakArr) {sumcoffee += parseFloat(CoffeeBreakArr[i]); }
+console.log(sumcoffee)
 //groupsum
-for(var i in GroupWorkArr) {sumgroup += GroupWorkArr[i]; }
-// console.log(sumgroup)
+for(var i in GroupWorkArr) {sumgroup += parseFloat(GroupWorkArr[i]); }
+console.log(sumgroup)
 //discussion
-for(var i in DiscussionArr) {sumdiscussion += DiscussionArr[i]; }
-// console.log(sumdiscussion)
+for(var i in DiscussionArr) {sumdiscussion += parseFloat(DiscussionArr[i]); }
+console.log(sumdiscussion)
 //presentation
-for(var i in PresentationArr) {sumpresentation += PresentationArr[i]; }
-// console.log(sumpresentation)
+for(var i in PresentationArr) {sumpresentation += parseFloat(PresentationArr[i]); }
+console.log(sumpresentation)
 
 // Total sum of all type arrays
 		  			 
@@ -194,16 +194,18 @@ updateDB = function() {
  if ( isNaN(percentagegroup) && isNaN(percentagecoffe) && isNaN(percentagediscussion) && isNaN(percentagepresentation) ) {
 
  	
- 	console.log("NaN We are empty");
+ 	
 
  	percentagegroup = 0;
  	percentagecoffe = 0;
  	percentagediscussion = 0;
  	percentagepresentation = 0;
  	updateDB();
+ 	console.log(percentageArr);
 
  } else {
- 	console.log("we are not empty")
+ 	console.log("percentageArr - ELSE not empty")
+ 	console.log(percentageArr);
  	updateDB();
  	
  }
