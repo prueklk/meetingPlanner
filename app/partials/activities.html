@@ -7,7 +7,7 @@
 <div class="container">
 
     <div class="col-sm-12 activitiesArea">
-    <p>Hint: First, create a meeting by clicking "Add a Meeting", then "Add an Activity", and drag an activity to your meeting.
+    <!-- <p>Hint: First, create a meeting by clicking "Add a Meeting", then "Add an Activity", and drag an activity to your meeting. -->
         <div class="row">
         <!-- <header id="headerFix">
             <h2 class="headertext">MeetingPlanner</h2>
@@ -27,13 +27,26 @@
          
 
             <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()" data-toggle="tooltip" title="Drag and drop an activity to a meeting">
+               
+                
+                <div class="row">
+                    <div class="col-sm-12">
+
                 <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add an Activity</button>
+                </div>
+                  </div>
+
+                <div class="row">
+
+                    <div class="col-sm-12 overflowBox">
+
+
 
                         <div ng-repeat="(key, value) in activities" class="row"> 
                            
                         <div class="col-sm-4 activity" >
                         <div class="panel-group">
-                        <div  id="{{key}}"  class="panel panel-default"  >
+                        <div  id="{{key}}"  class="panel panel-default">
                         
                         <div  ng-init="tag='collapse'" class="panel-heading {{value.type + 'Hover'}}" draggable dragstart="drag(key)">
                                 <h4 class="panel-title" ng-click="openEditActivity(key)">
@@ -59,11 +72,10 @@
                                   <div class="col-sm-6">
 
                                  
-                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
+                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key); (confirm('Are you sure you want to delete the meeting?'))" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
 
                               
-                                  <!-- <button id="" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </button>
- -->
+                            
 
 
                                    
@@ -134,8 +146,13 @@
 
 
             </div>
+          </div>
+          </div>
 
-
+<div class="alert alert-danger" ng-show="show">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
+  </div>
 
 
             <!-- Modal -->
@@ -150,7 +167,7 @@
    
                     <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
                    
-                    <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
+                    <p>Length <input type="number" ng-model="length" id="length" hrs="0"> min</p>
                     
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
@@ -166,8 +183,8 @@
 
                 <span class="status">{{status}}</span>
                 <div class="modal-footer">
-                  <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
                   <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+                  <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
                 </div>
                     
             </script>
@@ -175,7 +192,7 @@
 
  <!-- Modal for remove key -->
 
-            <script type="text/ng-template" id="removeactivityModal.html">
+            <script type="text/ng-template" id="removeActivityModal.html">
                
                  <div class="modal-header">
                     <button class="close" type="button" ng-click="cancel()">&times;</button>
@@ -190,8 +207,8 @@
 
                 
                 <div class="modal-footer">
-                  <button class="btn btn-success" type="button" ng-click="deleteAct(key)">Confirm</button>
                   <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                  <button class="btn btn-success" type="button" ng-click="deleteAct(key)">Confirm</button>
                 </div>
                    
             </script>
@@ -212,8 +229,10 @@
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder={{value.name}}> </p>
                     
-                    <p>Length <input type="number" ng-model="length" id="length" min="0"> min</p>
-                  
+                    <p>Length <input type="number" ng-model="time" id="length" hr:mins="0"> min</p>
+                
+  
+                
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
@@ -227,16 +246,37 @@
                 <span class="status">{{status}}</span>
 
                 <div class="modal-footer">
-                  <button class="btn btn-success" type="button" ng-click="editAct()">Save</button>
                   <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+                  <button class="btn btn-success" type="button" ng-click="editAct()">Save</button>
                 </div>
                     
             </script>
             <!-- END Modal 2 Edit act-->
 
+    <!-- CONFIRM MODAL -->
+    <script type="text/ng-template" id="activityConfirmModal.html">
+       
+        <div class="modal-header">
+          <button class="close" type="button" ng-click="cancel()">&times;</button>
+          <h4 class="modal-title">Delete an activity</h4>
+        </div>
+
+        <div class="modal-body">
+          <p>Are you sure you want to delete this activity <i>({{getActivityName()}})</i>?</p>
+        
+        </div>
 
 
-            <div class="col-sm-8" ng-drop="true"> 
+        <div class="modal-footer">
+           <button class="btn btn-warning" type="button" ng-click="cancel()">No</button>
+           <button class="btn btn-danger" type="button" ng-click="deleteActivity()">Delete</button>
+        </div>
+            
+    </script>
+    <!-- END CONFIRM MODAL -->
+
+
+            <div class="col-sm-8" ng-drop="true" > 
             	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
 
             </div>

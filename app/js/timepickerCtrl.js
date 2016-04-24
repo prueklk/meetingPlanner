@@ -22,6 +22,12 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
   $scope.changed = function () {
     $log.log('Time changed to: ' + $scope.mytime);
 
+    if ($scope.mytime === null) {
+      $scope.inputText = "Please correct the time.";
+    } else{
+      $scope.inputText = "";
+    }
+
     Agenda.selectedTime = $scope.mytime;
   };
 
