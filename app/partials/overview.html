@@ -157,7 +157,8 @@
               <div class="foo Coffee"></div> -->
 
                
-       <div  id="mainbox"> 
+       <div  id="mainbox" data-toggle="tooltip"
+          title="The red mark represents the 20% of the break time."> 
 
 
   <!--        <span>{{keybox}}</span> -->
@@ -188,8 +189,7 @@
         </div>
 
          
-          <span ng-style="breakmarker" ng-show="value.length >= 1" data-toggle="tooltip"
-          title="Breakmarker-shows that you need 20% breaks, which you do not have at the moment"></span>
+          <span ng-style="breakmarker" ng-show="value.length >= 1"></span>
 
          <!-- <div  class="breakmarker">
 
