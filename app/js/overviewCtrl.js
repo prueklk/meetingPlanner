@@ -153,16 +153,25 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
-		
-		// console.log(day_id);
-		// console.log(act_id);
-		Agenda.deleteActDay(day_id, act_id);
-		Agenda.DragDayID = day_id;
-		Agenda.getTotalTime();
-		Agenda.getEndTime();
-		Agenda.fillcolor(day_id)
+		console.log("DELETE ACT DAY");
+		// console.log("day_id = "+day_id);
+		// console.log("act_id = "+act_id);
 
-
+		var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return act_id;
+			        },
+		        	name: function(){
+		        		return $scope.days[day_id].activities[act_id].name;
+		        	},
+		        	day_id: function(){
+		        		return day_id;
+		        	}
+			    }
+	    });
 	}
 	
 
@@ -472,8 +481,8 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 });
 
 meetingPlannerApp.controller('OverviewConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name){
-	//console.log("id = "+id);
-	//console.log("name = "+name);
+	// console.log("id = "+id);
+	// console.log("name = "+name);
 	$scope.getMeetingName = function(){
 		return name;
 	}
