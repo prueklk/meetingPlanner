@@ -204,14 +204,6 @@ updateDB = function() {
 
 }
 
-this.getMeetingName = function(id){
-	// TO DO // return meeting name instead of id
-
-	//return this.dayRef.child(id).child("name");
-	// var selectedId = this.dayRef.child(id);
-	// console.log(selectedId);
-	return id;
-};
 
 
 this.deleteDay = function(id){
@@ -221,21 +213,14 @@ this.dayRef.child(id).remove();
 };
 
 
-this.getActivityName = function(id){
-	// TO DO // return activity name instead of id
-	
-	return id;
-};
-
 this.deleteAct = function(id){
 
 // console.log(this.actRef.child(id))
 this.actRef.child(id).remove();
 
-
-
-
 }
+
+
 this.logdate = function(){
 
 	// console.log(this.selectedDate);

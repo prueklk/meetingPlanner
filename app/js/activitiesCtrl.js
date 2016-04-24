@@ -77,13 +77,19 @@ $scope.test = function(text) {
 	}
 
 	$scope.deleteAct = function(id) {
+		// console.log($scope.days[id].name);
+		console.log($scope.activities);
+
 		var modalInstance = $uibModal.open({
 		      	templateUrl: 'activityConfirmModal.html',
 		      	controller: 'ActivityConfirmModalCtrl',
 			    resolve: {
 			        id: function () {
 			          	return id;
-			        }
+			        },
+		        	name: function(){
+		        		return $scope.activities[id].name;
+		        	}
 			    }
 	    });
 
@@ -274,11 +280,10 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 	});
 
-meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id){
-	console.log("id = "+id);
+meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name){
+	console.log("id = "+id+" , name = "+name);
 	$scope.getActivityName = function(){
-		//console.log(Agenda.getActivityName(id));
-		return Agenda.getActivityName(id);
+		return name;
 	}
 	
 	$scope.cancel = function () {

@@ -31,7 +31,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	}
 
-	 $scope.sort = {
+	$scope.sort = {
             group: 'acts',
             animation: 150,
             onSort: function (/** ngSortEvent */evt){
@@ -70,7 +70,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		        // + indexes from onEnd
 		        alert("ADD")
 		    	}
-		        }
+	}
 
 
 	// var query = messagesRef.orderByChild("timestamp").limitToLast(25);
@@ -124,12 +124,16 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 
 	$scope.deleteDay = function(id){
+		console.log($scope.days[id].name);
 		var modalInstance = $uibModal.open({
 	      	templateUrl: 'overviewConfirmModal.html',
 	      	controller: 'OverviewConfirmModalCtrl',
 		    resolve: {
 		        id: function () {
 		          	return id;
+		        },
+		        name: function(){
+		        	return $scope.days[id].name;
 		        }
 		    }
     	});
@@ -274,6 +278,15 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
         return hours + ':' + minutes; 
  	}
 
+ 	$scope.updateWeather = function(_date, _time){		
+ 		//console.log("UPDATEWEATHER // _date = "+_date+" // _time = "+_time);
+ 		var _date = new Date(_date);
+ 		var _time = new Date(_time);
+ 		
+		return Agenda.getWeather(_date, _time);
+	}
+
+
 });
 
 
@@ -347,7 +360,7 @@ $scope.cancel = function () {
 
 $scope.getWeather = function(){
 	if(Agenda.selectedDate && Agenda.selectedTime){
-		return "Weather : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
+		return "Weather forecast : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
 	}
 }
 
@@ -409,11 +422,11 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 });
 
-meetingPlannerApp.controller('OverviewConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id){
-	console.log("id = "+id);
+meetingPlannerApp.controller('OverviewConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name){
+	//console.log("id = "+id);
+	//console.log("name = "+name);
 	$scope.getMeetingName = function(){
-		//console.log(Agenda.getMeetingName(id));
-		return Agenda.getMeetingName(id);
+		return name;
 	}
 	
 	$scope.cancel = function () {

@@ -137,7 +137,7 @@
            <p><b>Name:</b></b> {{value.name}} </p>
            <p><b>Location:</b> {{value.location}} </p>
            <p><b>Date: </b>{{value.date | date: 'mediumDate'}} </p>
-           <p><b>Weather: </b>{{value.weather}}</p>
+           <p><b>Weather: </b>{{updateWeather(value.date,value.starttime)}}</p>
             <p><b>Start Time:</b> {{value.starttime | date: 'HH:mm'}}  </p>
 
              <p><b>End Time:</b> {{value.endtime | date: 'HH:mm'}} </p>
