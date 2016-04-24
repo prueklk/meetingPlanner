@@ -186,27 +186,27 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 
 	$scope.name = "";
 	$scope.description = "";
-	$scope.length = 0;
+	// $scope.length = 0;
 	$scope.type = "Select here";
 
 	$scope.addAct = function() {
-
+	
 		if ($scope.name == ""){
-			$scope.status = "Please enter a name";
+			$scope.status = "Please enter the activity name";
 		}
-		// else if ($scope.length == ""){
-		// 	$scope.status = "Please choose a length of the activity";
-		// }
+		else if ($scope.length == "" || !$scope.length){
+			$scope.status = "Please fill in the activity length.";
+		} 
 		else if ($scope.type == "Select here"){
-			$scope.status = "Please choose a type for the activity";
+			$scope.status = "Please choose the activity type.";
 		}
 		// else if ($scope.description == ""){
 		// 	$scope.status = "Please give the activity a description";
 		// }
-		else{
-		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
-		$uibModalInstance.dismiss('cancel');
-		$scope.status = "";
+		else {
+			Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
+			$uibModalInstance.dismiss('cancel');
+			$scope.status = "";
 		}
 	}
 
@@ -214,6 +214,35 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
     	$uibModalInstance.dismiss('cancel');
   	};
 
+});
+
+meetingPlannerApp.directive('validNumber', function() {
+  return {
+    require: '?ngModel',
+    link: function(scope, element, attrs, ngModelCtrl) {
+      if(!ngModelCtrl) {
+        return; 
+      }
+
+      ngModelCtrl.$parsers.push(function(val) {
+        if (angular.isUndefined(val)) {
+            var val = '';
+        }
+        var clean = val.replace( /[^0-9]+/g, '');
+        if (val !== clean) {
+          ngModelCtrl.$setViewValue(clean);
+          ngModelCtrl.$render();
+        }
+        return clean;
+      });
+
+      element.bind('keypress', function(event) {
+        if(event.keyCode === 32) {
+          event.preventDefault();
+        }
+      });
+    }
+  };
 });
 
 meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance){

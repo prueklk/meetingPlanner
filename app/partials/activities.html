@@ -150,10 +150,11 @@
 
                 <div class="modal-body">
    
-                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
+                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event" required> </p>
                    
-                    <p>Length <input type="number" ng-model="length" id="length" hrs="0"> min</p>
-                    
+                    <p>Length <input type="text" ng-model="length" id="length" placeholder="Number only" valid-number> minutes</p>
+                    <span class="status">{{inputText}}</span>
+
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
