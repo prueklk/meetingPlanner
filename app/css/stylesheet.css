@@ -749,6 +749,19 @@ height: 500px;
 	text-align: center;
 }
 
+.dayNameBoxEnd {
+
+
+	/*margin-right: 30px;*/
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background-color: rgba(84, 159, 146, 0.3);
+	color: white;
+	text-align: center;
+}
+
 .dayNameBox:hover {
 
 
@@ -781,6 +794,15 @@ margin-top: 9px;
 span.glyphicon-map {
 
 	content: url('/images/glyphicons-243-map-marker.jpg')
+}
+
+
+.detail {
+
+	margin-top: 50px;
+	width: 50%;
+	height: 700px;
+	background-color: white;
 }
 
 /*.activityParking{

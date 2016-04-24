@@ -1,5 +1,21 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal, $firebaseArray) {
 
+	
+	$scope.selectedDay = function(key) {
+
+
+		Agenda.selectedDay = key;
+		console.log(Agenda.selectedDay)
+	}
+
+
+	$scope.go = function ( path ) {
+  	$location.path( path );
+  	alert("sss")
+	};
+
+
+
 	$scope.TrackingFunction = function(actIndex, day, act){
 
 
@@ -80,21 +96,34 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	arr.$loaded(function(data){
 
+		dataArr = [];
+		
 
-		$scope.days = $firebaseObject(Agenda.dayRef);
+	// 	Agenda.dayRef.orderByChild("date").once("value",function(data) { 
+	// 	    data.forEach(function(snapshot) {
+		        
 
-		// Agenda.dayRef.orderByChild("date").once("value",function(data) { 
-		//     console.log(data.val()); 
+	// 	        dataArr.push(data);
 
-		//     days = data.val();
-		//     // this.dayRef = data.val();
 
 		    
-		// 	});
 
-		// $scope.days = data;
-		// console.log(data);
-	})
+	// 	//     days = data.val();
+	// 	//     
+	// 	//     // this.dayRef = data.val();
+
+		    
+	// 	// 	});
+
+		
+	// 	console.log(dataArr);
+	// 	})
+
+	// });
+
+		$scope.days = data;
+
+});
 
 
 

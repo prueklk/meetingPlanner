@@ -37,6 +37,8 @@ this.paneltag = false;
 this.ActSorted = "";
 this.DaySorted = "";
 
+this.selectedDay = "";
+
 
 this.updateIndex = function(index, day, act){
 
@@ -201,7 +203,7 @@ updateDB = function() {
  	updateDB();
 
  } else {
- 	
+ 	console.log("we are not empty")
  	updateDB();
  	
  }
@@ -366,8 +368,8 @@ this.getTotalTime = function(){
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
-		  			
-		  			sum += data.length;
+		  			console.log(data.length);
+		  			sum += parseFloat(data.length);
 		  			
 				});
 
@@ -375,7 +377,8 @@ this.getTotalTime = function(){
 
 		  			
 			});
-
+	console.log(sum);
+	// alert("totaltime")
 	//this.updateSum(sum)
 };
 
