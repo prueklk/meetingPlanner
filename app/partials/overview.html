@@ -12,7 +12,7 @@
     <div class="modal-body">
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
-      
+      <br>
       <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
       <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder=""> </p>
       <span>{{getWeather()}}</span><br>

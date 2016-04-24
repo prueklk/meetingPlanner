@@ -329,7 +329,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 
 		//   			}
 		//   			else{
-		  				if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation){
+		  				if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation && Agenda.selectedTime !== null){
 		  					// console.log("LOCATION = "+$scope.meetinglocation);
 
 							Agenda.addDay($scope.meetingname , $scope.meetinglocation);
@@ -338,7 +338,7 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 						}
 
 						else{
-							$scope.daystatus = "Please make sure your activity has a name, a location and a date."
+							$scope.daystatus = "Please make sure you have completed the form."
 						}
 		  				
 		  		// 	}
