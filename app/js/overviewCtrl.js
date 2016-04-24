@@ -1,13 +1,5 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal, $firebaseArray) {
 
-	
-	$scope.selectedDay = function(key) {
-
-
-		Agenda.selectedDay = key;
-		console.log(Agenda.selectedDay)
-	}
-
 
 	$scope.go = function ( path ) {
   	$location.path( path );
@@ -228,7 +220,29 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
   	};
 
   	
-
+  	$scope.edit = function (key, name, date, location, starttime) {
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'editDayModal.html',
+	      controller: 'EditDayModalCtrl',
+	      resolve: {
+		        key: function () {
+		          	return key;
+		        },
+		        name: function(){
+		        	return name;
+		        },
+		        date: function () {
+		          	return date;
+		        },
+		        location: function(){
+		        	return location;
+		        },
+		        starttime: function(){
+		        	return starttime;
+		        }
+		    }
+    	});
+  	};
 
 
 
@@ -446,6 +460,47 @@ $scope.getWeather = function(){
 	}
 }
 
+});
+
+meetingPlannerApp.controller('EditDayModalCtrl', function ($scope, Agenda, $uibModalInstance, key, name, date, location, starttime){
+	console.log("EDIT DAY");
+	console.log("key = "+key);
+	console.log("name = "+name+" // date = "+date+" // location = "+location+" // starttime = "+starttime);
+
+	$scope.meetingname = name;
+	$scope.olddate = new Date(date);
+	$scope.meetinglocation = location;
+	$scope.oldtime = new Date(starttime);
+	Agenda.clickedDay = key;
+
+
+	$scope.editDay = function() {
+		console.log(Agenda.selectedDate);
+		console.log($scope.meetingname);
+		console.log($scope.meetinglocation);
+		console.log(Agenda.selectedTime);
+
+		if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation && Agenda.selectedTime !== null){
+			// TO DO // UPDATE MEETING IN SERVICE // selectedDate and selectedTime are already updated.
+
+			Agenda.updateDay($scope.meetingname, $scope.meetinglocation);
+			$uibModalInstance.dismiss('cancel');
+			$scope.daystatus = "";			
+		}else{
+			$scope.daystatus = "Please make sure you have completed the form."
+
+		}
+	}
+
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+
+	$scope.getWeather = function(){
+		if(Agenda.selectedDate && Agenda.selectedTime){
+			return "Weather forecast : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
+		}
+	}
 });
 
 meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){

@@ -13,8 +13,8 @@
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
       <br>
-      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
-      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder=""> </p>
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder="Meeting 101"> </p>
+      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder="Meeting room 1"> </p>
       <span>{{getWeather()}}</span><br>
       <span class="status">{{daystatus}}</span>
     
@@ -29,6 +29,34 @@
         
   </script>
   <!-- END Modal -->
+
+
+  <!-- EDIT DAY Modal -->
+  <script type="text/ng-template" id="editDayModal.html">
+   
+    <div class="modal-header">
+      <button class="close" type="button" ng-click="cancel()">&times;</button>
+      <h4 class="modal-title">Edit a Meeting</h4>
+    </div>
+
+    <div class="modal-body">
+      <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl" ng-model="olddate"></ng-include>
+      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl" ng-model="oldtime"></ng-include>  
+      <br>
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname"> </p>
+      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation"> </p>
+      <span>{{getWeather()}}</span><br>
+      <span class="status">{{daystatus}}</span>
+    
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+      <button class="btn btn-success" type="button" ng-click="editDay()">Save</button>
+    </div>
+        
+  </script>
+  <!-- END EDIT DAYModal -->
 
 
   <!-- CONFIRM MODAL -->
@@ -105,14 +133,16 @@
     
     
 
+
     <div ng-init="tag='day'"  ng-repeat="(key, value) in days " class="row" > <!-- start of day item -->
       
 
 
+
       <div class="row">
 
-      <!--  <a href="#detail{{key}}"> --> <!-- this href leads to detailed view for the day clicked -->
-        <div ng-click="selectedDay(key)" class="col-sm-12 dayNameBox">
+
+        <div class="col-sm-12 dayNameBox" ng-click="edit(key, value.name, value.date, value.location, value.starttime)">
 
           <div class="row">
             <div class="col-sm-4 dayName">
