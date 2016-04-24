@@ -96,7 +96,8 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	arr.$loaded(function(data){
 
-		dataArr = [];
+		$scope.spin = true;
+		// dataArr = [];
 		
 
 	// 	Agenda.dayRef.orderByChild("date").once("value",function(data) { 

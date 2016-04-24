@@ -2,6 +2,19 @@ meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $fir
 
 
 
+var arr = $firebaseObject(Agenda.actRef);
+
+	arr.$loaded(function(data){
+
+		$scope.spin = true;
+
+
+		$scope.activities = data;
+
+	});
+
+
+
 
 $scope.selectChevron = function(id, event) {
     $scope.activeClass = id;
@@ -38,7 +51,13 @@ $scope.test = function(text) {
         
 
 
-	$scope.activities = $firebaseObject(Agenda.actRef);
+	
+
+
+
+
+
+	
 
 	
 
