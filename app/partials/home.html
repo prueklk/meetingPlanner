@@ -35,11 +35,27 @@ $("a").click(function() {
 	  	</div>
 
 	<div class="col-sm-4 login">
- 
+          
+            <div class="input-group input-group-sm">
+              
+              <input ng-model="email" type="text" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon3">
+              <span class="input-group-addon" id="sizing-addon3"></span>
+            </div>
 
-          <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
 
-           <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
+
+          <div class="input-group input-group-sm">
+              
+              <input ng-model="pw" type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon3">
+              <span class="input-group-addon" id="sizing-addon3"></span>
+            </div>
+
+
+
+
+          <a ng-click="login()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
+
+           <a ng-click="createUser()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
 
          </div> 
 
@@ -47,7 +63,7 @@ $("a").click(function() {
 
 
          <div class="col-sm-4">
-	  	</div>
+	  	  </div>
 
       </div>  
 

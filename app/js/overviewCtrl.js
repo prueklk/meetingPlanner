@@ -91,7 +91,30 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	// var query = messagesRef.orderByChild("timestamp").limitToLast(25);
 
-        
+     $scope.keyword = ""; 
+
+	$scope.search = function(){
+
+		
+
+
+		var query = $scope.searchinput;
+		$scope.keyword = query;
+		// Agenda.dayRef.on("value", function(response){
+
+
+		// 	days = response.val();
+
+		// 	days.forEach(function(snapshot) {
+		// 	console.log(item);
+
+
+		// })
+		// })
+
+	}
+
+
 	var arr = $firebaseObject(Agenda.dayRef);
 
 	arr.$loaded(function(data){
