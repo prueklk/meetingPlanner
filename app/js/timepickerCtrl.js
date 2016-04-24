@@ -12,9 +12,14 @@ meetingPlannerApp.controller('TimepickerCtrl', function ($scope, $log, Agenda) {
   };
 
   $scope.update = function() {
-    var d = new Date();
-    d.setHours( 8 );
-    d.setMinutes( 0 );
+    if($scope.oldtime){
+      var d = new Date($scope.oldtime)
+    }else{
+
+      var d = new Date();
+      d.setHours( 8 );
+      d.setMinutes( 0 );
+    }
     $scope.mytime = d;
     Agenda.selectedTime = $scope.mytime;
   };

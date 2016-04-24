@@ -1,10 +1,15 @@
 meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
     Agenda.selectedDate = "";
+    // console.log("CALENDAR // $scope.olddate = "+$scope.olddate);
 
-	  $scope.today = function() {
-		  $scope.dt = new Date();
+	  $scope.setDay = function(_day) {
+		  $scope.dt = new Date(_day);
+      Agenda.selectedDate = $scope.dt;
   	};
-  	// $scope.today();
+
+    if ($scope.olddate){
+  	 $scope.setDay($scope.olddate);
+    }
 
   	$scope.clear = function() {
     	$scope.dt = null;

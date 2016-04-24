@@ -255,8 +255,6 @@ this.addAct = function(name, length, type, description){
 
 this.addDay = function(name,location){
 	
-
-	// TODO // need to check duplicate dates
 	// var list = $firebaseArray();
 
 	this.dayRef.push({
@@ -452,7 +450,20 @@ this.addActToDay = function(){
 
 }
 
+this.updateDay = function(name, location){
+	// console.log("UPDATE DAY");
+	// console.log(this.dayRef);
 
+	this.dayRef.child(this.clickedDay).update({
+		name: name,
+  		location: location,
+		date: this.selectedDate.toISOString(),
+	    starttime: this.selectedTime.toISOString(),
+
+	});
+
+	this.clickedDay = "";
+}
 
 this.updateActDay = function(name, length, type, description){
 	console.log("updating activity Day")
