@@ -415,13 +415,13 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 		$scope.editAct = function(){
 			
 				if ($scope.name == ""){
-					$scope.status = "Please enter a name";
+					$scope.status = "Please enter the activity name";
 				}
-				// else if ($scope.length == ""){
-				// 	$scope.status = "Please choose a length of the activity";
-				// }
+				else if ($scope.length == "" || !$scope.length){
+					$scope.status = "Please fill in the activity length.";
+				} 
 				else if ($scope.type == "Select here"){
-					$scope.status = "Please choose a type for the activity";
+					$scope.status = "Please choose the activity type.";
 				}
 				// else if ($scope.description == ""){
 				// 	$scope.status = "Please give the activity a description";

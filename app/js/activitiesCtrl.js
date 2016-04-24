@@ -186,31 +186,34 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 
 	$scope.name = "";
 	$scope.description = "";
-	$scope.length = 0;
+	// $scope.length = 0;
 	$scope.type = "Select here";
 
 	$scope.addAct = function() {
+
 		
 
+
+	
 		if ($scope.name == ""){
-			$scope.status = "Please enter a name";
-			console.log("if")
+			$scope.status = "Please enter the activity name";
+
 		}
-		// else if ($scope.length == ""){
-		// 	$scope.status = "Please choose a length of the activity";
-		// }
-		else if ($scope.type == "Select here"){
-			$scope.status = "Please choose a type for the activity";
-			console.log("else_if")
-		}
+		else if ($scope.length == "" || !$scope.length){
+			$scope.status = "Please fill in the activity length.";
+		} 
+		
+
+
 		// else if ($scope.description == ""){
 		// 	$scope.status = "Please give the activity a description";
 		// }
-		else{
-		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
-		$uibModalInstance.dismiss('cancel');
-		$scope.status = "";
-		console.log("else")
+
+		else {
+			Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
+			$uibModalInstance.dismiss('cancel');
+			$scope.status = "";
+
 		}
 	}
 
@@ -220,7 +223,36 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 
 });
 
-meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance){
+meetingPlannerApp.directive('validNumber', function() {
+  return {
+    require: '?ngModel',
+    link: function(scope, element, attrs, ngModelCtrl) {
+      if(!ngModelCtrl) {
+        return; 
+      }
+
+      ngModelCtrl.$parsers.push(function(val) {
+        if (angular.isUndefined(val)) {
+            var val = '';
+        }
+        var clean = val.replace( /[^0-9]+/g, '');
+        if (val !== clean) {
+          ngModelCtrl.$setViewValue(clean);
+          ngModelCtrl.$render();
+        }
+        return clean;
+      });
+
+      element.bind('keypress', function(event) {
+        if(event.keyCode === 32) {
+          event.preventDefault();
+        }
+      });
+    }
+  };
+});
+
+meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance,$uibModal){
 
 	  //HOW TO GET THE DATA FROM THE CLICKED ACTIVITY IN HERE???!
 
@@ -248,29 +280,30 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 						$scope.description = data.description;
 						$scope.length = data.length;
 						$scope.type = data.type;
-
+						$scope.key = key;
+						$scope.data = data;
 		
 					});
 
 		$scope.editAct = function(){
 
 				if ($scope.name == ""){
-					$scope.status = "Please enter a name";
+					$scope.status = "Please enter the activity name";
 				}
-				// else if ($scope.length == ""){
-				// 	$scope.status = "Please choose a length of the activity";
-				// }
+				else if ($scope.length == "" || !$scope.length){
+					$scope.status = "Please fill in the activity length.";
+				} 
 				else if ($scope.type == "Select here"){
-					$scope.status = "Please choose a type for the activity";
+					$scope.status = "Please choose the activity type.";
 				}
 				// else if ($scope.description == ""){
 				// 	$scope.status = "Please give the activity a description";
 				// }
 				else{
-				Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
+					Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
 
-				$uibModalInstance.dismiss('cancel');
-				 $scope.status = "";
+					$uibModalInstance.dismiss('cancel');
+				 	$scope.status = "";
 
 				}
 
@@ -281,6 +314,24 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 		};
 
+		/*$scope.deleteAct = function(id) {
+			console.log("DELETEACT");
+			console.log($scope.data.name);
+			console.log(id);
+
+			var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return id;
+			        },
+		        	name: function(){
+		        		return $scope.data.name;
+		        	}
+			    }
+	    	});
+		}*/
 
 	});
 

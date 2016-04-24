@@ -72,7 +72,7 @@
                                   <div class="col-sm-6">
 
                                  
-                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key); (confirm('Are you sure you want to delete the meeting?'))" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
+                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key);" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
 
                               
                             
@@ -149,10 +149,6 @@
           </div>
           </div>
 
-<div class="alert alert-danger" ng-show="show">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Danger!</strong> This alert box could indicate a dangerous or potentially negative action.
-  </div>
 
 
             <!-- Modal -->
@@ -165,14 +161,15 @@
 
                 <div class="modal-body">
    
-                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event.." required> </p>
+                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event" required> </p>
                    
-                    <p>Length <input type="number" ng-model="length" id="length" hrs="0"> min</p>
-                    
+                    <p>Length <input type="text" ng-model="length" id="length" placeholder="Number only" valid-number> minutes</p>
+                    <span class="status">{{inputText}}</span>
+
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
-                        <option selected="selected" value="Presentation">Presentation</option>
+                        <option value="Presentation">Presentation</option>
                         <option value="Discussion">Discussion</option></select> </p>
               
                     <p>Description <textarea ng-model="description" type="text" id="actDescription">
@@ -190,33 +187,6 @@
             </script>
             <!-- END Modal -->
 
- <!-- Modal for remove key -->
-
-            <script type="text/ng-template" id="removeActivityModal.html">
-               
-                 <div class="modal-header">
-                    <button class="close" type="button" ng-click="cancel()">&times;</button>
-                 
-                </div>
-                <div class="modal-body">
-
-                    <p>Are you sure you want to delete this activity?
-                    </p>
-                    
-                </div>
-
-                
-                <div class="modal-footer">
-                  <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-                  <button class="btn btn-success" type="button" ng-click="deleteAct(key)">Confirm</button>
-                </div>
-                   
-            </script>
-
-            <!-- END Modal -->
-
-
-
 
             <!-- Modal 2 Edit act-->
             <script type="text/ng-template" id="editActivityModal.html">
@@ -229,14 +199,13 @@
                 <div class="modal-body">
                     <p>Name <input type="text" ng-model="name" id="name" placeholder={{value.name}}> </p>
                     
-                    <p>Length <input type="number" ng-model="time" id="length" hr:mins="0"> min</p>
-                
+                    <p>Length <input type="text" ng-model="length" id="length" valid-number> minutes</p>
   
                 
                     <p>Type <select class="form-control" ng-model="type" id="selectType">
                         <option value="Coffee">Coffee break</option>
                         <option value="Group">Group work</option>
-                        <option selected="selected" value="Presentation">Presentation</option>
+                        <option value="Presentation">Presentation</option>
                         <option value="Discussion">Discussion</option></select> </p>
                     <p>Descpription <textarea ng-model="description" type="text" id="actDescription">
                         <pre>{{ data | json }}</pre></textarea>
