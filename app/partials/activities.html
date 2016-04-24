@@ -25,8 +25,7 @@
 
             <!-- </div> -->
          
-
-            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()" data-toggle="tooltip" title="Drag and drop an activity to a meeting">
+            <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()">
                
                 
                 <div class="row">
@@ -42,7 +41,7 @@
 
 
 
-                        <div ng-repeat="(key, value) in activities" class="row"> 
+                        <div ng-repeat="(key, value) in activities" class="row" data-toggle="tooltip" title="Drag an activity and drop in a meeting plan."> 
                            
                         <div class="col-sm-4 activity" >
                         <div class="panel-group">

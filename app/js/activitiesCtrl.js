@@ -89,6 +89,9 @@ $scope.test = function(text) {
 			        },
 		        	name: function(){
 		        		return $scope.activities[id].name;
+		        	},
+		        	day_id: function(){
+		        		return null;
 		        	}
 			    }
 	    });
@@ -335,8 +338,9 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 	});
 
-meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name){
-	console.log("id = "+id+" , name = "+name);
+meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name, day_id){
+	console.log("id = "+id+" , name = "+name+" , day_id = "+day_id);
+
 	$scope.getActivityName = function(){
 		return name;
 	}
@@ -349,7 +353,15 @@ meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agend
 	$scope.deleteActivity = function(){
 		console.log("DELETE");
 		$uibModalInstance.dismiss('cancel');
-		Agenda.deleteAct(id);
+		if(day_id){
+			Agenda.deleteActDay(day_id, id);
+			Agenda.DragDayID = day_id;
+			Agenda.getTotalTime();
+			Agenda.getEndTime();
+			Agenda.fillcolor(day_id)
+		}else{
+			Agenda.deleteAct(id);
+		}
 	}
 
 });
