@@ -23,9 +23,52 @@
 	margin: 15px;
 
 }
+.secondlanding{
+	 	
+	
+	  width: 100%;
+	  height: 100vh;
+	 background: cover;
 
+}
 
-/*about page css*/
+.second {
+    width: 100%;
+ height:100vh;
+   
+  
+}
+.button1{
+	background-color: DarkSlateGray;
+}
+#four{
+	float:right;
+	margin-top: -150px;
+	margin-right: -580px;
+	color:white;
+
+}
+
+#three{
+	float:right;
+	margin-top: 0px;
+	margin-right: 960px;
+color:white;
+}
+#one{
+	float:right;
+	margin-top: -150px;
+	margin-right: 670px;
+color:white;
+}
+#two{
+	float:right;
+	margin-top: -180px;
+	margin-right: 370px;
+	color:white;
+
+}
+/.secondlanding*about page css*/
 #aboutpanel{
 background-color: #808080;
 opacity:0.3;
@@ -41,7 +84,7 @@ margin-top: 0px;
 	text-align: center;
 	color: white;
 	font-style: normal;
-	margin-top:50px;
+	margin-top:100px;
 
 	background: url('/images/MeetingBG.jpg') no-repeat center center fixed; 
 	  
@@ -108,51 +151,44 @@ margin-top: 100px;
  background-color:orange;
   height:20px;
   opacity:0.7;
-  width:130px;
+   width:130px;
  margin-left: 0px;
 margin-top: 20px;
 }
 #sticky2div{
  background-color:#13b4ff;
   height:20px;
-  width:130px;
+   width:130px;
  margin-left: 0px;
 margin-top: 20px;
 }
 #sticky3div{
  background-color:Coral;
   height:20px;
-  width:130px;
-  margin-left: 0px;
-margin-top: 20px;	
+   width:130px;
+ margin-left: 0px;
+margin-top: 20px;
 }
 #sticky4div{
  background-color:#ae163e;
   height:20px;
-  width:130px;	
-  margin-left: 0px;
+   width:130px;
+ margin-left: 0px;
 margin-top: 20px;
 }
-#sticky{
-	
-	margin-left: 500px;
+
+.center-block{
+	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
 }
 
 /*about page css ends here*/
 
 /*contact page css*/
 #cont{
-	margin-left: 350px;
-    margin-top: 100px;
-		color:white;
-}
-#contactform{
-	margin-left: 350px;
-	margin-top: 20px;
-}
-#textcontact{
-
-	margin-left: 350px;
+	margin-top: 100px;
+	color:white;
 }
 
 ul li{
@@ -171,7 +207,7 @@ ul li{
 }
 
 .activityParking{
-	overflow: auto;
+	/*overflow: auto;*/
 background-color:  white;
 height: 600px;
 width: 30%;
@@ -298,7 +334,7 @@ h5{
 	text-align: center;
 }
 .daysinfo{
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 30%;
 	/*padding: 10px;*/
 	margin: 13px;
@@ -307,7 +343,7 @@ h5{
 }
 
 .dayactivity{
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 60%;
 	/*padding: 10px;*/
 	margin: 13px;
@@ -531,18 +567,19 @@ button.accordion.active, button.accordion:hover {
     background-color: DarkSlateGray; 
 }
 
-div.panel {
+/*div.panel {
     padding: 0 18px;
     display: none;
      width: 100%;
      height:70px;
+     transition: 0.6;
 background: url('/images/MeetingBODY.jpg') no-repeat center center fixed; 
     opacity:0.6;
-}
+}*/
 
-div.panel.show {
+/*div.panel.show {
     display: block !important;
-}
+}*/
 
 .navbar-brand a{
 
@@ -603,7 +640,7 @@ div.panel.show {
 	font-size: 16px;
 	font-style: italic;
 	float: left;
-	margin-left: 20px;
+	/*margin-left: 20px;*/
 	margin-bottom: 5px;
 }
 
@@ -720,7 +757,108 @@ div.panel.show {
   outline: none;
 }
 
+.overflowBox{
+overflow: auto!important;
+height: 500px;
+}
 
+.addMeetingButton{
+
+
+	width: 60%;
+}
+
+
+.addMeetingButton1{
+
+
+	width: 20%;
+}
+
+
+.dayNameBox {
+
+
+	/*margin-right: 30px;*/
+	margin-top: 0;
+	margin-bottom: 0;
+	width: 100%;
+	height: 40px;
+	background-color: rgba(84, 159, 146, 0.9);
+	color: white;
+	text-align: center;
+}
+
+.dayNameBoxEnd {
+
+
+	/*margin-right: 30px;*/
+	margin-top: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background-color: rgba(84, 159, 146, 0.3);
+	color: white;
+	text-align: center;
+}
+
+.dayNameBox:hover {
+
+
+	/*margin-right: 30px;*/
+	
+	background-color: rgba(84, 159, 146, 0.5);
+	cursor: pointer;
+	
+}
+
+.dayName {
+	
+
+	margin-top: 8px;
+	font-size: 120%;
+}
+
+.dayDate {
+margin-top: 9px;
+
+
+}
+
+.dayLocation {
+	margin-top: 9px;
+
+
+}
+
+span.glyphicon-map {
+
+	content: url('/images/glyphicons-243-map-marker.jpg')
+}
+
+
+.detail {
+
+	margin-top: 50px;
+	width: 50%;
+	height: 700px;
+	background-color: white;
+}
+
+
+.spinner{
+
+	position: absolute;
+	top: 50%;
+	bottom: -50%;
+	left: 50%;
+}
+
+.spinner img{
+
+	width: 30px;
+	height: 30px;
+}
 
 /*.activityParking{
 

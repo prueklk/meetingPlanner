@@ -1,5 +1,13 @@
 meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebaseObject, $uibModal, $firebaseArray) {
 
+
+	$scope.go = function ( path ) {
+  	$location.path( path );
+  	alert("sss")
+	};
+
+
+
 	$scope.TrackingFunction = function(actIndex, day, act){
 
 
@@ -31,7 +39,7 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 
 	}
 
-	 $scope.sort = {
+	$scope.sort = {
             group: 'acts',
             animation: 150,
             onSort: function (/** ngSortEvent */evt){
@@ -70,19 +78,72 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		        // + indexes from onEnd
 		        alert("ADD")
 		    	}
-		        }
+	}
 
 
 	// var query = messagesRef.orderByChild("timestamp").limitToLast(25);
 
-        
+     $scope.keyword = ""; 
+
+	$scope.search = function(){
+
+		
+
+
+		var query = $scope.searchinput;
+		$scope.keyword = query;
+		// Agenda.dayRef.on("value", function(response){
+
+
+		// 	days = response.val();
+
+		// 	days.forEach(function(snapshot) {
+		// 	console.log(item);
+
+
+		// })
+		// })
+
+	}
+
+
 	var arr = $firebaseObject(Agenda.dayRef);
 
 	arr.$loaded(function(data){
 
+		$scope.spin = true;
+		// dataArr = [];
+		
+
+	// 	Agenda.dayRef.orderByChild("date").once("value",function(data) { 
+	// 	    data.forEach(function(snapshot) {
+		        
+
+	// 	        dataArr.push(data);
+
+
+		    
+
+	// 	//     days = data.val();
+	// 	//     
+	// 	//     // this.dayRef = data.val();
+
+		    
+	// 	// 	});
+
+		
+	// 	console.log(dataArr);
+	// 	})
+
+	// });
+
 		$scope.days = data;
-		console.log(data);
-	})
+
+});
+
+
+
+	
 
 	//  = $firebaseArray(Agenda.dayRef);
 
@@ -108,25 +169,46 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	// console.log($firebaseObject(Agenda.dayRef))
 
 	$scope.deleteActDay = function(day_id, act_id) {
-		
-		// console.log(day_id);
-		// console.log(act_id);
-		Agenda.deleteActDay(day_id, act_id);
-		Agenda.DragDayID = day_id;
-		Agenda.getTotalTime();
-		Agenda.getEndTime();
-		Agenda.fillcolor(day_id)
+		console.log("DELETE ACT DAY");
+		// console.log("day_id = "+day_id);
+		// console.log("act_id = "+act_id);
 
-
+		var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return act_id;
+			        },
+		        	name: function(){
+		        		return $scope.days[day_id].activities[act_id].name;
+		        	},
+		        	day_id: function(){
+		        		return day_id;
+		        	}
+			    }
+	    });
 	}
 	
 
 
 
 	$scope.deleteDay = function(id){
-		
-		Agenda.deleteDay(id);
-	
+		console.log($scope.days[id].name);
+		var modalInstance = $uibModal.open({
+	      	templateUrl: 'overviewConfirmModal.html',
+	      	controller: 'OverviewConfirmModalCtrl',
+		    resolve: {
+		        id: function () {
+		          	return id;
+		        },
+		        name: function(){
+		        	return $scope.days[id].name;
+		        }
+		    }
+    	});
+
+		//Agenda.deleteDay(id);
 	}
 
 
@@ -138,7 +220,29 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
   	};
 
   	
-
+  	$scope.edit = function (key, name, date, location, starttime) {
+	    var modalInstance = $uibModal.open({
+	      templateUrl: 'editDayModal.html',
+	      controller: 'EditDayModalCtrl',
+	      resolve: {
+		        key: function () {
+		          	return key;
+		        },
+		        name: function(){
+		        	return name;
+		        },
+		        date: function () {
+		          	return date;
+		        },
+		        location: function(){
+		        	return location;
+		        },
+		        starttime: function(){
+		        	return starttime;
+		        }
+		    }
+    	});
+  	};
 
 
 
@@ -256,13 +360,31 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 	    	});
  	 	};
 
+ 	$scope.convertToHours = function(min){
+        var minutes = min % 60;
+        var hours = Math.floor(min / 60);
+
+        minutes = (minutes < 10 ? '0' : '') + minutes;
+        // hours = (hours < 10 ? '0' : '') + hours;
+
+        return hours + ':' + minutes; 
+ 	}
+
+ 	$scope.updateWeather = function(_date, _time){		
+ 		//console.log("UPDATEWEATHER // _date = "+_date+" // _time = "+_time);
+ 		var _date = new Date(_date);
+ 		var _time = new Date(_time);
+ 		
+		return Agenda.getWeather(_date, _time);
+	}
+
 
 });
 
 
 
 meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uibModalInstance){
-
+	
 	$scope.addDay = function() {
 		
 
@@ -299,16 +421,20 @@ meetingPlannerApp.controller('OverviewModalCtrl', function ($scope, Agenda, $uib
 
 		//   			}
 		//   			else{
-		  				if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation){
+
+		  				if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation && Agenda.selectedTime !== null){
 		  					// console.log("LOCATION = "+$scope.meetinglocation);
 
-							Agenda.addDay($scope.meetingname , $scope.meetinglocation);
+
+							Agenda.addDay($scope.meetingname, $scope.meetinglocation);
 							$uibModalInstance.dismiss('cancel');
-							$scope.daystatus = ""			
+							$scope.daystatus = "";			
 						}
 
 						else{
-							$scope.daystatus = "Please make sure your activity has a name, a location and a date."
+
+							$scope.daystatus = "Please make sure you have completed the form."
+
 						}
 		  				
 		  		// 	}
@@ -329,11 +455,52 @@ $scope.cancel = function () {
   };
 
 $scope.getWeather = function(){
-	if(Agenda.selectedDate && Agenda.selectedDate){
-		return "Weather : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
+	if(Agenda.selectedDate && Agenda.selectedTime){
+		return "Weather forecast : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
 	}
 }
 
+});
+
+meetingPlannerApp.controller('EditDayModalCtrl', function ($scope, Agenda, $uibModalInstance, key, name, date, location, starttime){
+	console.log("EDIT DAY");
+	console.log("key = "+key);
+	console.log("name = "+name+" // date = "+date+" // location = "+location+" // starttime = "+starttime);
+
+	$scope.meetingname = name;
+	$scope.olddate = new Date(date);
+	$scope.meetinglocation = location;
+	$scope.oldtime = new Date(starttime);
+	Agenda.clickedDay = key;
+
+
+	$scope.editDay = function() {
+		console.log(Agenda.selectedDate);
+		console.log($scope.meetingname);
+		console.log($scope.meetinglocation);
+		console.log(Agenda.selectedTime);
+
+		if (Agenda.selectedDate && $scope.meetingname && $scope.meetinglocation && Agenda.selectedTime !== null){
+			// TO DO // UPDATE MEETING IN SERVICE // selectedDate and selectedTime are already updated.
+
+			Agenda.updateDay($scope.meetingname, $scope.meetinglocation);
+			$uibModalInstance.dismiss('cancel');
+			$scope.daystatus = "";			
+		}else{
+			$scope.daystatus = "Please make sure you have completed the form."
+
+		}
+	}
+
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	  };
+
+	$scope.getWeather = function(){
+		if(Agenda.selectedDate && Agenda.selectedTime){
+			return "Weather forecast : "+Agenda.getWeather(Agenda.selectedDate, Agenda.selectedTime);
+		}
+	}
 });
 
 meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agenda, $uibModalInstance){
@@ -354,7 +521,7 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 
 			  	$scope.status = "";
 			  			
-			  			$scope.name = data.name;
+			  			$scope.name = data.name; 
 						$scope.description = data.description;
 						$scope.length = data.length;
 						$scope.type = data.type;
@@ -365,13 +532,13 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 		$scope.editAct = function(){
 			
 				if ($scope.name == ""){
-					$scope.status = "Please enter a name";
+					$scope.status = "Please enter the activity name";
 				}
-				// else if ($scope.length == ""){
-				// 	$scope.status = "Please choose a length of the activity";
-				// }
+				else if ($scope.length == "" || !$scope.length){
+					$scope.status = "Please fill in the activity length.";
+				} 
 				else if ($scope.type == "Select here"){
-					$scope.status = "Please choose a type for the activity";
+					$scope.status = "Please choose the activity type.";
 				}
 				// else if ($scope.description == ""){
 				// 	$scope.status = "Please give the activity a description";
@@ -390,6 +557,25 @@ meetingPlannerApp.controller('editActivityDayModalCtrl', function ($scope, Agend
 				  	};
 
 
-		});
+});
 
+meetingPlannerApp.controller('OverviewConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name){
+	// console.log("id = "+id);
+	// console.log("name = "+name);
+	$scope.getMeetingName = function(){
+		return name;
+	}
+	
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	    console.log("CANCEL");
+	};
+
+	$scope.deleteMeeting = function(){
+		console.log("DELETE");
+		$uibModalInstance.dismiss('cancel');
+		Agenda.deleteDay(id);
+	}
+
+});
 

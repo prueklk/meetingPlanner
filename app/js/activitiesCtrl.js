@@ -1,4 +1,17 @@
-meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal) {
+meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal ) {
+
+
+
+var arr = $firebaseObject(Agenda.actRef);
+
+	arr.$loaded(function(data){
+
+		$scope.spin = true;
+
+
+		$scope.activities = data;
+
+	});
 
 
 
@@ -38,7 +51,13 @@ $scope.test = function(text) {
         
 
 
-	$scope.activities = $firebaseObject(Agenda.actRef);
+	
+
+
+
+
+
+	
 
 	
 
@@ -76,8 +95,27 @@ $scope.test = function(text) {
 		}
 	}
 
-$scope.deleteAct = function(id) {
-		Agenda.deleteAct(id);
+	$scope.deleteAct = function(id) {
+		// console.log($scope.days[id].name);
+		console.log($scope.activities);
+
+		var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return id;
+			        },
+		        	name: function(){
+		        		return $scope.activities[id].name;
+		        	},
+		        	day_id: function(){
+		        		return null;
+		        	}
+			    }
+	    });
+
+		// Agenda.deleteAct(id);
 	}
 
 
@@ -170,27 +208,34 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 
 	$scope.name = "";
 	$scope.description = "";
-	$scope.length = 0;
+	// $scope.length = 0;
 	$scope.type = "Select here";
 
 	$scope.addAct = function() {
 
+		
+
+
+	
 		if ($scope.name == ""){
-			$scope.status = "Please enter a name";
+			$scope.status = "Please enter the activity name";
+
 		}
-		// else if ($scope.length == ""){
-		// 	$scope.status = "Please choose a length of the activity";
-		// }
-		else if ($scope.type == "Select here"){
-			$scope.status = "Please choose a type for the activity";
-		}
+		else if ($scope.length == "" || !$scope.length){
+			$scope.status = "Please fill in the activity length.";
+		} 
+		
+
+
 		// else if ($scope.description == ""){
 		// 	$scope.status = "Please give the activity a description";
 		// }
-		else{
-		Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
-		$uibModalInstance.dismiss('cancel');
-		$scope.status = "";
+
+		else {
+			Agenda.addAct($scope.name, $scope.length, $scope.type, $scope.description);
+			$uibModalInstance.dismiss('cancel');
+			$scope.status = "";
+
 		}
 	}
 
@@ -200,7 +245,36 @@ meetingPlannerApp.controller('ActivityModalCtrl', function ($scope, Agenda, $uib
 
 });
 
-meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance){
+meetingPlannerApp.directive('validNumber', function() {
+  return {
+    require: '?ngModel',
+    link: function(scope, element, attrs, ngModelCtrl) {
+      if(!ngModelCtrl) {
+        return; 
+      }
+
+      ngModelCtrl.$parsers.push(function(val) {
+        if (angular.isUndefined(val)) {
+            var val = '';
+        }
+        var clean = val.replace( /[^0-9]+/g, '');
+        if (val !== clean) {
+          ngModelCtrl.$setViewValue(clean);
+          ngModelCtrl.$render();
+        }
+        return clean;
+      });
+
+      element.bind('keypress', function(event) {
+        if(event.keyCode === 32) {
+          event.preventDefault();
+        }
+      });
+    }
+  };
+});
+
+meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, $uibModalInstance,$uibModal){
 
 	  //HOW TO GET THE DATA FROM THE CLICKED ACTIVITY IN HERE???!
 
@@ -228,29 +302,30 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 						$scope.description = data.description;
 						$scope.length = data.length;
 						$scope.type = data.type;
-
+						$scope.key = key;
+						$scope.data = data;
 		
 					});
 
 		$scope.editAct = function(){
 
 				if ($scope.name == ""){
-					$scope.status = "Please enter a name";
+					$scope.status = "Please enter the activity name";
 				}
-				// else if ($scope.length == ""){
-				// 	$scope.status = "Please choose a length of the activity";
-				// }
+				else if ($scope.length == "" || !$scope.length){
+					$scope.status = "Please fill in the activity length.";
+				} 
 				else if ($scope.type == "Select here"){
-					$scope.status = "Please choose a type for the activity";
+					$scope.status = "Please choose the activity type.";
 				}
 				// else if ($scope.description == ""){
 				// 	$scope.status = "Please give the activity a description";
 				// }
 				else{
-				Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
+					Agenda.updateAct($scope.name, $scope.length, $scope.type, $scope.description);
 
-				$uibModalInstance.dismiss('cancel');
-				 $scope.status = "";
+					$uibModalInstance.dismiss('cancel');
+				 	$scope.status = "";
 
 				}
 
@@ -261,7 +336,51 @@ meetingPlannerApp.controller('editActivityModalCtrl', function ($scope, Agenda, 
 
 		};
 
+		/*$scope.deleteAct = function(id) {
+			console.log("DELETEACT");
+			console.log($scope.data.name);
+			console.log(id);
+
+			var modalInstance = $uibModal.open({
+		      	templateUrl: 'activityConfirmModal.html',
+		      	controller: 'ActivityConfirmModalCtrl',
+			    resolve: {
+			        id: function () {
+			          	return id;
+			        },
+		        	name: function(){
+		        		return $scope.data.name;
+		        	}
+			    }
+	    	});
+		}*/
 
 	});
 
+meetingPlannerApp.controller('ActivityConfirmModalCtrl', function ($scope, Agenda, $uibModalInstance, id, name, day_id){
+	console.log("id = "+id+" , name = "+name+" , day_id = "+day_id);
 
+	$scope.getActivityName = function(){
+		return name;
+	}
+	
+	$scope.cancel = function () {
+	    $uibModalInstance.dismiss('cancel');
+	    console.log("CANCEL");
+	};
+
+	$scope.deleteActivity = function(){
+		console.log("DELETE");
+		$uibModalInstance.dismiss('cancel');
+		if(day_id){
+			Agenda.deleteActDay(day_id, id);
+			Agenda.DragDayID = day_id;
+			Agenda.getTotalTime();
+			Agenda.getEndTime();
+			Agenda.fillcolor(day_id)
+		}else{
+			Agenda.deleteAct(id);
+		}
+	}
+
+});

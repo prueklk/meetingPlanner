@@ -1,10 +1,15 @@
 meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
+    Agenda.selectedDate = "";
+    // console.log("CALENDAR // $scope.olddate = "+$scope.olddate);
 
-	$scope.today = function() {
-
-		$scope.dt = new Date();
+	  $scope.setDay = function(_day) {
+		  $scope.dt = new Date(_day);
+      Agenda.selectedDate = $scope.dt;
   	};
-  	// $scope.today();
+
+    if ($scope.olddate){
+  	 $scope.setDay($scope.olddate);
+    }
 
   	$scope.clear = function() {
     	$scope.dt = null;
@@ -12,24 +17,18 @@ meetingPlannerApp.controller('CalendarCtrl', function ($scope, Agenda) {
 
   	$scope.inlineOptions = {
     	// customClass: getDayClass,
-    	minDate: new Date(),
+    	minDate: 0,
     	showWeeks: true
   	};
 
   	$scope.dateOptions = {
-    	dateDisabled: disabled,
     	formatYear: 'yy',
 	    maxDate: new Date(2020, 5, 22),
-	    minDate: new Date(),
+	    minDate: 0,
 	    startingDay: 1
   	};
 
-	// Disable weekend selection
-	function disabled(data) {
-		var date = data.date,
-	    mode = data.mode;
-	    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-	}
+	
 
   	$scope.toggleMin = function() {
     	$scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();

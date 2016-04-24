@@ -8,7 +8,23 @@
 // also see that we included separate JavaScript files for these modules. Angular
 // has other core modules that you might want to use and explore when you go deeper
 // into developing Angular applications. For this lab, these two will suffice.
-var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource', "firebase", 'ngAnimate', 'ui.bootstrap', 'ng-sortable']);
+var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource', "firebase", 'ngAnimate', 'ui.bootstrap', 'ng-sortable', 'ui.router']);
+
+
+ meetingPlannerApp.filter('orderByKey', ['$filter', function($filter) {
+    return function(items, field, reverse) {
+      var keys = $filter('orderBy')(Object.keys(items), field, reverse),
+          obj = {};
+      keys.forEach(function(key) {
+        obj[key] = items[key];
+      });
+      return obj;
+    };
+  }]);
+
+
+
+
 
 meetingPlannerApp.directive('draggable', function() {
   return {
@@ -142,7 +158,8 @@ meetingPlannerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
       when('/home', {
-        templateUrl: 'partials/home.html'
+        templateUrl: 'partials/home.html',
+        controller: 'HomeCtrl'
       }).
       when('/activities', {
         templateUrl: 'partials/activities.html',
@@ -152,10 +169,6 @@ meetingPlannerApp.config(['$routeProvider',
       when('/overview', {
         templateUrl: 'partials/overview.html',
         controller: 'OverviewCtrl'
-      }).
-      when('/addActivity', {
-        templateUrl: 'partials/addActivity.html',
-        controller: 'AddActivityCtrl'
       }).
       when('/calendar', {
         templateUrl: 'partials/calendar.html',
@@ -175,6 +188,12 @@ meetingPlannerApp.config(['$routeProvider',
       }).
       when('/contact', {
         templateUrl: 'partials/contact.html',
+       
+      }).
+
+      when('/detail:meetingID', {
+        templateUrl: 'partials/detail.html',
+        controller: 'DetailCtrl'
        
       }).
 

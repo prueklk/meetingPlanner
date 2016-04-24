@@ -3,6 +3,13 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 this.ref = new Firebase("https://agendaplanner.firebaseio.com/");
 this.actRef = this.ref.child("activity")
 this.dayRef = this.ref.child("day")
+
+
+
+// this.ref.child("day").orderByChild("date").once("value",function(data) { 
+//     console.log(data.val()); 
+//     // this.dayRef = data.val();
+// });
 // this.testRef = new Firebase("https://agendaplanner.firebaseio.com/day");
 
 // var list = $firebaseArray(this.dayRef);
@@ -29,6 +36,8 @@ this.paneltag = false;
 
 this.ActSorted = "";
 this.DaySorted = "";
+
+this.selectedDay = "";
 
 
 this.updateIndex = function(index, day, act){
@@ -118,17 +127,17 @@ this.fillcolor = function(day){
 
 
 //summation
-for(var i in CoffeeBreakArr) {sumcoffee += CoffeeBreakArr[i]; }
-// console.log(sumcoffee)
+for(var i in CoffeeBreakArr) {sumcoffee += parseFloat(CoffeeBreakArr[i]); }
+console.log(sumcoffee)
 //groupsum
-for(var i in GroupWorkArr) {sumgroup += GroupWorkArr[i]; }
-// console.log(sumgroup)
+for(var i in GroupWorkArr) {sumgroup += parseFloat(GroupWorkArr[i]); }
+console.log(sumgroup)
 //discussion
-for(var i in DiscussionArr) {sumdiscussion += DiscussionArr[i]; }
-// console.log(sumdiscussion)
+for(var i in DiscussionArr) {sumdiscussion += parseFloat(DiscussionArr[i]); }
+console.log(sumdiscussion)
 //presentation
-for(var i in PresentationArr) {sumpresentation += PresentationArr[i]; }
-// console.log(sumpresentation)
+for(var i in PresentationArr) {sumpresentation += parseFloat(PresentationArr[i]); }
+console.log(sumpresentation)
 
 // Total sum of all type arrays
 		  			 
@@ -185,16 +194,18 @@ updateDB = function() {
  if ( isNaN(percentagegroup) && isNaN(percentagecoffe) && isNaN(percentagediscussion) && isNaN(percentagepresentation) ) {
 
  	
- 	console.log("NaN We are empty");
+ 	
 
  	percentagegroup = 0;
  	percentagecoffe = 0;
  	percentagediscussion = 0;
  	percentagepresentation = 0;
  	updateDB();
+ 	console.log(percentageArr);
 
  } else {
- 	
+ 	console.log("percentageArr - ELSE not empty")
+ 	console.log(percentageArr);
  	updateDB();
  	
  }
@@ -210,18 +221,17 @@ this.deleteDay = function(id){
 
 this.dayRef.child(id).remove();
 
-
 };
+
 
 this.deleteAct = function(id){
 
 // console.log(this.actRef.child(id))
 this.actRef.child(id).remove();
 
-
-
-
 }
+
+
 this.logdate = function(){
 
 	// console.log(this.selectedDate);
@@ -229,7 +239,7 @@ this.logdate = function(){
 }
 
 this.addAct = function(name, length, type, description){
-
+	console.log("addACT");
 
 	this.actRef.push({
   		
@@ -245,8 +255,6 @@ this.addAct = function(name, length, type, description){
 
 this.addDay = function(name,location){
 	
-
-	// TODO // need to check duplicate dates
 	// var list = $firebaseArray();
 
 	this.dayRef.push({
@@ -360,8 +368,8 @@ this.getTotalTime = function(){
 
 		  			var key = childSnapshot.key()
 		  			var data = childSnapshot.val()
-		  			
-		  			sum += data.length;
+		  			console.log(data.length);
+		  			sum += parseFloat(data.length);
 		  			
 				});
 
@@ -369,7 +377,8 @@ this.getTotalTime = function(){
 
 		  			
 			});
-
+	console.log(sum);
+	// alert("totaltime")
 	//this.updateSum(sum)
 };
 
@@ -441,7 +450,20 @@ this.addActToDay = function(){
 
 }
 
+this.updateDay = function(name, location){
+	// console.log("UPDATE DAY");
+	// console.log(this.dayRef);
 
+	this.dayRef.child(this.clickedDay).update({
+		name: name,
+  		location: location,
+		date: this.selectedDate.toISOString(),
+	    starttime: this.selectedTime.toISOString(),
+
+	});
+
+	this.clickedDay = "";
+}
 
 this.updateActDay = function(name, length, type, description){
 	console.log("updating activity Day")

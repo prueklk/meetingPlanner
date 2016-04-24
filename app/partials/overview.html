@@ -12,48 +12,172 @@
     <div class="modal-body">
       <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include>
       <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl"></ng-include>  
-      
-      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder=""> </p>
-      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder=""> </p>
-      <span>{{getWeather()}}</span>
-
-    <span class="status">{{daystatus}}</span>
+      <br>
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname" placeholder="Meeting 101"> </p>
+      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation" placeholder="Meeting room 1"> </p>
+      <span>{{getWeather()}}</span><br>
+      <span class="status">{{daystatus}}</span>
     
     </div>
 
 
 
     <div class="modal-footer">
-      <button class="btn btn-success" type="button" ng-click="addDay()">Save</button>
       <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+      <button class="btn btn-success" type="button" ng-click="addDay()">Save</button>
     </div>
         
   </script>
   <!-- END Modal -->
 
 
+  <!-- EDIT DAY Modal -->
+  <script type="text/ng-template" id="editDayModal.html">
+   
+    <div class="modal-header">
+      <button class="close" type="button" ng-click="cancel()">&times;</button>
+      <h4 class="modal-title">Edit a Meeting</h4>
+    </div>
+
+    <div class="modal-body">
+      <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl" ng-model="olddate"></ng-include>
+      <ng-include src="'partials/timepicker.html'" ng-controller="TimepickerCtrl" ng-model="oldtime"></ng-include>  
+      <br>
+      <p>Name <input type="text" ng-model="meetingname" id="meetingname"> </p>
+      <p>Location <input type="text" ng-model="meetinglocation" id="meetinglocation"> </p>
+      <span>{{getWeather()}}</span><br>
+      <span class="status">{{daystatus}}</span>
+    
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+      <button class="btn btn-success" type="button" ng-click="editDay()">Save</button>
+    </div>
+        
+  </script>
+  <!-- END EDIT DAYModal -->
+
+
+  <!-- CONFIRM MODAL -->
+  <script type="text/ng-template" id="overviewConfirmModal.html">
+   
+    <div class="modal-header">
+      <button class="close" type="button" ng-click="cancel()">&times;</button>
+      <h4 class="modal-title">Delete a meeting</h4>
+    </div>
+
+    <div class="modal-body">
+      <p>Are you sure you want to delete this meeting <i>({{getMeetingName()}})</i>?</p>
+    
+    </div>
+
+
+    <div class="modal-footer">
+       <button class="btn btn-warning" type="button" ng-click="cancel()">No</button>
+       <button class="btn btn-danger" type="button" ng-click="deleteMeeting()">Delete</button>
+    </div>
+        
+  </script>
+  <!-- END CONFIRM MODAL -->
+
+
 
 <div  class="row">
 
   <div class="col-sm-4 days shadow">
-    <div class="col-sm-12" data-toggle="tooltip" title="Select a day and create a schedule by drag your activities here.">
+
+    
+    
+   <div class="row">
+    
+    <div class="col-sm-2 addMeetingButton1">
+    </div>
+
+    <div class="col-sm-8 addMeetingButton">
+
       <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="open()">Add a Meeting </button>
     </div>
-    <div   ng-init="tag='day'"  ng-repeat="(key, value) in days" class="row"> <!-- start of day item -->
 
-      <div  id="{{key}}" class="col-sm-6 dayactivity" droppable drop="drop(key)">
+      <div class="col-sm-2 addMeetingButton1">
+
+             <!--  <div class="input-group">
+            <input ng-model="searchinput" type="text" class="form-control" placeholder="Search for...">
+              <span class="input-group-btn">
+                <button ng-click="search()" class="btn btn-default glyphicon glyphicon-search" type="button"></button>
+              </span>
+          </div><!-- /input-group -->
+
+    </div>
+
+
+    <div ng-hide="spin" class="row">
+      <div class="col-sm-4 spinner">
+
+
+        <img src="/images/ajax-loader.gif">
+        
+
+
+      </div>
+
+    </div>
+
+
+
+    </div>
+
+     <div class="row">
+
+    <div class="col-sm-12 overflowBox">
+    
+    
+
+
+    <div ng-init="tag='day'"  ng-repeat="(key, value) in days " class="row" > <!-- start of day item -->
+      
+
+
+
+      <div class="row">
+
+
+        <div class="col-sm-12 dayNameBox" ng-click="edit(key, value.name, value.date, value.location, value.starttime)">
+
+          <div class="row">
+            <div class="col-sm-4 dayName">
+              {{value.name}}
+            </div> 
+
+            
+            <div class="col-sm-4 dayDate">
+              {{value.date | date: 'mediumDate'}}
+            </div> 
+
+            
+            <div class="col-sm-4 dayLocation">
+
+              <span class="glyphicon glyphicon-map-marker"></span>
+              {{value.location}}
+            </div> 
+
+          </div>
+
+      </div>
+  <!--   </a> -->
+
+
+      </div>
+
+      <div  id="{{key}}" class="col-sm-6 dayactivity" droppable drop="drop(key)" data-toggle="tooltip" title="Create a meeting plan by dragging your activities here.">
 
     
 
 
       <ul ng-sortable="sort"  class="list-group drop2" >
-        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 dayAct {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities track by $index   " id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
+        <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 dayAct {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities" id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
 
 
-
-
-
-         
 
 
                                  <div class="col-sm-2">
@@ -97,9 +221,6 @@
         </div> -->
 
 
-
-            
- 
           
 
         </li>
@@ -110,21 +231,16 @@
 
       <div  class="col-sm-6 daysinfo">
            
-<<<<<<< HEAD
-           <p><b>Name:</b> {{value.name}} </p>
+
+   
+          <!--  <p><b>Name:</b></b> {{value.name}} </p>
            <p><b>Location:</b> {{value.location}} </p>
-           <p><b>Date: </b>{{value.date | date: 'mediumDate'}} </p>
+           <p><b>Date: </b>{{value.date | date: 'mediumDate'}} </p> -->
+           <p><b>Weather: </b>{{updateWeather(value.date,value.starttime)}}</p>
             <p><b>Start Time:</b> {{value.starttime | date: 'HH:mm'}}  </p>
-=======
-           <p>Name: {{value.name}} </p>
-           <p>Location: {{value.location}} </p>
-           <p>Date: {{value.date | date: 'mediumDate'}} </p>
-           <p>Weather: {{value.weather}}</p>
-            <p>Start Time: {{value.starttime | date: 'HH:mm'}}  </p>
->>>>>>> f827d683d2dc6086f594c4690a242b34aae7b11d
-              
+
              <p><b>End Time:</b> {{value.endtime | date: 'HH:mm'}} </p>
-              <p><b>Total Time: </b>{{value.length}}  min</p>
+              <p><b>Total Time: </b>{{convertToHours(value.length)}} hours</p>
 
 
             
@@ -140,7 +256,8 @@
               <div class="foo Coffee"></div> -->
 
                
-       <div  id="mainbox"> 
+       <div  id="mainbox" data-toggle="tooltip"
+          title="The red mark represents how much the break time should be. (20% of the meeting time)"> 
 
 
   <!--        <span>{{keybox}}</span> -->
@@ -160,10 +277,7 @@
               'position' : 'relative',
               'opacity' : '0.8',
 
-              'display': 'inline-block'}">
-
-
-             
+              'display': 'inline-block'}">    
 
 
               <!-- <span>{{box.percent}}</span> -->
@@ -171,8 +285,7 @@
         </div>
 
          
-          <span ng-style="breakmarker" ng-show="value.length >= 1" data-toggle="tooltip"
-          title="Breakmarker-shows that you need 20% breaks, which you do not have at the moment"></span>
+          <span ng-style="breakmarker" ng-show="value.length >= 1"></span>
 
          <!-- <div  class="breakmarker">
 
@@ -204,11 +317,19 @@
       
       
        
-       
-  </div>
+   <div class="row">
+
+    <div class="col-sm-12 dayNameBoxEnd">
+     </div>
+   </div>
+
+
+    </div>
       <!-- <div id="div1" ondrop="ondrop(event)" ondragover="ondragover(event)">
       </div> -->
     </div> <!-- end of day item -->
+  </div>
+  </div>
   </div>
 <!-- </div> -->
 
