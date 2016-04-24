@@ -1,4 +1,8 @@
-Interaction Programing - Lab assignment - HTML
+Agenda, the Meeting Planner
 =================================================
 
-This project contains the startup code for HTML version of the Interaction Programing course lab assignment. For more details on how to complete the assignment follow the instructions on the [course website](https://www.kth.se/social/course/DH2641).
+Agenda is a platform to create and plan your meetings in the easiest possible way. You can add an activity of one of the four types-Coffee Break, Group work, Discussion and Presentation and also set the duration of each activity. You can create a meeting plan and then move your activities to the plan. You can see how you manage your time from the activity color bar. In addition, there is weather forecast information provided on the certain day and time.
+
+This is a project work for the course Interaction Programming and the Dynamic Web (DH2642)
+
+Team members: Frida Engslätt, Kaur Kask, Pruek Laochaiyapruek, Saman Ali
