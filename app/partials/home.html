@@ -1,95 +1,85 @@
 <div class="col-sm-12 landing">
 	<div class="container"> 
-    <div class="row">
-      <div id="LandingText">
-  			<h1>Agenda</h1>  
-  			<h4>The best way to plan and control your meetings. </h4>
-    		<a type="text" href="#home?scrollTo=secondiv">Learn more about Agenda</a>
-      </div>
-      <hr> 
-	  </div>
-
-
-	  <div class="container">
-
-
-	  <div class="row login">
-
-	  	<div class="col-sm-4">
-	  	</div>
-
-	<div class="col-sm-4 login">
-          
-            <div class="input-group input-group-sm">
-              
-              <input ng-model="email" type="text" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon3">
-              <span class="input-group-addon" id="sizing-addon3"></span>
+        <div class="row">
+            <div id="LandingText">
+      			<h1>Agenda</h1>  
+      			<h4>The best way to plan and control your meetings. </h4>
+        		<a type="text" href="#home?scrollTo=secondiv">Learn more about Agenda</a>
             </div>
+            <hr> 
+    	</div>
 
+    	<div class="container">
+            <div class="row login">
 
-
-          <div class="input-group input-group-sm">
+    	  	    <div class="col-sm-4">
+    	  	    </div>
+                <div class="col-sm-4 login">
               
-              <input ng-model="pw" type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon3">
-              <span class="input-group-addon" id="sizing-addon3"></span>
+                    <div class="input-group input-group-sm">
+                        <input ng-model="email" type="text" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon3">
+                        <span class="input-group-addon" id="sizing-addon3"></span>
+                    </div>
+
+                    <div class="input-group input-group-sm">
+                        <input ng-model="pw" type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon3">
+                        <span class="input-group-addon" id="sizing-addon3"></span>
+                    </div>
+                    
+                    <a ng-click="login()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
+
+                    <a ng-click="createUser()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
+
+                    <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Start here</button> </a>  
+                </div> 
             </div>
+        </div>  
+    </div> 
+</div>  
 
-
-
-
-          <a ng-click="login()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
-
-           <a ng-click="createUser()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
-
-            <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Start here</button> </a>  
-
-         </div> 
-
-	</div>
-
-
-	
-       
-
-
-
-
-      </div>  
-
-      </div> 
-    </div>  
-
-
-  </div>
-</div>
-
- 
- 
-</div>
 
 <div class="col-sm-12 secondlanding" id="secondiv">	
-  <div class="container">  
-    <div class="second"> 
-      <h1>What is Agenda?</h1>
-      <br>
-      <br>
-      <p>Agenda is a platform to create and plan your meetings in the easiest possible way. You can add an activity of one of the four types-Coffee Break, Group work, Discussion and Presentation and also set the duration of each activity. You can create a meeting plan and then move your activities to the plan by simple drag and drop. You can see how you manage your time from the activity color bar.
-      <br>
-      <p>In addition, there is weather forecast information provided on the certain day and time.Information about the start time, end time and total time can also be viewed.
-      <br>
-      <h3>Simple and Easy.</h3>
-
-      <div id="three"><h4>Add an activity</h4><img src="/images/addactivity.png"  style="width:230px;height:180px;"></div>
-      <div id="one"> <h4>Add a meeting</h4><img src="/images/addmeeting.png"  style="width:230px;height:180px;"> </div>
-      <div id="two"><h4> Color box</h4><img src="/images/colorbox.png"  style="width:230px;height:180px;"> </div>
-      <div id="four"><h4> Information Display</h4><img src="/images/widgets.png"  style="width:230px;height:180px;"> </div>
-
-    </div>
-<!--<div id="second1"><h3>   1.  Add a meeting    </h3></div>
-  <div id="second2"><h3> 2.  Add an activity</h3></div>
- <div id="second3"><h3>  3.  Dragand drop activities to Meetings</h3><div>
- <div id="second4"><h3>  4.  Visualize your meetings through the color bar</h3> <div>  
- </div>-->
-  </div> 
+    <div class="container normpage">  
+        <div class="row"> 
+            <div class="col-md-12">
+                <h1 class="whitetxt">What is Agenda?</h1>
+                <br>
+                <p>Agenda is a platform to create and plan meetings in the easiest possible way. Users can add an activity of one of the four types-Coffee Break, Group work, Discussion and Presentation and set the duration of each activity. Users can create a meeting plan and then move the activities to the plan by drag and drop. Users can see how they manage their time from the activity color bar. In addition, Agenda has implemented weather forecast information on the certain day and time.
+                <br>
+                <br>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="/images/image1.jpg">
+                    <div class="caption">
+                        <!-- <h3>Thumbnail label</h3> -->
+                        <p class="whitetxt">Overall information provided including how time is distributed.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="/images/image2.jpg">
+                    <div class="caption">
+                        <!-- <h3>Thumbnail label</h3> -->
+                        <p class="whitetxt">Easily choose a date by picking from the calendar interface.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-4">
+                <div class="thumbnail">
+                    <img src="/images/image3.jpg">
+                    <div class="caption">
+                        <!-- <h3>Thumbnail label</h3> -->
+                        <p class="whitetxt">Arrange your activities and meetings by drag-and-drop.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+                <p>This is a project work for the course Interaction Programming and the Dynamic Web (DH2642)
+                <p><b class="whitetxt">Team members:</b> Frida Engslätt, Kaur Kask, Pruek Laochaiyapruek, Saman Ali
+            </div>
+        </div>
+    </div> 
 </div>
-
