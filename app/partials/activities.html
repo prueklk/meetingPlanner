@@ -1,266 +1,174 @@
 <div class="row">
-
     <ng-include src="'partials/navbar.html'" ng-controller="NavbarCtrl"></ng-include>
-
 </div>
 
 <div class="container">
-
     <div class="col-sm-12 activitiesArea">
     <!-- <p>Hint: First, create a meeting by clicking "Add a Meeting", then "Add an Activity", and drag an activity to your meeting. -->
         <div class="row">
-        <!-- <header id="headerFix">
-            <h2 class="headertext">MeetingPlanner</h2>
-            <h5 class="headertext">The best way to control and plan your meetings</h5>
-
-        </header> -->
-            <!-- <div class="col-sm-6"> -->
-
-
-            <!-- <ng-include src="'..partials/calendar.html'" ng-controller="overviewCtrl"></ng-include>
-             -->
-
-            <!-- <ng-include src="'partials/calendar.html'" ng-controller="CalendarCtrl"></ng-include> -->
-
-
-            <!-- </div> -->
-         
             <div class="col-sm-2 activityParking shadow drop" droppable drop="dropBack()">
                
-                
                 <div class="row">
                     <div class="col-sm-12">
 
-                <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add an Activity</button>
+                    <button type="button" class="btn btn-info btn-sm btn-ADD" ng-click="openAddActivity()">Add an Activity</button>
+                    </div>
                 </div>
-                  </div>
 
                 <div class="row">
-
                     <div class="col-sm-12 overflowBox">
 
-
                         <div ng-hide="spin" class="row">
-                              <div class="col-sm-4 spinner">
-
-
-                                <img src="/images/ajax-loader.gif">
-                                
-
-
-                              </div>
-
+                            <div class="col-sm-4 spinner">
+                                <img src="/images/ajax-loader.gif">    
                             </div>
-
-
+                        </div>
 
                         <div ng-repeat="(key, value) in activities" class="row" data-toggle="tooltip" title="Drag an activity and drop in a meeting plan."> 
                            
-                        <div class="col-sm-4 activity" >
-                        <div class="panel-group">
-                        <div  id="{{key}}"  class="panel panel-default">
-                        
-                        <div  ng-init="tag='collapse'" class="panel-heading {{value.type + 'Hover'}}" draggable dragstart="drag(key)">
-                                <h4 class="panel-title" ng-click="openEditActivity(key)">
+                            <div class="col-sm-4 activity" >
+                                <div class="panel-group">
+                                    <div id="{{key}}" class="panel panel-default">
+                                        <div ng-init="tag='collapse'" class="panel-heading {{value.type + 'Hover'}}" draggable dragstart="drag(key)">
+                                            <h4 class="panel-title" ng-click="openEditActivity(key)">
                     
+                                                <div class="col-sm-6 activityHeading">
+                                                    {{value.name}} 
+                                                </div>
 
-                                <div class="col-sm-6 activityHeading">
-                                {{value.name}} 
-                                </div>
+                                                 <div class="col-sm-6 activityHeading">
+                                                    {{value.length}} min
+                                                </div>
 
-                                 <div class="col-sm-6 activityHeading">
-                                {{value.length}} min
-                                </div>
+                                                <div class="row ">
+                                                    <div class="col-sm-6">
+                                                    </div>
 
+                                                    <div class="col-sm-6">
+                                                        <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key);" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
 
-                                <div class="row ">
+                                                        <!--  <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button> -->
+                                                    </div>
+                                                </div>
 
-                                    <div class="col-sm-6">
-                               
-                               
+                                                <div class="row">
+                                                    <div class="col-sm-12  {{value.type}} TypeTag">
+                                                        <div class="row">
 
-                                </div>
+                                                            <div class="col-sm-3">
+                                                                <span class="typetext">{{value.type}} </span>
+                                                            </div>
 
-                                  <div class="col-sm-6">
+                                                            <div class="col-sm-9">
 
-                                 
-                                  <button id="" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteAct(key);" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right {{value.type + 'HoverRemove'}}"> </button>
-
-                              
-                            
-
-
-                                   
-
-
-                                 <!--  <button  type="button" class="btn btn-info btn-sm btn-ADD" ng-click="AddToDayTest(key)">Add to day TEST</button> -->
-
-                              </div>
-
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12  {{value.type}} TypeTag">
-                                        <div class="row">
-
-                                            <div class="col-sm-3">
-                                            <span class="typetext">{{value.type}} </span>
-                                            </div>
-
-                                            <div class="col-sm-9">
-
-                                                 <button id="{{key}}" class="glyphicon  glyphicon-chevron-right "  data-ng-class=" {'glyphicon-chevron-down': key == activeClass}"  ng-href="#{{key + tag}}"  ng-show="value.description.length >= 1"  data-toggle="collapse"  data-ng-click="selectChevron(key, $event); paneltag();">
-                                                  </button>
-
-
-
-                                            </div>
-
-
-
+                                                                <button id="{{key}}" class="glyphicon  glyphicon-chevron-right "  data-ng-class=" {'glyphicon-chevron-down': key == activeClass}"  ng-href="#{{key + tag}}"  ng-show="value.description.length >= 1"  data-toggle="collapse"  data-ng-click="selectChevron(key, $event); paneltag();">
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </h4>
                                         </div>
-
-
+                                        <div id="{{key + tag}}" class="panel-collapse collapse">
+                                            <div class="panel-body">{{value.description}}</div>
+                                            <!-- <button id="edit" ng-click="openEditActivity(key)">Edit</button> -->
+                                        </div>
                                     </div>
                                 </div>
-
-                            
-                                </h4>
-                        </div>
-                        <div id="{{key + tag}}" class="panel-collapse collapse">
-
-                                <div class="panel-body">{{value.description}}</div>
-                                <!-- <button id="edit" ng-click="openEditActivity(key)">Edit</button> -->
-                        </div>
-
-                    
-
-                    
-                        </div>
-                        </div>
-                        </div>
-
-
-
-
-
-             </div>    
-                <!-- <div ng-repeat="(key, value) in activities" class="row" > 
-                    <div class="col-sm-4 activity" id="{{value.name}}" draggable="true"
-                            ondragstart="ondragstart(event)">
-                    	<h4> {{value.name}} </h4>
-                    	<span> {{value.length}} min </span>
-                    	<a id="{{key}}" ng-click="deleteAct(key)" class="btn btn-alert btn-group-sm glyphicon glyphicon-remove pull-right"> </a>
-                    	 <p> {{act.type}} </p>
-                    	<p> {{act.description}} </p> -->
-                    <!-- </div> -->
-                <!-- </div> --> <!-- end of activity item --> <!-- --> 
-
-
-
+                            </div>
+                        </div>    
+                    </div>
+                </div>
             </div>
-          </div>
-          </div>
-
-
-
-            <!-- Modal -->
-            <script type="text/ng-template" id="activityModal.html">
-               
-                <div class="modal-header" id="activityhead">
-                    <button class="close" type="button" ng-click="cancel()">&times;</button>
-                    <h4 class="modal-title">Add an Activity</h4>
-                </div>
-
-                <div class="modal-body">
-   
-                    <p>Name <input  type="text" ng-model="name" placeholder="Name your event" required> </p>
-                   
-                    <p>Length <input type="text" ng-model="length" id="length" placeholder="Number only" valid-number> minutes</p>
-                    <span class="status">{{inputText}}</span>
-
-                    <p>Type <select class="form-control" ng-model="type" id="selectType">
-                        <option value="Coffee">Coffee break</option>
-                        <option value="Group">Group work</option>
-                        <option value="Presentation">Presentation</option>
-                        <option value="Discussion">Discussion</option></select> </p>
-              
-                    <p>Description <textarea ng-model="description" type="text" id="actDescription">
-                        <pre>{{ data | json }}</pre></textarea>
-                    </p>
-                    
-                </div>
-
-                <span class="status">{{status}}</span>
-                <div class="modal-footer">
-                  <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
-                  <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
-                </div>
-                    
-            </script>
-            <!-- END Modal -->
-
-
-            <!-- Modal 2 Edit act-->
-            <script type="text/ng-template" id="editActivityModal.html">
-               
-                <div class="modal-header">
-                    <button class="close" type="button" ng-click="cancel()">&times;</button>
-                    <h4 class="modal-title">Edit an Activity</h4>
-                </div>
-
-                <div class="modal-body">
-                    <p>Name <input type="text" ng-model="name" id="name"> </p>
-                    
-                    <p>Length <input type="text" ng-model="length" id="length" valid-number> minutes</p>
-  
-                
-                    <p>Type <select class="form-control" ng-model="type" id="selectType">
-                        <option value="Coffee">Coffee break</option>
-                        <option value="Group">Group work</option>
-                        <option value="Presentation">Presentation</option>
-                        <option value="Discussion">Discussion</option></select> </p>
-                    <p>Descpription <textarea ng-model="description" type="text" id="actDescription">
-                        <pre>{{ data | json }}</pre></textarea>
-                    </p>
-                </div>
-
-                <span class="status">{{status}}</span>
-
-                <div class="modal-footer">
-                  <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
-                  <button class="btn btn-success" type="button" ng-click="editAct()">Save</button>
-                </div>
-                    
-            </script>
-            <!-- END Modal 2 Edit act-->
-
-    <!-- CONFIRM MODAL -->
-    <script type="text/ng-template" id="activityConfirmModal.html">
-       
-        <div class="modal-header">
-          <button class="close" type="button" ng-click="cancel()">&times;</button>
-          <h4 class="modal-title">Delete an activity</h4>
-        </div>
-
-        <div class="modal-body">
-          <p>Are you sure you want to delete this activity <i>({{getActivityName()}})</i>?</p>
-        
-        </div>
-
-
-        <div class="modal-footer">
-           <button class="btn btn-warning" type="button" ng-click="cancel()">No</button>
-           <button class="btn btn-danger" type="button" ng-click="deleteActivity()">Delete</button>
-        </div>
-            
-    </script>
-    <!-- END CONFIRM MODAL -->
-
-
             <div class="col-sm-8" ng-drop="true" > 
-            	<ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
-
+                <ng-include src="'partials/overview.html'" ng-controller="OverviewCtrl"></ng-include>
             </div>
         </div>
-        </div>
+    </div>
 </div>
+
+
+<!-- Modal -->
+<script type="text/ng-template" id="activityModal.html">
+    <div class="modal-header" id="activityhead">
+        <button class="close" type="button" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Add an Activity</h4>
+    </div>
+
+    <div class="modal-body">
+        <p>Name <input  type="text" ng-model="name" placeholder="Name your event" required> </p>
+       
+        <p>Length <input type="text" ng-model="length" id="length" placeholder="Number only" valid-number> minutes</p>
+        <span class="status">{{inputText}}</span>
+
+        <p>Type <select class="form-control" ng-model="type" id="selectType">
+            <option value="Coffee">Coffee break</option>
+            <option value="Group">Group work</option>
+            <option value="Presentation">Presentation</option>
+            <option value="Discussion">Discussion</option></select> </p>
+  
+        <p>Description <textarea ng-model="description" type="text" id="actDescription">
+            <pre>{{ data | json }}</pre></textarea>
+        </p>
+    </div>
+
+    <span class="status">{{status}}</span>
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+        <button class="btn btn-success" type="button" ng-click="addAct()">Save</button>
+    </div>
+</script>
+<!-- END Modal -->
+
+
+<!-- Modal 2 Edit act-->
+<script type="text/ng-template" id="editActivityModal.html">
+    <div class="modal-header">
+        <button class="close" type="button" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Edit an Activity</h4>
+    </div>
+
+    <div class="modal-body">
+        <p>Name <input type="text" ng-model="name" id="name"> </p>
+        
+        <p>Length <input type="text" ng-model="length" id="length" valid-number> minutes</p>
+
+    
+        <p>Type <select class="form-control" ng-model="type" id="selectType">
+            <option value="Coffee">Coffee break</option>
+            <option value="Group">Group work</option>
+            <option value="Presentation">Presentation</option>
+            <option value="Discussion">Discussion</option></select> </p>
+        <p>Descpription <textarea ng-model="description" type="text" id="actDescription">
+            <pre>{{ data | json }}</pre></textarea>
+        </p>
+    </div>
+
+    <span class="status">{{status}}</span>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">Close</button>
+        <button class="btn btn-success" type="button" ng-click="editAct()">Save</button>
+    </div>
+        
+</script>
+<!-- END Modal 2 Edit act-->
+
+<!-- CONFIRM MODAL -->
+<script type="text/ng-template" id="activityConfirmModal.html">
+    <div class="modal-header">
+        <button class="close" type="button" ng-click="cancel()">&times;</button>
+        <h4 class="modal-title">Delete an activity</h4>
+    </div>
+
+    <div class="modal-body">
+        <p>Are you sure you want to delete this activity <i>({{getActivityName()}})</i>?</p>
+    </div>
+
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" type="button" ng-click="cancel()">No</button>
+        <button class="btn btn-danger" type="button" ng-click="deleteActivity()">Delete</button>
+    </div>
+</script>
+<!-- END CONFIRM MODAL -->
