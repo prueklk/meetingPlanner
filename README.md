@@ -7,7 +7,7 @@ Agenda is a platform to create and plan your meetings in the easiest possible wa
 Related technologies:
 Firebase: https://www.firebase.com
 AngularJS: https://angularjs.org
-Angular Drag & Drop: http://marceljuenemann.github.io/angular-drag-and-drop-lists/demo/#/nested
+Drag & Drop: https://parkji.co.uk/2013/08/11/native-drag-and-drop-in-angularjs.html
 Bootstrap: https://angular-ui.github.io/bootstrap/, http://getbootstrap.com
 OpenWeatherMap: http://openweathermap.org
 Bower: http://bower.io
