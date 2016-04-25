@@ -16,7 +16,7 @@ function authDataCallback(authData) {
 
 this.ref.onAuth(authDataCallback);
 
-this.isNewUser = false;
+this.isNewUser = true;
 
 // 	
 
@@ -24,6 +24,7 @@ this.isNewUser = false;
 
 this.ref.onAuth(function(authData) {
   if (authData && this.isNewUser) {
+  	
     // save the user's profile into the database so we can list users,
     // use them in Security and Firebase Rules, and show profiles
     this.ref.child("users").child(authData.uid).set({
