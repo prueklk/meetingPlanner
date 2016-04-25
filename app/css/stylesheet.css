@@ -90,6 +90,14 @@ margin-top: 0px;
 	color:white;
 }
 
+a:link, a:visited { 
+    color: #ffff00;
+}
+/*
+a:link:active, a:visited:active { 
+    color: (internal value);
+}
+*/
 /*END ABOUT AND CONTACT*/
 
 ul li{
