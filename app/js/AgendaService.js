@@ -135,16 +135,36 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 		var total=sumcoffee+sumpresentation+sumdiscussion+sumgroup;
 				    
 		// Percentage time  of eacy type
-
+		
 		var percentagecoffe=Math.round((sumcoffee/total)*100);
-		percentageArr.push(percentagecoffe);
 		var percentagegroup=Math.round((sumgroup/total)*100);
-		percentageArr.push(percentagegroup);
 		var percentagediscussion=Math.round((sumdiscussion/total)*100);
-		percentageArr.push(percentagediscussion);
 		var percentagepresentation=Math.round((sumpresentation/total)*100);
+
+		// Check if the sum of percentageArr > 100
+		
+		var _tempAll = percentagecoffe+percentagegroup+percentagediscussion+percentagepresentation;
+		//console.log("_tempAll // 1 = "+_tempAll);
+		if (_tempAll >100){
+			if (percentagepresentation > 1){
+				percentagepresentation =percentagepresentation-1;
+			}else if(percentagediscussion >1){
+				percentagediscussion = percentagediscussion-1;
+			}else if(percentagegroup >1){
+				percentagegroup = percentagegroup-1;
+			}else if(percentagecoffe >1){
+				percentagecoffe = percentagecoffe-1;
+			}
+		}
+
+		percentageArr.push(percentagecoffe);
+		percentageArr.push(percentagegroup);
+		percentageArr.push(percentagediscussion);
 		percentageArr.push(percentagepresentation);
-		 // console.log( percentageArr)
+
+		//console.log( percentageArr)
+		//console.log("percentagecoffe = "+percentagecoffe+", percentagegroup = "+percentagegroup+", percentagediscussion = "+percentagediscussion+", percentagepresentation = "+percentagepresentation);
+
 		 // console.log(percentagecoffe)
 		targetDayColorbox = targetDay.child("colorbox");
 		
@@ -370,6 +390,8 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 		    type: type,
 		    description: description
 		});
+
+		this.fillcolor(this.clickedDay);
 
 		this.clickedAct = "";
 		this.clickedDay = "";
