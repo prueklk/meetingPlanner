@@ -140,7 +140,7 @@ $scope.login = function(){
 							
 
 									Agenda.ref.onAuth(function(authData) {
-										Agenda.auth();
+
 										
 										console.log(authData)
 										var isNewUser = true;
@@ -148,8 +148,13 @@ $scope.login = function(){
 	  										snapshot.forEach(function(childSnapshot) {
 	  											var key = childSnapshot.key()
 	  											
-	  											if (authData.uid === key) {
-	  												isNewUser = false;
+	  											if (authData) {
+	  												
+	  												if (authData.uid === key) {
+	  													isNewUser = false;
+
+	  												};
+	  												
 		
 	  											} 
 
