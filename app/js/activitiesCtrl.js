@@ -1,13 +1,24 @@
-meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal ) {
+meetingPlannerApp.controller('ActivitiesCtrl', function ($scope, $location, $firebaseArray,$firebaseObject,Agenda,$uibModal, $location ) {
 
-	var arr = $firebaseObject(Agenda.actRef);
+	if (Agenda.actRef) {
 
-	arr.$loaded(function(data){
+		var arr = $firebaseObject(Agenda.actRef);
+
+		arr.$loaded(function(data){
 
 		$scope.spin = true;
 		$scope.activities = data;
 
 	});
+
+
+	} else {
+		alert("Not logged in!")
+		$location.path("/home");
+
+	}
+
+	
 
 
 	$scope.selectChevron = function(id, event) {

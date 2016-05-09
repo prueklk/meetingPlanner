@@ -39,7 +39,7 @@
                     </div>
 
                     <div  id="{{key}}" class="col-sm-6 dayactivity" droppable drop="drop(key)" data-toggle="tooltip" title="Create a meeting plan by dragging your activities here.">
-                        <ul ng-sortable="sort"  class="list-group drop2" >
+                        <ul   class="list-group drop2" > <!-- ng-sortable="sort" -->
                             <li style="cursor: pointer;" ng-click="openEditActivityDay(keyact, key)" ng-mousedown="sortableKey(keyact, key)" class="list-group-item col-sm-12 dayAct {{item.type + 'Hover'}}" ng-repeat="(keyact, item) in value.activities" id="{{keyact}}"  draggable dragstart="dragBackStart(keyact, key)" ng-init="TrackingFunction($index, key, keyact)">
                                 
                                 <div class="col-sm-2">

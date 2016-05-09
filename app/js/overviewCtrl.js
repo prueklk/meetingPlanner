@@ -69,13 +69,18 @@ meetingPlannerApp.controller('OverviewCtrl', function ($scope, Agenda, $firebase
 		// })
 	}
 
+	if (Agenda.dayRef) {
 
-	var arr = $firebaseObject(Agenda.dayRef);
-	arr.$loaded(function(data){
-		$scope.spin = true;
-		$scope.days = data;
-	});
+		var arr = $firebaseObject(Agenda.dayRef);
+		arr.$loaded(function(data){
+			$scope.spin = true;
+			$scope.days = data;
+		});
 
+	};
+	
+
+	
 	$scope.totalSum = 0;
 	$scope.letterlimit = 1;
 

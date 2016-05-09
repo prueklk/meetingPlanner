@@ -1,4 +1,4 @@
-var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource', "firebase", 'ngAnimate', 'ui.bootstrap', 'ng-sortable', 'ui.router']);
+var meetingPlannerApp = angular.module('meetingPlanner', ['ngRoute','ngResource', "firebase", 'ngAnimate', 'ui.bootstrap', 'ng-sortable', 'ui.router', 'ngProgress']);
 
 meetingPlannerApp.filter('orderByKey', ['$filter', function($filter) {
     return function(items, field, reverse) {

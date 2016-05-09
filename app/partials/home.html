@@ -9,29 +9,107 @@
             <hr> 
     	</div>
 
+<<<<<<< HEAD
     	<!-- <div class="container"> -->
             <div class="login">
                 <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Start here</button> </a>  
     	  	    <!-- <div class="col-sm-4">
-    	  	    </div>
-                <div class="col-sm-4 login">
-              
-                    <div class="input-group input-group-sm">
-                        <input ng-model="email" type="text" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon3">
-                        <span class="input-group-addon" id="sizing-addon3"></span>
-                    </div>
+=======
+    	<div class="container">
 
-                    <div class="input-group input-group-sm">
-                        <input ng-model="pw" type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon3">
-                        <span class="input-group-addon" id="sizing-addon3"></span>
-                    </div>
+
+            <div class="row login">
+
                     
-                    <a ng-click="login()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
 
-                    <a ng-click="createUser()" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
+    	  	    <div class="col-sm-4">
 
+
+                       
+>>>>>>> devop
+    	  	    </div>
+
+
+                <div class="col-sm-4 login">
+
+                         <!--  <div ng-hide="spin" class="row">
+                        <div class="col-sm-4 spinnerMain">
+                            <img src="/images/ajax-loader.gif">
+                        </div>
+                    </div> -->
+                    
+                    
+                        <input ng-model="email" type="text" class=" homeinput" placeholder="E-mail" aria-describedby="sizing-addon3">
+                      
+                    
+                        <div class="row">
+                    
+                        <input ng-model="pw" type="password" class=" homeinput" placeholder="Password" aria-describedby="sizing-addon3">
+
+                        </div>
+                       
+                   
+                    
+                     <div class="row loginbuttons"> 
+
+
+                    <a ng-disabled="isDisabled" ng-click="login()" href=""<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Log in</button> </a>  
+
+                    <a ng-disabled="isDisabled" ng-click="createUser()" href=""<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out  ">Sign up</button> </a>   
+
+                    <!-- <a ng-disabled="isDisabled" href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Start here</button> </a>   -->
+
+
+
+                  </div>
+
+
+
+
+
+                
+
+
+                    </div>
+
+
+
+                </div>
+
+                 <div class="row homeAlertBox">
+                    
+
+                        <div class="col-sm-4">
+
+                        </div>
+
+
+                         <div  ng-show="homeAlert" class="col-sm-4 homeAlert">
+
+                            {{loginError}}
+
+                        </div>
+
+
+                        <div  ng-show="homeProgress" class="col-sm-4 homeProgress">
+
+                            {{loginError}}
+
+                        </div>
+
+
+                         <div class="col-sm-4">
+
+                        </div>
+
+
+<<<<<<< HEAD
                     <a href="#activities"<button type="button" class="btn btn-primary btn-lg loginbutton hvr-outline-out ">Start here</button> </a>  
                 </div>  -->
+=======
+                           
+                    </div> 
+>>>>>>> devop
             </div>
         <!-- </div>   -->
     </div> 
