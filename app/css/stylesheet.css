@@ -789,7 +789,18 @@ span.glyphicon-map {
 	font-size: 110%;
 	margin-left: 5px;
 	/*background-color: rgba(84, 159, 146, 0.5);*/
+
+}
+
+
+
+.homeProgress{
+	text-align: center;
+	color: white;
+	font-size: 120%;
+	background-color: rgba(84, 159, 146, 0.5);
 	
+
 }
 /*.activityParking{
 

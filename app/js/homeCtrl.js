@@ -7,6 +7,7 @@ meetingPlannerApp.controller('HomeCtrl', function ($scope,$firebaseArray,Agenda,
 
 	$scope.isDisabled = false;
 	$scope.homeAlert = false;
+	$scope.homeProgress = false;
 	
 	
 
@@ -19,10 +20,18 @@ $scope.login = function(){
 		// alert("LOGIN");
 
 
+
 		if ($scope.email && $scope.pw) {
 		
 		   $scope.progressbar.start();
-		   $scope.homeAlert = false;
+		    $scope.homeAlert = false;
+		   $scope.homeProgress = true;
+
+			$scope.loginError = "Logging in.."
+			
+
+
+
 		   $scope.isDisabled = true;
 		Agenda.ref.authWithPassword({
 			email    : $scope.email,
@@ -32,10 +41,12 @@ $scope.login = function(){
 
 				Agenda.currentUser = authData.uid
 				// Agenda.updateUserDB();
+				$scope.loginError = "Welcome!"
+				
 
 				$scope.progressbar.complete();
-
 				$scope.isDisabled = false;
+				$scope.homeProgress = false;
 				$location.path("/activities")
 
 
@@ -45,6 +56,7 @@ $scope.login = function(){
 			} else if (error.code === "INVALID_USER") {
 				$scope.isDisabled = false;
 				$scope.homeAlert = true;
+				$scope.homeProgress = false;
 				$scope.loginError = "Invalid user, try again or Sign Up"
 				$scope.progressbar.reset()
 
@@ -53,30 +65,25 @@ $scope.login = function(){
 
 				$scope.isDisabled = false;
 				$scope.homeAlert = true;
+				$scope.homeProgress = false;
 				$scope.loginError = "Invalid password"
 				$scope.progressbar.reset()
 
 
 
 			} else if (error.code === "INVALID_EMAIL") {
-				
+				$scope.homeProgress = false;
 				$scope.isDisabled = false;
+
 				$scope.homeAlert = true;
+				
 				$scope.loginError = "Username must be an e-mail address"
 				// alert("No such user, try again or Sign Up!")
 				
 			    console.log("Login Failed!", error)
 			    $scope.progressbar.reset()
 
-				// 	Agenda.ref.onAuth(authDataCallback);
-				// function authDataCallback(authData) {
-				// 	 	if (authData) {
-				// 	    	console.log("User " + authData.uid + " is logged in with " + authData.provider);
-
-				// 		} else {
-				// 		    console.log("User is logged out");
-				// 		}
-				// 	}
+			
 			} 
 				
 
@@ -88,6 +95,7 @@ $scope.login = function(){
 		$scope.isDisabled = false;
 		// alert("Please fill in your e-mail and password")
 		$scope.homeAlert = true;
+		$scope.homeProgress = false;
 		$scope.loginError = "Please fill in your e-mail and password"
 
 	}
@@ -98,7 +106,8 @@ $scope.login = function(){
 	$scope.createUser = function() {
 
 	if ($scope.email && $scope.pw) {
-
+			$scope.homeProgress = true;
+			$scope.loginError = "Signing up.."
 			$scope.progressbar.start();
 			$scope.homeAlert = false;
 			$scope.isDisabled = true;
@@ -108,7 +117,7 @@ $scope.login = function(){
 			password : $scope.pw
 		}, function(error, userData) {
 			if (!error) {
-
+			
 			console.log("Successfully created user account with uid:", userData.uid);
 			Agenda.ref.authWithPassword({
 				email    : $scope.email,
@@ -175,7 +184,7 @@ $scope.login = function(){
 											    	
 												    Agenda.currentUser = authData.uid
 												    
-												   
+												   	$scope.loginError = "Welcome!"
 											    	$scope.progressbar.complete();
 											    	$scope.isDisabled = false;
 											    	$location.path("/activities");
@@ -184,7 +193,7 @@ $scope.login = function(){
 
 
 											  		Agenda.currentUser = authData.uid
-												    
+												    $scope.loginError = "Welcome!"
 											    	$scope.progressbar.complete();
 											    	$scope.isDisabled = false;
 											    	$location.path("/activities");
@@ -206,6 +215,7 @@ $scope.login = function(){
 					// alert(error)
 			    	
 			  	} else if(error.code === "INVALID_EMAIL") {
+			  			$scope.homeProgress = false;
 			  			$scope.homeAlert = true;
 						$scope.loginError = "Please use a valid e-mail address";
 						$scope.isDisabled = false;
@@ -214,7 +224,7 @@ $scope.login = function(){
 
 
 			  	} else if (error.code  === "EMAIL_TAKEN")  {
-
+			  			$scope.homeProgress = false;
 			  			$scope.homeAlert = true;
 						$scope.loginError = "User is already signed up";
 						$scope.isDisabled = false;
@@ -226,7 +236,7 @@ $scope.login = function(){
 
 
 		} else {
-
+			$scope.homeProgress = false;
 			$scope.progressbar.reset();
 			$scope.isDisabled = false;
 			// alert("Please fill in your e-mail and password")
