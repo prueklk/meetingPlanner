@@ -1,8 +1,28 @@
 meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebaseObject) {
 
+	Agenda = this;
+	
+	this.currentUser = "";
+	
 	this.ref = new Firebase("https://agendaplanner.firebaseio.com/");
-	this.actRef = this.ref.child("activity")
-	this.dayRef = this.ref.child("day")
+
+	this.actRef = "";
+	this.dayRef = "";
+
+
+	Agenda.ref.onAuth(function(authData) {
+
+		if (authData) {
+			console.log(authData.uid);
+			Agenda.currentUser = authData.uid;
+			Agenda.actRef = Agenda.ref.child("users").child(authData.uid).child("activity")
+			Agenda.dayRef = Agenda.ref.child("users").child(authData.uid).child("day")
+
+		};
+	
+
+	});
+
 
 	this.actIDarray = [];
 	this.selectedDate = "";
@@ -27,35 +47,11 @@ meetingPlannerApp.factory('Agenda',function ($resource, $firebaseArray, $firebas
 	var self = this;
 
 
-
-	function authDataCallback(authData) {
-	 	if (authData) {
-	    	console.log("User " + authData.uid + " is logged in with " + authData.provider);
-		} else {
-		    console.log("User is logged out");
-		}
-	}
-
-	this.ref.onAuth(authDataCallback);
-
-	
-
-	function getName(authData) {
-	  	switch(authData.provider) {
-	     	case 'password':
-	       	return authData.password.email.replace(/@.*/, '');
-
-	     	case 'twitter':
-	       	return authData.twitter.displayName;
-	     	
-	     	case 'facebook':
-	       	return authData.facebook.displayName;
-	  	}
-	}
-
-
 	this.logout = function(){
-		this.ref.unauth();
+		Agenda.ref.unauth();
+		Agenda.actRef = "";
+		Agenda.dayRef = "";
+		console.log("logout service")
 	}
 
 	this.updateIndex = function(index, day, act){
